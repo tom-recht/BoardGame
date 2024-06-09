@@ -208,6 +208,7 @@ class Piece {
         this.moveToRack(unenteredRack);
         unenteredRack.addPieceToFirstPosition(this)
         this.justMovedHome = false;
+        this.reachableTiles = null;
         this.game.selectedPiece = null;
         this.game.tiles.forEach(tile => {
             tile.unhighlight();
