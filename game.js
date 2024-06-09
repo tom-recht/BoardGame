@@ -6,6 +6,9 @@ const HOME_TILE_RADIUS = TILE_RADIUS_STEP * 1.5;
 
 const TOTAL_PIECES = 15;
 
+const DIE_1_POSITION= 500;
+const DIE_2_POSITION = 600;
+
 const colorFirstDie = 0x40E0D0; // Turquoise
 const colorSecondDie = 0xFFC0CB; 
 const colorSum = 0xFFFF00; // Yellow
@@ -816,7 +819,7 @@ class Game {
         this.scene = scene;
         this.players = [new Player('white'), new Player('black')];
         this.turn = 'white';
-        this.dice = [new Die(scene, 500, 50, true), new Die(scene, 600, 50, false)];
+        this.dice = [new Die(scene, DIE_1_POSITION, 50, true), new Die(scene, DIE_2_POSITION, 50, false)];
         this.gameOver = false;
         this.score = { 'white': 0, 'black': 0 };
         this.selectedPiece = null;
@@ -827,16 +830,10 @@ class Game {
         this.blackUnenteredRack = new Rack(scene, 1545, 150, 'black', 'unentered');
         this.blackSavedRack = new Rack(scene, 1545, 600, 'black', 'saved');
 
-        // Create buttons
-        this.switchTurnButton = scene.add.text(850, 50, 'Switch Turn', {
-            fontSize: '24px',
-            backgroundColor: '#ff69b4',
-            padding: { x: 15, y: 7.5 },
-            borderColor: '#000',
-            borderWidth: 1.5,
-            borderRadius: 3.75
-        }).setInteractive().on('pointerdown', () => this.switchTurn());
+  
 
+        // Create buttons
+        this.createSwitchTurnButton(scene);
         this.createUndoButton(scene);
 
         // Initialize game elements
@@ -1518,17 +1515,21 @@ class Game {
     }
     
     
-        createUndoButton(scene) {
-            this.undoButton = scene.add.text(750, 50, 'Undo', {
-                fontSize: '24px',
-                backgroundColor: '#ffcc00',
-                padding: { x: 15, y: 7.5 },
-                borderColor: '#000',
-                borderWidth: 1.5,
-                borderRadius: 3.75
-            }).setInteractive()
-                .on('pointerdown', () => this.restoreState());
-        }
+    createUndoButton(scene) {
+        const buttonSize = 64; // Adjust the button size as needed
+        this.undoButton = scene.add.image(config.width - DIE_2_POSITION, 85, 'leftWavyArrow')
+            .setDisplaySize(buttonSize, buttonSize)
+            .setInteractive()
+            .on('pointerdown', () => this.restoreState());
+    }
+
+    createSwitchTurnButton(scene) {
+        const buttonSize = 64; // Adjust the button size as needed
+        this.switchTurnButton = scene.add.image(config.width - DIE_1_POSITION, 85, 'rightWavyArrow')
+            .setDisplaySize(buttonSize, buttonSize)
+            .setInteractive()
+            .on('pointerdown', () => this.switchTurn());
+    }
     
 }
 
@@ -1557,7 +1558,8 @@ class MainGameScene extends Phaser.Scene {
     }
 
     preload() {
-        // Preload assets if needed
+        this.load.image('leftWavyArrow', 'assets/left-arrow.png');
+        this.load.image('rightWavyArrow', 'assets/right-arrow.png');
     }
 
     create() {
@@ -1684,4 +1686,5 @@ const gameInstance = new Phaser.Game(config);
 // clicking on a selectable piece should select it even if another piece is selected
 // should be able to make moves in either order when must move a piece
 // missing border for save tiles
-// instructions
+// write instructions
+// make buttons nicer
