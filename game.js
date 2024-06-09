@@ -1672,26 +1672,46 @@ class InstructionsScene extends Phaser.Scene {
         super({ key: 'InstructionsScene' });
     }
 
-    
-
     create() {
-        const instructions = '1. Do this\n2. Do that\n3. Win the game'
+        const instructions = 'Win the game by saving all your pieces before your opponent does. Your score is the number of pieces your opponent has left. \n\n' +
+            'Pieces begin on the side rack and enter the game through the yellow central home tile. To save a piece, move it to one of the green goal tiles and roll the number of that tile to move it off the board. \n\n' +
+            'Unnumbered pieces can be saved from any goal tile, but numbered pieces must be saved from the goal tile that matches their number. \n\n' +
+            'You may begin saving pieces once all your pieces have moved onto the board. \n\n' +
+            'If you land on a tile occupied by one of your opponent\'s pieces, you capture that piece and send it back to the home tile. \n\n' +
+            'If a tile is occupied by two or more of your opponent\'s pieces, that tile is blocked and you cannot move through or into it. \n\n' +
+            'If you have one or more captured pieces, you must move them out of the home tile before moving any other pieces. ' +
+            'Otherwise, if you have one or more pieces on the side rack, you must move the first of these onto the board before moving any other pieces. \n\n' +
+            'You may pass your turn without using one or both dice. \n\n' +
+            'When all your pieces are either saved or on goal tiles from which they can be saved, you are in the endgame. In the endgame, you may save unnumbered pieces using a higher roll than the goal tile number, as long as you don\'t have any pieces on higher-numbered goals. \n\n' +
+            'You can get rid of an opponent\'s block by double-clicking on the blocked tile at the start of your turn, but your opponent\'s pieces will be saved and you can make no other moves that turn. \n\n' +
+            'Click the back arrow to undo your moves or the right arrow to end your turn. \n\n' +
+            'Good luck!'
 
         // Add instructions text
-        this.add.text(CENTER_X, CENTER_Y - 100, 'How to Play', {
+        this.add.text(CENTER_X, 70, 'How to Play', {
             fontSize: '48px',
             color: '#000000'
         }).setOrigin(0.5);
 
-        // Add the actual instructions here
-        this.add.text(CENTER_X, CENTER_Y, instructions, {
-            fontSize: '24px',
+        // Create a text box for the instructions
+        const textBox = this.add.text(CENTER_X, 300, instructions, {
+            fontSize: '26px',
             color: '#000000',
-            align: 'center'
-        }).setOrigin(0.5);
+            align: 'left',
+            wordWrap: { width: config.width - 100 }
+        }).setOrigin(0.5, 0);
+
+        // Calculate the total height of the instructions text
+        const instructionsHeight = textBox.height;
+
+        // Adjust the position if the text exceeds the available space
+        const maxY = config.height - 100 - 200; // Adjust maxY based on backButton position
+        if (300 + instructionsHeight > maxY) {
+            textBox.setY((config.height - instructionsHeight) / 2); // Center vertically if overflowing
+        }
 
         // Add a button to go back to the main game
-        const backButton = this.add.text(CENTER_X, CENTER_Y + 200, 'Back to Game', {
+        const backButton = this.add.text(CENTER_X, config.height - 70, 'Back to Game', {
             fontSize: '32px',
             backgroundColor: '#ffcc00',
             padding: { x: 20, y: 10 },
@@ -1705,6 +1725,7 @@ class InstructionsScene extends Phaser.Scene {
         });
     }
 }
+
 
 
 
