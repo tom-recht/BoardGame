@@ -55,6 +55,7 @@ class Piece {
 
     onHover() {
         if (this.game.selectedPiece && this.game.selectedPiece !== this) return;
+        if (this.game.dice[0].used && this.game.dice[1].used) return;
         if (this.player !== this.game.turn) return; 
         if (this.rack && this.rack.type === 'saved') return;
         if (this.rack && this.rack.type === 'unentered' && this.rack.pieces[0] !== this) return;
@@ -78,6 +79,7 @@ class Piece {
 
     handleClick(pointer) {
         if (this.game.gameOver) return; 
+        if (this.game.dice[0].used && this.game.dice[1].used) return;
         if (this.game.selectedPiece && this.game.selectedPiece !== this) return;
         if (this.player !== this.game.turn) return; 
         if (this.rack && this.rack.type === 'saved') return;
