@@ -838,6 +838,7 @@ class Game {
         this.createSwitchTurnButton(scene);
         this.createUndoButton(scene);
 
+
         // Initialize game elements
         this.tiles = [];
         this.pieces = [];
@@ -1633,6 +1634,11 @@ class Game {
             this.confirmationModal = null;
         }
     }
+
+
+
+    
+
 }
 
 class Player {
@@ -1682,6 +1688,84 @@ class MainGameScene extends Phaser.Scene {
         instructionsButton.on('pointerdown', () => {
             this.scene.switch('InstructionsScene');
         });
+
+                // Add new game button under the instructions button
+                const newGameButton = this.add.text(150, 100, 'New Game', {
+                    fontSize: '24px',
+                    backgroundColor: '#87CEEB',
+                    padding: { x: 15, y: 7.5 },
+                    borderColor: '#000',
+                    borderWidth: 1.5,
+                    borderRadius: 3.75
+                }).setOrigin(0.5).setInteractive();
+        
+                newGameButton.on('pointerdown', () => {
+                    this.showNewGameConfirmationModal();
+                });
+
+    }
+
+    showNewGameConfirmationModal() {
+        if (this.confirmationModal) {
+            this.confirmationModal.destroy(true);
+        }
+        const modalWidth = 400;
+        const modalHeight = 200;
+        const modalX = CENTER_X - modalWidth / 2;
+        const modalY = CENTER_Y - modalHeight / 2;
+
+        this.confirmationModal = this.add.container(0, 0); // Create a container for modal elements
+
+        const modalBackground = this.add.graphics();
+        modalBackground.fillStyle(0xffffff, 1);
+        modalBackground.fillRect(modalX, modalY, modalWidth, modalHeight);
+        modalBackground.lineStyle(2, 0x000000, 1);
+        modalBackground.strokeRect(modalX, modalY, modalWidth, modalHeight);
+        this.confirmationModal.add(modalBackground);
+
+        const text = this.add.text(CENTER_X, CENTER_Y - 40, 'Start a new game?', {
+            fontSize: '22px',
+            color: '#000000',
+            wordWrap: { width: modalWidth - 40 },
+            align: 'center'
+        }).setOrigin(0.5);
+        this.confirmationModal.add(text);
+
+        const confirmButton = this.add.text(CENTER_X - 60, CENTER_Y + 40, 'Yes', {
+            fontSize: '28px',
+            backgroundColor: '#00ff00',
+            padding: { x: 20, y: 10 },
+            borderColor: '#000',
+            borderWidth: 1.5,
+            borderRadius: 3.75
+        }).setOrigin(0.5).setInteractive();
+        this.confirmationModal.add(confirmButton);
+
+        const cancelButton = this.add.text(CENTER_X + 60, CENTER_Y + 40, 'No', {
+            fontSize: '28px',
+            backgroundColor: '#ff0000',
+            padding: { x: 20, y: 10 },
+            borderColor: '#000',
+            borderWidth: 1.5,
+            borderRadius: 3.75
+        }).setOrigin(0.5).setInteractive();
+        this.confirmationModal.add(cancelButton);
+
+        confirmButton.on('pointerdown', () => {
+            this.scene.restart(); // Restart the current scene to start a new game
+            this.hideConfirmationModal();
+        });
+
+        cancelButton.on('pointerdown', () => {
+            this.hideConfirmationModal();
+        });
+    }
+
+    hideConfirmationModal() {
+        if (this.confirmationModal) {
+            this.confirmationModal.destroy(true);
+            this.confirmationModal = null;
+        }
     }
 
     update() {
