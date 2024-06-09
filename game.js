@@ -1521,6 +1521,22 @@ class Game {
             .setDisplaySize(buttonSize, buttonSize)
             .setInteractive()
             .on('pointerdown', () => this.restoreState());
+    
+        // Add tooltip for undo button
+        const undoTooltip = scene.add.text(this.undoButton.x, this.undoButton.y, 'UNDO', {
+            fontSize: '22px',
+            fontFamily: 'Arial, sans-serif',
+            fill: '#000000',
+            backgroundColor: 'rgba(0, 0, 0, 0)'
+        }).setOrigin(0.5).setVisible(false);
+    
+        this.undoButton.on('pointerover', () => {
+            undoTooltip.setVisible(true);
+        });
+    
+        this.undoButton.on('pointerout', () => {
+            undoTooltip.setVisible(false);
+        });
     }
 
     createSwitchTurnButton(scene) {
@@ -1529,6 +1545,22 @@ class Game {
             .setDisplaySize(buttonSize, buttonSize)
             .setInteractive()
             .on('pointerdown', () => this.switchTurn());
+    
+        // Add tooltip for switch turn button
+        const switchTurnTooltip = scene.add.text(this.switchTurnButton.x, this.switchTurnButton.y, 'END TURN', {
+            fontSize: '22px',
+            fontFamily: 'Arial, sans-serif',
+            fill: '#000000',
+            backgroundColor: 'rgba(0, 0, 0, 0)'
+        }).setOrigin(0.5).setVisible(false);
+    
+        this.switchTurnButton.on('pointerover', () => {
+            switchTurnTooltip.setVisible(true);
+        });
+    
+        this.switchTurnButton.on('pointerout', () => {
+            switchTurnTooltip.setVisible(false);
+        });
     }
     
 }
