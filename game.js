@@ -1161,9 +1161,16 @@ class Game {
                 this.capturePiece(targetTile.pieces[0]); // Capture the opposing piece
             }
             
-            piece.move(targetTile);
-    
+            
+
             const dice = this.dice.filter(die => !die.used);
+
+            // check en route capture
+            if (dice.length > 1 && reachableBySum.includes(targetTile)) {
+                this.checkEnRouteCapture(piece, targetTile);
+            }
+    
+            piece.move(targetTile);
     
             if (reachableByFirstDie.includes(targetTile)) {
                 dice[0].setUsed();
@@ -1196,6 +1203,45 @@ class Game {
         }
     }
 
+    checkEnRouteCapture(piece, targetTile) {
+        console.log('Checking en route capture');
+    
+        const diceValues = this.dice.filter(die => !die.used).map(die => die.value);
+        if (diceValues.length < 2) return; // Ensure there are two dice values
+    
+        const [firstDieValue, secondDieValue] = diceValues;
+    
+        // Calculate reachable tiles using each die value separately
+        const reachableWithFirstDie = this.getReachableTiles(piece.currentTile, firstDieValue);
+        const reachableWithSecondDie = this.getReachableTiles(piece.currentTile, secondDieValue);
+    
+        console.log('Reachable with first die:', reachableWithFirstDie);
+        console.log('Reachable with second die:', reachableWithSecondDie);
+    
+        // Find all intermediate tiles leading to the target tile
+        const intermediateTiles1 = reachableWithFirstDie.filter(tile => this.getReachableTiles(tile, secondDieValue).includes(targetTile));
+        const intermediateTiles2 = reachableWithSecondDie.filter(tile => this.getReachableTiles(tile, firstDieValue).includes(targetTile));
+    
+        console.log('Intermediate tiles set 1:', intermediateTiles1);
+        console.log('Intermediate tiles set 2:', intermediateTiles2);
+    
+        // Combine the intermediate tiles
+        const allIntermediateTiles = [...intermediateTiles1, ...intermediateTiles2];
+    
+        // Check if there's an opponent piece on any of the intermediate tiles and capture only one piece
+        const captureConditionsMet = (tile) => tile && tile.pieces.some(p => p.player !== piece.player) && tile.pieces.length === 1;
+    
+        for (const tile of allIntermediateTiles) {
+            if (captureConditionsMet(tile)) {
+                console.log('Capturing piece at intermediate tile:', tile);
+                this.capturePiece(tile.pieces[0]);
+                break; // Capture only one piece and break out of the loop
+            }
+        }
+    }
+    
+    
+    
     
     updateMovablePieces() {
         this.mustMovePieces = [];
@@ -1549,4 +1595,5 @@ const gameInstance = new Phaser.Game(config);
 // add saving opponent's pieces
 // clicking on a selectable piece should select it even if another piece is selected
 // should be able to make moves in either order when must move a piece
-// if using total roll, are you capturing or not?
+// missing border for save tiles
+// instructions
