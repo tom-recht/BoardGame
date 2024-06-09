@@ -1681,6 +1681,7 @@ class InstructionsScene extends Phaser.Scene {
             'If a tile is occupied by two or more of your opponent\'s pieces, that tile is blocked and you cannot move through or into it. \n\n' +
             'If you have one or more captured pieces, you must move them out of the home tile before moving any other pieces. ' +
             'Otherwise, if you have one or more pieces on the side rack, you must move the first of these onto the board before moving any other pieces. \n\n' +
+            'A piece must take the shortest available route to its destination tile, both when using one die and when using two dice. \n\n' +
             'You may pass your turn without using one or both dice. \n\n' +
             'When all your pieces are either saved or on goal tiles from which they can be saved, you are in the endgame. In the endgame, you may save unnumbered pieces using a higher roll than the goal tile number, as long as you don\'t have any pieces on higher-numbered goals. \n\n' +
             'You can get rid of an opponent\'s block by double-clicking on the blocked tile at the start of your turn, but your opponent\'s pieces will be saved and you can make no other moves that turn. \n\n' +
@@ -1745,4 +1746,3 @@ const gameInstance = new Phaser.Game(config);
 // clicking on a selectable piece should select it even if another piece is selected
 // should be able to make moves in either order when must move a piece
 // missing border for save tiles
-// write instructions
