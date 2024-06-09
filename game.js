@@ -445,41 +445,18 @@ class Tile {
     } */
 
         onClick() {
-            if (this.game.gameOver) return;
-            const currentTime = Date.now(); // Use system time
-    
-            if (this.lastClickTime === null) {
-                this.lastClickTime = currentTime;
-                if (this.game.selectedPiece && this.type !== "nogo") {
-                    if (this.game.movePiece(this.game.selectedPiece, this)) {
-                        this.game.selectedPiece.isSelected = false;
-                        this.game.selectedPiece.updateColor();
-                        this.game.selectedPiece = null;
-                    } else {
-                        console.log('Move not possible');
-                    }
-                }
-            } else {
-                const timeSinceLastClick = currentTime - this.lastClickTime;
-                this.lastClickTime = currentTime;
-                if (timeSinceLastClick < 300) {
-                    this.handleDoubleClick();
-                    this.lastClickTime = null; // Reset after double click
+            if (this.game.gameOver) return; 
+            if (this.game.selectedPiece && this.type !== "nogo") {
+                if (this.game.movePiece(this.game.selectedPiece, this)) {
+                    this.game.selectedPiece.isSelected = false;
+                    this.game.selectedPiece.updateColor();
+                    this.game.selectedPiece = null;
+                } else {
+                    console.log('Move not possible');
                 }
             }
         }
     
-    
-        handleDoubleClick() {
-            console.log('Double click on tile');
-            if (this.game.dice.some(die => die.used)) return; 
-            if (!this.game.isBlocked(this) || !this.type === 'field') return;
-            const savedRack = this.game.turn === 'white' ? this.game.whiteSavedRack : this.game.blackSavedRack;
-            if (savedRack.pieces.length + this.pieces.length !== TOTAL_PIECES) {  // don't save if it would end the game
-                this.game.saveOpponentPieces(this, savedRack);
-            }
-            
-        }
 
     onHover() {
         if (this.game.gameOver) return; 
