@@ -1612,7 +1612,7 @@ class MainGameScene extends Phaser.Scene {
         }).setOrigin(0.5).setInteractive();
 
         instructionsButton.on('pointerdown', () => {
-            this.scene.start('InstructionsScene');
+            this.scene.switch('InstructionsScene');
         });
     }
 
@@ -1697,7 +1697,8 @@ class InstructionsScene extends Phaser.Scene {
         }).setOrigin(0.5).setInteractive();
 
         backButton.on('pointerdown', () => {
-            this.scene.start('MainGameScene');
+            this.scene.switch('MainGameScene'); // Resume the MainGameScene
+
         });
     }
 }
