@@ -39,7 +39,9 @@ class Piece {
             .on('pointerout', () => this.onOut())
             .on('pointerdown', (pointer) => this.handleClick(pointer));
         
-        this.circle.setStrokeStyle(3, 0x000000);
+        // Set stroke style based on piece color
+        this.borderColor = this.color === 0x000000 ? 0xffffff : 0x000000;
+        this.circle.setStrokeStyle(2, this.borderColor);
 
         if (this.number <= 6) {
             this.text = scene.add.text(this.x, this.y, this.number, {
@@ -216,7 +218,7 @@ class Piece {
         } else {
             this.circle.fillColor = this.originalColor;
         }
-        this.circle.setStrokeStyle(3);
+        this.circle.setStrokeStyle(2, this.borderColor);
     }
 
 
@@ -323,7 +325,7 @@ class Piece {
             .on('pointerout', () => this.onOut())
             .on('pointerdown', (pointer) => this.handleClick(pointer));
 
-        this.circle.setStrokeStyle(3, 0x000000);
+        this.circle.setStrokeStyle(2, this.borderColor);
 
         if (this.number <= 6) {
             this.text = this.scene.add.text(this.x, this.y, this.number, {
@@ -1719,4 +1721,3 @@ const gameInstance = new Phaser.Game(config);
 // should be able to make moves in either order when must move a piece
 // missing border for save tiles
 // write instructions
-// make buttons nicer
