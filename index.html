@@ -8,12 +8,22 @@
         body {
             margin: 0;
             touch-action: manipulation; /* Allows panning and pinch-zooming */
+            overflow: hidden; /* Prevents scrolling */
         }
         canvas {
             display: block;
+            touch-action: none; /* Ensures canvas element does not interfere with touch actions */
         }
     </style>
 </head>
 <body>
+    <script>
+        // Ensuring touch actions are enabled
+        document.addEventListener('touchmove', function(event) {
+            if (event.scale !== 1) {
+                event.preventDefault(); // Prevent the default zoom action
+            }
+        }, { passive: false });
+    </script>
 </body>
 </html>
