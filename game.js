@@ -1828,9 +1828,9 @@ class InstructionsScene extends Phaser.Scene {
 
     create() {
         const instructions = 'Win the game by saving all your pieces before your opponent does. Your score is the number of pieces your opponent has left. \n\n' +
-            'Pieces begin on the side rack and enter the game through the yellow central home tile. To save a piece, move it to one of the green goal tiles and roll the number of that tile to move it off the board. \n\n' +
+            'Pieces begin on the side rack and enter the game through the yellow central home tile. Only the first piece on the side rack may enter the board. You may begin saving pieces once all your pieces have moved onto the board.  \n\n' +
+            'To save a piece, move it to one of the green goal tiles and roll the number of that tile to move it off the board. ' +
             'Unnumbered pieces can be saved from any goal tile, but numbered pieces must be saved from the goal tile that matches their number. \n\n' +
-            'You may begin saving pieces once all your pieces have moved onto the board. \n\n' +
             'If you land on a tile occupied by one of your opponent\'s pieces, you capture that piece and send it back to the home tile. \n\n' +
             'If a tile is occupied by two or more of your opponent\'s pieces, that tile is blocked and you cannot move through or into it. \n\n' +
             'If you have one or more captured pieces, you must move them out of the home tile before moving any other pieces. ' +
@@ -1843,7 +1843,7 @@ class InstructionsScene extends Phaser.Scene {
             'Good luck!'
 
         // Add instructions text
-        this.add.text(CENTER_X, 70, 'How to Play', {
+        this.add.text(CENTER_X, 50, 'How to Play', {
             fontSize: '48px',
             color: '#000000'
         }).setOrigin(0.5);
@@ -1896,7 +1896,8 @@ const config = {
 const gameInstance = new Phaser.Game(config);
 
 
-
+// add saving opponent's pieces
 // clicking on a selectable piece should select it even if another piece is selected
 // should be able to make moves in either order when must move a piece
 // missing border for save tiles
+// make ring 6 nogo tiles that abut on the outer border invisible
