@@ -1532,6 +1532,24 @@ class Game {
     
 }
 
+class Player {
+    constructor(name) {
+        this.name = name;
+        this.gamePhase = 'opening'; // Initialize the game phase
+    }
+
+    // Method to set the game phase
+    setGamePhase(phase) {
+        this.gamePhase = phase;
+        console.log(`${this.name}'s game phase set to: ${phase}`);
+    }
+
+    // Method to get the game phase
+    getGamePhase() {
+        return this.gamePhase;
+    }
+}
+
 class MainGameScene extends Phaser.Scene {
     constructor() {
         super({ key: 'MainGameScene' });
@@ -1546,12 +1564,27 @@ class MainGameScene extends Phaser.Scene {
         const debugMode = false; // Set this to false to disable debug mode
 
         this.game = new Game(this, debugMode);
+
+        // Add instructions button
+        const instructionsButton = this.add.text(150, 50, 'How to Play', {
+            fontSize: '24px',
+            backgroundColor: '#87CEEB',
+            padding: { x: 15, y: 7.5 },
+            borderColor: '#000',
+            borderWidth: 1.5,
+            borderRadius: 3.75
+        }).setOrigin(0.5).setInteractive();
+
+        instructionsButton.on('pointerdown', () => {
+            this.scene.start('InstructionsScene');
+        });
     }
 
     update() {
         // Update logic if needed
     }
 }
+
 
 
 
@@ -1598,37 +1631,56 @@ class EndGameScene extends Phaser.Scene {
 
 
 
-
-class Player {
-    constructor(name) {
-        this.name = name;
-        this.gamePhase = 'opening'; // Initialize the game phase
+class InstructionsScene extends Phaser.Scene {
+    constructor() {
+        super({ key: 'InstructionsScene' });
     }
 
-    // Method to set the game phase
-    setGamePhase(phase) {
-        this.gamePhase = phase;
-        console.log(`${this.name}'s game phase set to: ${phase}`);
-    }
+    create() {
+        // Add instructions text
+        this.add.text(CENTER_X, CENTER_Y - 100, 'Instructions', {
+            fontSize: '48px',
+            color: '#000000'
+        }).setOrigin(0.5);
 
-    // Method to get the game phase
-    getGamePhase() {
-        return this.gamePhase;
+        // Add the actual instructions here
+        this.add.text(CENTER_X, CENTER_Y, '1. Do this\n2. Do that\n3. Win the game', {
+            fontSize: '24px',
+            color: '#000000',
+            align: 'center'
+        }).setOrigin(0.5);
+
+        // Add a button to go back to the main game
+        const backButton = this.add.text(CENTER_X, CENTER_Y + 200, 'Back to Game', {
+            fontSize: '32px',
+            backgroundColor: '#ffcc00',
+            padding: { x: 20, y: 10 },
+            borderColor: '#000',
+            borderWidth: 1.5,
+            borderRadius: 3.75
+        }).setOrigin(0.5).setInteractive();
+
+        backButton.on('pointerdown', () => {
+            this.scene.start('MainGameScene');
+        });
     }
 }
+
+
+
 
 const config = {
     type: Phaser.AUTO,
     width: 1800,
     height: 1200,
     backgroundColor: '#ffffff',
-    scene: [MainGameScene, EndGameScene], // Include the main game scene and the end game scene
+    scene:  [MainGameScene, InstructionsScene, EndGameScene], // Include the main game scene and the end game scene
 };
 
 const gameInstance = new Phaser.Game(config);
 
 
-// add saving opponent's pieces
+
 // clicking on a selectable piece should select it even if another piece is selected
 // should be able to make moves in either order when must move a piece
 // missing border for save tiles
