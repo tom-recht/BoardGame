@@ -1,13 +1,13 @@
 const PIECE_RADIUS_BASE = 20; 
 const TILE_RADIUS_STEP = 60; 
 const CENTER_X = 900;
-const CENTER_Y = 650; 
+const CENTER_Y = 640; 
 const HOME_TILE_RADIUS = TILE_RADIUS_STEP * 1.5; 
 
 const TOTAL_PIECES = 15;
 
-const DIE_1_POSITION= 500;
-const DIE_2_POSITION = 600;
+const DIE_1_POSITION= 400;
+const DIE_2_POSITION = 500;
 
 const colorFirstDie = 0x40E0D0; // Turquoise
 const colorSecondDie = 0xFFC0CB; 
