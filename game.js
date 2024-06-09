@@ -832,7 +832,7 @@ class Game {
         this.blackUnenteredRack = new Rack(scene, 1545, 150, 'black', 'unentered');
         this.blackSavedRack = new Rack(scene, 1545, 600, 'black', 'saved');
 
-  
+        this.confirmationModal = null;
 
         // Create buttons
         this.createSwitchTurnButton(scene);
@@ -1546,7 +1546,13 @@ class Game {
         this.switchTurnButton = scene.add.image(config.width - DIE_1_POSITION, 85, 'rightWavyArrow')
             .setDisplaySize(buttonSize, buttonSize)
             .setInteractive()
-            .on('pointerdown', () => this.switchTurn());
+            .on('pointerdown', () => {
+                if (this.dice.some(die => !die.used)) {
+                    this.showConfirmationModal();
+                } else {
+                    this.switchTurn();
+                }
+            });
     
         // Add tooltip for switch turn button
         const switchTurnTooltip = scene.add.text(this.switchTurnButton.x, this.switchTurnButton.y, 'END TURN', {
@@ -1565,6 +1571,68 @@ class Game {
         });
     }
     
+    showConfirmationModal() {
+        if (this.confirmationModal) {
+            this.confirmationModal.destroy(true);
+        }
+        const modalWidth = 400;
+        const modalHeight = 200;
+        const modalX = CENTER_X - modalWidth / 2;
+        const modalY = CENTER_Y - modalHeight / 2;
+
+        this.confirmationModal = this.scene.add.container(0, 0); // Create a container for modal elements
+
+        const modalBackground = this.scene.add.graphics();
+        modalBackground.fillStyle(0xffffff, 1);
+        modalBackground.fillRect(modalX, modalY, modalWidth, modalHeight);
+        modalBackground.lineStyle(2, 0x000000, 1);
+        modalBackground.strokeRect(modalX, modalY, modalWidth, modalHeight);
+        this.confirmationModal.add(modalBackground);
+
+        const text = this.scene.add.text(CENTER_X, CENTER_Y - 40, 'End your turn without using both dice?', {
+            fontSize: '22px',
+            color: '#000000',
+            wordWrap: { width: modalWidth - 40 },
+            align: 'center'
+        }).setOrigin(0.5);
+        this.confirmationModal.add(text);
+
+        const confirmButton = this.scene.add.text(CENTER_X - 60, CENTER_Y + 40, 'Yes', {
+            fontSize: '28px',
+            backgroundColor: '#00ff00',
+            padding: { x: 20, y: 10 },
+            borderColor: '#000',
+            borderWidth: 1.5,
+            borderRadius: 3.75
+        }).setOrigin(0.5).setInteractive();
+        this.confirmationModal.add(confirmButton);
+
+        const cancelButton = this.scene.add.text(CENTER_X + 60, CENTER_Y + 40, 'No', {
+            fontSize: '28px',
+            backgroundColor: '#ff0000',
+            padding: { x: 20, y: 10 },
+            borderColor: '#000',
+            borderWidth: 1.5,
+            borderRadius: 3.75
+        }).setOrigin(0.5).setInteractive();
+        this.confirmationModal.add(cancelButton);
+
+        confirmButton.on('pointerdown', () => {
+            this.switchTurn();
+            this.hideConfirmationModal();
+        });
+
+        cancelButton.on('pointerdown', () => {
+            this.hideConfirmationModal();
+        });
+    }
+
+    hideConfirmationModal() {
+        if (this.confirmationModal) {
+            this.confirmationModal.destroy(true);
+            this.confirmationModal = null;
+        }
+    }
 }
 
 class Player {
