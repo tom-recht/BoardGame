@@ -360,7 +360,9 @@ class Tile {
             this.reachableColor = null;
             this.lastClickTime = null;
     
-            let lineColor = 0x000000;
+            this.lineColor = 0x000000;
+            this.graphics = scene.add.graphics();
+
             switch (type) {
                 case "home":
                     this.fillColor = 0xffff00;
@@ -370,48 +372,15 @@ class Tile {
                     break;
                 case "nogo":
                     this.fillColor = ring === 7 ? 0xffffff : 0x000000; 
-                    lineColor = ring === 7 ? 0xffffff : 0x000000; // No border for 7th ring nogo tiles
+                    this.lineColor = ring === 7 ? 0xffffff : 0x000000; // No border for 7th ring nogo tiles
                     break;
                 case "field":
                     this.fillColor = 0xffffff;
                     break;
             }
-    
-            this.graphics = scene.add.graphics();
-            this.graphics.lineStyle(1, lineColor, 1);
-            this.graphics.fillStyle(this.fillColor, 1);
-    
-            if (type === "home") {
-                this.x = CENTER_X;
-                this.y = CENTER_Y;
-                this.graphics.fillCircle(CENTER_X, CENTER_Y, HOME_TILE_RADIUS);
-                this.graphics.strokeCircle(CENTER_X, CENTER_Y, HOME_TILE_RADIUS);
-            } else {
-        
-                const points = this.calculateAnnularSegmentPoints(CENTER_X, CENTER_Y, innerRadius, outerRadius, startAngle, endAngle);
-    
-                this.graphics.beginPath();
-                points.forEach((point, index) => {
-                    if (index === 0) {
-                        this.graphics.moveTo(point.x, point.y);
-                    } else {
-                        this.graphics.lineTo(point.x, point.y);
-                    }
-                });
-                this.graphics.closePath();
-                this.graphics.fillPath();
-                this.graphics.strokePath();
-    
-                this.graphics.setInteractive(new Phaser.Geom.Polygon(points), Phaser.Geom.Polygon.Contains)
-                    .on('pointerdown', () => this.onClick())
-                    .on('pointerover', () => this.onHover())
-                    .on('pointerout', () => this.onOut());
 
-                                // Add number to "save" tiles
-            if (type === 'save' && number !== undefined) {
-                this.addNumberText(number, (startAngle + endAngle) / 2, outerRadius);
-            }
-            }
+            this.drawTile();
+
         }
 
     calculateAnnularSegmentPoints(cx, cy, innerRadius, outerRadius, startAngle, endAngle) {
@@ -627,9 +596,9 @@ class Tile {
     
     
     drawTile() {
-        let lineColor = 0x000000;
+        
         this.graphics.clear();
-        this.graphics.lineStyle(1, lineColor, 1);
+        this.graphics.lineStyle(1, this.lineColor, 1);
         this.graphics.fillStyle(this.fillColor, 1);
 
         if (this.type === "home") {
