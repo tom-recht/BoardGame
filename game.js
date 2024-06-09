@@ -4,7 +4,7 @@ const CENTER_X = 900;
 const CENTER_Y = 640; 
 const HOME_TILE_RADIUS = TILE_RADIUS_STEP * 1.5; 
 
-const TOTAL_PIECES = 15;
+const TOTAL_PIECES = 14;
 
 const DIE_1_POSITION= 400;
 const DIE_2_POSITION = 500;
@@ -1672,15 +1672,19 @@ class InstructionsScene extends Phaser.Scene {
         super({ key: 'InstructionsScene' });
     }
 
+    
+
     create() {
+        const instructions = '1. Do this\n2. Do that\n3. Win the game'
+
         // Add instructions text
-        this.add.text(CENTER_X, CENTER_Y - 100, 'Instructions', {
+        this.add.text(CENTER_X, CENTER_Y - 100, 'How to Play', {
             fontSize: '48px',
             color: '#000000'
         }).setOrigin(0.5);
 
         // Add the actual instructions here
-        this.add.text(CENTER_X, CENTER_Y, '1. Do this\n2. Do that\n3. Win the game', {
+        this.add.text(CENTER_X, CENTER_Y, instructions, {
             fontSize: '24px',
             color: '#000000',
             align: 'center'
@@ -1698,7 +1702,6 @@ class InstructionsScene extends Phaser.Scene {
 
         backButton.on('pointerdown', () => {
             this.scene.switch('MainGameScene'); // Resume the MainGameScene
-
         });
     }
 }
