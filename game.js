@@ -127,6 +127,7 @@ class Piece {
                 console.log('Deselecting piece');
                 this.game.unhighlightAllTiles();
                 this.game.selectedPiece = null;
+                this.reachableTiles = null;
             }
         }
     }
