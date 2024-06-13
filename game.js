@@ -1,3 +1,5 @@
+const DEBUG_MODE = true; 
+
 const PIECE_RADIUS_BASE = 20; 
 const TILE_RADIUS_STEP = 60; 
 const CENTER_X = 900;
@@ -31,26 +33,9 @@ class Piece {
         this.justMovedHome = false;
         this.reachableTiles = null;
         this.lastClickTime = null;
-        
-
-        this.circle = scene.add.circle(this.x, this.y, this.radius, this.color)
-            .setInteractive()
-            .on('pointerover', () => this.onHover())
-            .on('pointerout', () => this.onOut())
-            .on('pointerdown', (pointer) => this.handleClick(pointer));
-        
-        // Set stroke style based on piece color
         this.borderColor = this.color === 0x000000 ? 0xffffff : 0x000000;
-        this.circle.setStrokeStyle(2, this.borderColor);
-
-        if (this.number <= 6) {
-            this.text = scene.add.text(this.x, this.y, this.number, {
-                fontSize: `${this.radius * 1.5}px`,
-                color: `#${this.textColor.toString(16)}`
-            }).setOrigin(0.5, 0.5);
-        } else {
-            this.text = null;
-        }
+        
+        this.drawPiece();
     }
 
     onHover() {
@@ -157,7 +142,7 @@ class Piece {
     
     move(tile, checkMidgame = true) {
         if (this.rack) {
-            this.rack.removePiece(this);
+            this.moveFromRack();
         } else if (this.currentTile) {
             this.currentTile.removePiece(this);
         }
@@ -252,9 +237,9 @@ class Piece {
     }
 
     canBeSaved() {
-        if (!this.currentTile || this.currentTile.type !== 'save') {
-            return false;
-        }
+        if (player.getGamePhase() === 'opening') return false;
+        
+        if (!this.currentTile || this.currentTile.type !== 'save') return false;
 
         if (this.number > 6) {
             return true;
@@ -331,7 +316,7 @@ class Piece {
 
         this.circle.setStrokeStyle(2, this.borderColor);
 
-        if (this.number <= 6) {
+        if (this.number <= 6 || DEBUG_MODE) {
             this.text = this.scene.add.text(this.x, this.y, this.number, {
                 fontSize: `${this.radius * 1.5}px`,
                 color: `#${this.textColor.toString(16)}`
@@ -463,7 +448,7 @@ class Tile {
         if (this.game.gameOver) return; 
         if (this.type === "nogo") return;
         this.highlight();
-     //   console.log(this.ring, this.sector)
+        if (DEBUG_MODE) console.log(this.ring, this.sector)
     }
 
     highlight() {   
@@ -1039,6 +1024,10 @@ class Game {
     }
 
     getReachableTiles(startTile, steps) {
+        if (!startTile) {           // if piece is still on rack, pretend it's on the home square
+            startTile = this.tiles.find(tile => tile.type === 'home');
+        }
+
         const queue = [{ tile: startTile, stepsTaken: 0 }]; // Start with the current tile and 0 steps taken
         const visited = new Set();
         const reachableTiles = [];
@@ -1097,7 +1086,7 @@ class Game {
                 reachableBySum: filteredReachableBySum
             };
         }
-        console.log(2, reachableByFirstDie, reachableBySecondDie);
+        console.log(2, reachableByFirstDie, reachableBySecondDie, reachableBySum);
         return {
             reachableByFirstDie: reachableByFirstDie,
             reachableBySecondDie: reachableBySecondDie,
@@ -1107,7 +1096,7 @@ class Game {
     
     
     
-    movePiece(piece, targetTile) {
+    movePiece(piece, targetTile, getReachableTiles = false) {
         if (!piece || !targetTile) return false;
 
         if (this.mustMovePieces.length > 0 && !this.mustMovePieces.includes(piece)) {
@@ -1116,6 +1105,12 @@ class Game {
         }
     
         let reachableTiles = piece.reachableTiles;
+
+        if (!reachableTiles && !getReachableTiles) return false;
+
+        if (!reachableTiles) {  // this is called from AI agent's applyMove
+            reachableTiles = this.getReachableTilesByDice(piece);
+            piece.reachableTiles = reachableTiles}  
 
         if (!reachableTiles) return false;
 
@@ -1145,13 +1140,20 @@ class Game {
                 this.checkEnRouteCapture(piece, targetTile);
             }
     
+
+            
+
             piece.move(targetTile);
     
+            const homeTile = this.tiles.find(tile => tile.type === 'home');
+            if (homeTile.pieces.includes(piece)) homeTile.removePiece(piece);
+
             if (reachableByFirstDie.includes(targetTile)) {
                 dice[0].setUsed();
             } else if (reachableBySecondDie.includes(targetTile)) {
                 dice[1].setUsed();
             } else {
+
                 dice[0].setUsed();
                 if (dice.length > 1) dice[1].setUsed();
             }
@@ -1229,11 +1231,13 @@ class Game {
         const homePieces = homeTile.pieces.filter(piece => piece.color === currentPlayerColor);
         if (homePieces.length > 0) {
             this.mustMovePieces = homePieces;
+            console.log('Must move captured pieces:', homePieces.map(p => p.number).join(', '));
             return; // If there are captured pieces, no other pieces may move
         }
 
         // Check if there's a piece in the unentered rack
         if (unenteredRack.pieces.length > 0) {
+            console.log('Must move a piece from the unentered rack');
             this.mustMovePieces = [unenteredRack.pieces[0]]; // The first piece in the unentered rack must move
         }
     }
@@ -1267,7 +1271,6 @@ class Game {
         this.updateMovablePieces(); // Update movable pieces
     }
 
-
     switchTurn() {
         this.turn = this.turn === 'white' ? 'black' : 'white';
         if (this.selectedPiece) {
@@ -1278,15 +1281,27 @@ class Game {
         this.pieces.forEach(p => {
             if (p.justMovedHome) {
                 p.returnToRack();
-                p.justMovedHome = false; // Reset the flag after calling returnToRack
+                p.justMovedHome = false;
             }
         });
-        
+
         this.rollDice();
         this.movedOnce = false;
         this.updateMovablePieces();
+        console.log(`Switched turn to ${this.turn}`, 'Must move pieces:', this.mustMovePieces.map(p => p.number).join(', '));
         this.pieces.forEach(piece => piece.reachableTiles = null);
-        this.state = this.captureState(); 
+        this.state = this.captureState();
+
+        // Check if it's the agent's turn and call getAgentMoves
+        const currentPlayer = this.turn;
+
+        if (currentPlayer === 'black') { // Assuming the agent plays as 'black'
+            console.log('Agent\'s turn');
+            const gameState = getCurrentGameState();
+            setTimeout(() => {
+                getAgentMoves(gameState);
+            }, 1000); // 1 second delay
+        }
     }
 
     checkMidgame() {
@@ -1829,6 +1844,181 @@ class InstructionsScene extends Phaser.Scene {
     }
 }
 
+// Ensure these functions are defined outside of any class or method
+function getAgentMoves(gameState) {
+    console.log('Sending game state to agent:', gameState);
+    return fetch('http://localhost:5000/select_moves', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(gameState)
+    })
+    .then(response => {
+        console.log('Response status:', response.status);
+        if (response.status === 204) {
+            console.log('No moves received from agent');
+            return null;
+        }
+        return response.json();
+    })
+    .then(moves => {
+        if (moves && moves.length > 0) {
+            console.log('Agent moves:', moves);
+            applyMoves(moves);
+        } else {
+            console.log('No moves to apply');
+            gameInstance.scene.scenes[0].game.switchTurn();
+        }
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+function applyMoves(moves) {
+    const game = gameInstance.scene.scenes[0].game;
+    
+    const applyMoveSequence = (moveIndex) => {
+        if (moveIndex >= moves.length) {
+            // All moves applied, check if there are unused dice
+            if (game.dice.some(die => !die.used)) {
+                // Call the agent again for additional moves
+                const gameState = getCurrentGameState();
+                setTimeout(() => getAgentMoves(gameState), 1000); // Delay before making the next move
+            } else {
+                // No unused dice, switch the turn
+                game.switchTurn();
+            }
+            return;
+        }
+
+        const move = moves[moveIndex];
+        console.log('Applying move:', move);
+        const piece = findPieceById(move.piece_id);
+        const targetTile = findTileByRingAndSector(move.target.ring, move.target.sector);
+        if (piece && targetTile) {
+
+/*                 piece.circle.fillColor = this.color === 0xffffff ? 0x90ee90 : 0xee82ee;
+                piece.circle.setStrokeStyle(2, this.borderColor);
+                targetTile.highlight() */
+
+            if (game.movePiece(piece, targetTile, true)) {
+
+                console.log(`Piece ${move.piece_id} moved to ring ${move.target.ring}, sector ${move.target.sector}`);
+                piece.reachableTiles = game.getReachableTilesByDice(piece); // Update reachable tiles
+                
+                // Update game state after applying the move
+                game.state = game.captureState();
+                
+                // Apply the next move in the sequence after a short delay
+                setTimeout(() => {
+                    applyMoveSequence(moveIndex + 1);
+/*                     piece.circle.fillColor = piece.color;
+                    piece.circle.setStrokeStyle(2, this.borderColor);
+                    targetTile.unhighlight()    */ 
+                }, 1000); // 1 second delay between moves
+
+            } else {
+                console.log('Move not valid according to game rules.');
+                applyMoveSequence(moveIndex + 1);
+            }
+        } else {
+            console.log('Piece or target tile not found for move:', move);
+            applyMoveSequence(moveIndex + 1);
+        }
+    };
+
+    applyMoveSequence(0); // Start applying the move sequence
+}
+
+
+function findPieceById(id) {
+    const game = gameInstance.scene.scenes[0].game;
+    return game.pieces.find(piece => {
+        const pieceId = piece.number + (piece.player === 'black' ? 14 : 0);
+        return pieceId === id;
+    });
+}
+
+function findTileByRingAndSector(ring, sector) {
+    return gameInstance.scene.scenes[0].game.tiles.find(tile => tile.ring === ring && tile.sector === sector);
+}
+
+function getCurrentGameState() {
+    const game = gameInstance.scene.scenes[0].game;
+    const currentPlayer = game.turn;
+
+    // Log current game state for debugging
+    console.log('Current turn:', game.turn);
+    console.log('All Pieces:', game.pieces);
+    console.log('Must move pieces:', game.mustMovePieces);
+
+    game.dice.forEach((die, index) => {
+        console.log(`Die ${index + 1} value: ${die.value}`)});
+
+    const piecesToConsider = game.mustMovePieces.length > 0
+        ? game.mustMovePieces
+        : game.pieces.filter(piece => {
+            if (piece.player !== currentPlayer) return false;
+            if (piece.currentTile && ['home', 'field', 'save'].includes(piece.currentTile.type)) return true;
+            if (piece.rack && piece.rack.type === 'unentered' && piece.rack.pieces[0] === piece) return true;
+            return false;
+        });
+
+    const gameState = {
+        current_player: currentPlayer,
+        dice: game.dice.filter(die => !die.used).map(die => die.value),
+        pieces: piecesToConsider.map(piece => {
+            console.log('Piece before calculating reachable tiles:', {
+                id: piece.number + (piece.player === 'black' ? 14 : 0),
+                player: piece.player,
+                currentTile: piece.currentTile ? piece.currentTile.type : null,
+                rack: piece.rack ? piece.rack.type : null
+            });
+
+            const reachableTiles = game.getReachableTilesByDice(piece);
+
+            const pieceState = {
+                id: piece.number + (piece.player === 'black' ? 14 : 0),
+                player: piece.player,
+                available_moves: [
+                    ...(reachableTiles.reachableByFirstDie || []).map(tile => ({ ring: tile.ring, sector: tile.sector })),
+                    ...(reachableTiles.reachableBySecondDie || []).map(tile => ({ ring: tile.ring, sector: tile.sector })),
+                    ...(reachableTiles.reachableBySum || []).map(tile => ({ ring: tile.ring, sector: tile.sector }))
+                ]
+            };
+
+            console.log('Piece state:', pieceState); // Log each piece's state separately
+            return pieceState;
+        })
+    };
+
+    console.log('Game State:', gameState); // Log the final game state
+    logPiecesInHomeTile(); // Log all pieces in the home tile
+    return gameState;
+}
+
+
+
+
+
+function logPiecesInHomeTile() {
+    const game = gameInstance.scene.scenes[0].game;
+    const homeTile = game.tiles.find(tile => tile.type === 'home');
+
+    if (homeTile) {
+        console.log('Pieces in the home tile:');
+        homeTile.pieces.forEach(piece => {
+            console.log({
+                id: piece.number + (piece.player === 'black' ? 14 : 0),
+                player: piece.player,
+                number: piece.number
+            });
+        });
+    } else {
+        console.log('No home tile found.');
+    }
+}
+
 
 
 
@@ -1849,3 +2039,6 @@ const gameInstance = new Phaser.Game(config);
 // should be able to make moves in either order when must move a piece
 // missing border for save tiles
 // make ring 6 nogo tiles that abut on the outer border invisible
+
+// when agent has two captured pieces, it only moves one out of home
+// agent doesn't know how to save pieces
