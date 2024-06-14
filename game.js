@@ -1,5 +1,8 @@
 const DEBUG_MODE = true; 
 
+const WHITE_IS_AI = false;
+const BLACK_IS_AI = true;
+
 const PIECE_RADIUS_BASE = 20; 
 const TILE_RADIUS_STEP = 60; 
 const CENTER_X = 900;
@@ -237,6 +240,8 @@ class Piece {
     }
 
     canBeSaved() {
+        const player = this.color === 0xffffff ? this.game.players[0] : this.game.players[1];
+        console.log(player)
         if (player.getGamePhase() === 'opening') return false;
         
         if (!this.currentTile || this.currentTile.type !== 'save') return false;
@@ -754,7 +759,7 @@ class Die {
 class Game {
     constructor(scene, debug = false) {
         this.scene = scene;
-        this.players = [new Player('white'), new Player('black')];
+        this.players = [new Player('white', WHITE_IS_AI), new Player('black', BLACK_IS_AI)];
         this.turn = 'white';
         this.dice = [new Die(scene, DIE_1_POSITION, 50, true), new Die(scene, DIE_2_POSITION, 50, false)];
         this.gameOver = false;
@@ -1295,7 +1300,9 @@ class Game {
         // Check if it's the agent's turn and call getAgentMoves
         const currentPlayer = this.turn;
 
-        if (currentPlayer === 'black') { // Assuming the agent plays as 'black'
+        const currentPlayerObject = this.players.find(player => player.name === currentPlayer);
+
+        if (currentPlayerObject && currentPlayerObject.isAI) { // Check if the current player is AI
             console.log('Agent\'s turn');
             const gameState = getCurrentGameState();
             setTimeout(() => {
@@ -1607,8 +1614,9 @@ class Game {
 }
 
 class Player {
-    constructor(name) {
+    constructor(name, isAI = false) {
         this.name = name;
+        this.isAI = isAI;
         this.gamePhase = 'opening'; // Initialize the game phase
     }
 
@@ -2042,3 +2050,4 @@ const gameInstance = new Phaser.Game(config);
 
 // when agent has two captured pieces, it only moves one out of home
 // agent doesn't know how to save pieces
+// highlight pieces and tiles when agent moves
