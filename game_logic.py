@@ -57,7 +57,6 @@ class Board:
         self.pieces = []
         self.initialize_pieces()
         self.moved_piece = None           # Piece that has been moved during the current turn
-        self.final_tiles_for_moved_piece = None
 
         self.game_stages = {'white': 'opening', 'black': 'opening'}
         self.current_player = 'white' 

@@ -1597,7 +1597,41 @@ class Game {
     }
 
 
+    saveTileNeighborsToFile() {
+        const tileNeighbors = {};
 
+        this.tiles.forEach(tile => {
+            if (tile.type !== 'nogo') {
+                const key = `ring${tile.ring}_sector${tile.sector}`;
+                tileNeighbors[key] = {
+                    type: tile.type,
+                    neighbors: tile.neighbors.map(neighbor => ({
+                        ring: neighbor.ring,
+                        sector: neighbor.sector
+                    }))
+                };
+                if (tile.type === 'save') {
+                    tileNeighbors[key].number = tile.number;
+                }
+            }
+        });
+
+        const json = JSON.stringify(tileNeighbors, null, 2);
+        this.saveJSONToFile(json, 'tile_neighbors.json');
+    }
+
+    saveJSONToFile(json, filename) {
+        const blob = new Blob([json], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+    }
     
 
 }
