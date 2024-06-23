@@ -18,8 +18,13 @@ def select_moves():
     try:
         state = request.json
         board.update_state(state)
-        print(board)
-        return jsonify({"message": "Game state updated successfully"}), 200
+        moves = board.get_valid_moves()
+        print(f"Moves: {moves}")
+        if moves:
+            chosen_move = random.choice(moves)
+            return jsonify({"message": "Game state updated successfully", "move": chosen_move}), 200
+        else:
+            return jsonify({"message": "No valid moves available"}), 200
     except Exception as e:
         print(f"Error: {e}")
         return jsonify({"message": "An error occurred"}), 500

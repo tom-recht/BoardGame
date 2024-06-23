@@ -18,6 +18,7 @@ class Piece:
         self.rack = None
         self.reachable_tiles = None
         self.reachable_by_sum = None
+        self.index = None
 
     def __repr__(self):
         return f'{self.player}({self.number})'
@@ -41,6 +42,7 @@ class Tile:
         self.neighbors = []
         self.board = board
         self.number = number  # for goal tiles
+        self.index = None
 
     def __repr__(self):
         return f"{self.type}({self.ring}, {self.pos})"
@@ -63,6 +65,7 @@ class Board:
         self.black_unentered = []
         self.white_saved = []
         self.black_saved = []
+        self.assign_tile_indices()
         self.game_stages = {'white': 'opening', 'black': 'opening'}
         self.firstMove = None
 
@@ -108,6 +111,9 @@ class Board:
     def update_state(self, game_state_details):
         # Set the current turn
         self.current_player = game_state_details['currentTurn']
+
+        # Clear the board pieces
+        self.pieces.clear()
         
         # Set dice values and used status
         for die, die_details in zip(self.dice, game_state_details['dice']):
@@ -119,6 +125,7 @@ class Board:
             rack.clear()
             for piece_details in pieces_details:
                 piece = Piece(player, piece_details['number'], self)
+                self.pieces.append(piece)
                 rack.append(piece)
                 piece.rack = rack
         
@@ -128,8 +135,7 @@ class Board:
         place_pieces_in_rack(self.black_unentered, game_state_details['racks']['blackUnentered'], 'black')
         place_pieces_in_rack(self.black_saved, game_state_details['racks']['blackSaved'], 'black')
         
-        # Clear the board pieces
-        self.pieces.clear()
+        
         
         # Place pieces on the board
         for piece_details in game_state_details['boardPieces']:
@@ -146,7 +152,21 @@ class Board:
             if 'reachableBySum' in piece_details:
                 piece.reachable_by_sum = [self.get_tile(t['ring'], t['sector']) for t in piece_details['reachableBySum']]
 
+        self.assign_piece_indices()
         self.game_stages[self.current_player] = self.get_game_stage(self.current_player)
+
+    def assign_tile_indices(self):
+        for i in range(len(self.tiles)):
+            self.tiles[i].index = i
+
+    def assign_piece_indices(self):
+        print('Assigning piece indices')
+        # Sort the pieces list by color (white then black) and then by their number
+        self.pieces.sort(key=lambda piece: (piece.player != 'white', piece.number))
+        # Assign the indices
+        for i in range(len(self.pieces)):
+            self.pieces[i].index = i+1
+            print(self.pieces[i], self.pieces[i].index)
 
     def get_game_stage(self, player):
         player_pieces = [p for p in self.pieces if p.player == player]
@@ -258,15 +278,15 @@ class Board:
         piece.reachable_tiles = reachable_tiles
         print(piece, reachable_tiles)
 
-    def get_valid_moves(self, readable=False):
-        # probably need to change this so it uses piece / tile index as in original, not piece / tile object
+    def get_valid_moves(self):
+        # need to change this so it uses tile index as in original, not tile object
 
         # if must move captured piece(s), do so
         captured_pieces = [piece for piece in self.home_tile.pieces if piece.player == self.current_player]
         if captured_pieces:
             for piece in captured_pieces:
                 self.get_reachable_tiles_by_dice(piece)
-            self.destinations_by_piece = {piece: piece.reachable_tiles for piece in captured_pieces}
+            self.destinations_by_piece = {piece.index: piece.reachable_tiles for piece in captured_pieces}
 
         # if must move unentered piece, do so
         elif self.must_move_unentered():
@@ -274,7 +294,7 @@ class Board:
             piece = self.get_unentered_piece()
             print('Unentered piece:', piece)
             self.get_reachable_tiles_by_dice(piece)
-            self.destinations_by_piece = {piece: piece.reachable_tiles}
+            self.destinations_by_piece = {piece.index: piece.reachable_tiles}
             
         else:
             player_pieces = [p for p in self.pieces if p.player == self.current_player and p.tile.type in ['field', 'save']]
@@ -287,36 +307,27 @@ class Board:
             for piece in player_pieces:
                 self.get_reachable_tiles_by_dice(piece)
         
-            self.destinations_by_piece = {piece: piece.reachable_tiles for piece in player_pieces}
+            self.destinations_by_piece = {piece.index: piece.reachable_tiles for piece in player_pieces}
 
+
+        print('Destinations by piece:', self.destinations_by_piece)
         # transform the dictionary so that items are tuples of (piece, tile, roll)
         tuples_list = []
         for piece, moves in self.destinations_by_piece.items():
             for roll, destinations in moves.items():
                 if destinations:  # Ignore 'total' rolls and empty destinations
                     for destination in destinations:
-                        tuples_list.append((piece, destination, roll))
+                        tuples_list.append((piece, destination.index, roll))
 
         tuples_list.append((0, 0, 0))  # add a pass move
 
         # add tuples of form (0, tile_index, 0) for saving opponent's block
         for tile in self.tiles:
-            if tile.type == 'field' and tile.pieces and len(tile.pieces) > 1 and tile.pieces[0].player != self.current_player:
+            if tile.is_blocked():
                 tuples_list.append((0, tile, 0))
   
-        if not readable:
-            return tuples_list
+        return tuples_list
         
-        # human-readable output
-        adjusted_tuples_list = []
-        for piece, destination, roll in tuples_list:
-            piece = piece if piece <= 14 else piece - 14
-            destination = self.index_to_tile(destination)
-            adjusted_tuples_list.append((piece, destination, roll))
-        
-        tuple_dict = {adjusted_tuple: original_tuple for adjusted_tuple, original_tuple in zip(adjusted_tuples_list, tuples_list)}
-        return tuple_dict
-
 board = Board()
 
 filename = 'game_state (4).json'

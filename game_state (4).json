@@ -2,8 +2,8 @@
   "currentTurn": "white",
   "dice": [
     {
-      "value": 6,
-      "used": true
+      "value": 3,
+      "used": false
     },
     {
       "value": 4,
@@ -12,10 +12,6 @@
   ],
   "racks": {
     "whiteUnentered": [
-      {
-        "color": "white",
-        "number": 14
-      },
       {
         "color": "white",
         "number": 5
@@ -67,14 +63,6 @@
     ],
     "whiteSaved": [],
     "blackUnentered": [
-      {
-        "color": "black",
-        "number": 2
-      },
-      {
-        "color": "black",
-        "number": 10
-      },
       {
         "color": "black",
         "number": 8
@@ -131,10 +119,33 @@
       "color": "white",
       "number": 7,
       "tile": {
+        "ring": 0,
+        "sector": 0
+      }
+    },
+    {
+      "color": "white",
+      "number": 14,
+      "tile": {
+        "ring": 4,
+        "sector": 10
+      }
+    },
+    {
+      "color": "black",
+      "number": 2,
+      "tile": {
         "ring": 6,
         "sector": 8
-      },
-      "reachableBySum": []
+      }
+    },
+    {
+      "color": "black",
+      "number": 10,
+      "tile": {
+        "ring": 3,
+        "sector": 10
+      }
     }
   ]
 }
