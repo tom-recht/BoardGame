@@ -15,9 +15,14 @@ board = Board()
 
 @app.route('/select_moves', methods=['POST'])
 def select_moves():
-    state = request.json
-    board.update_state(state)
-    return jsonify({"message": "Game state updated successfully"}), 200
+    try:
+        state = request.json
+        board.update_state(state)
+        print(board)
+        return jsonify({"message": "Game state updated successfully"}), 200
+    except Exception as e:
+        print(f"Error: {e}")
+        return jsonify({"message": "An error occurred"}), 500
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True, port=5000)

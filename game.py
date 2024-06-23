@@ -16,7 +16,7 @@ class Piece:
         self.tile = None
 
     def __repr__(self):
-        return f'[{self.player}, {self.number}, {self.tile}, {self.index}]'
+        return f'[{self.player}, {self.number}, {self.tile}]'
 
 class Tile:
     def __init__(self, tile_type, ring, pos, board, number=None):
@@ -35,7 +35,7 @@ class Board:
     def __init__(self):
         self.players = ['white', 'black']
         self.dice = [Die(self), Die(self)] 
-
+        self.pieces = []
         self.tiles = []
         self.tile_map = {}
         self.load_from_json('tile_neighbors.json')
@@ -48,7 +48,15 @@ class Board:
         self.firstMove = None
 
     def __repr__(self):
-        return f"Board(tiles={self.tiles})"
+
+        board_repr = "White unentered: " + str(self.white_unentered) + "\n"
+        board_repr += "White saved: " + str(self.white_saved) + "\n"
+        board_repr += "Black unentered: " + str(self.black_unentered) + "\n"
+        board_repr += "Black saved: " + str(self.black_saved) + "\n"
+        board_repr += "Pieces on board:\n"
+        for piece in self.pieces:
+            board_repr += f"  {piece}\n"
+        return board_repr
 
     def add_tile(self, tile):
         self.tiles.append(tile)
@@ -109,7 +117,7 @@ class Board:
             number = piece_details['number']
             ring = piece_details['tile']['ring']
             sector = piece_details['tile']['sector']
-            tile = self.board.get_tile(ring, sector)
+            tile = self.get_tile(ring, sector)
             piece = Piece(player, number)
             piece.tile = tile
             tile.pieces.append(piece)
@@ -117,7 +125,7 @@ class Board:
             
             if 'reachableBySum' in piece_details:
                 piece.reachable_by_sum = {
-                    'reachableBySum': [self.board.get_tile(t['ring'], t['sector']) for t in piece_details['reachableBySum']]
+                    'reachableBySum': [self.get_tile(t['ring'], t['sector']) for t in piece_details['reachableBySum']]
                 }
 
 

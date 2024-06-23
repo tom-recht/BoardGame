@@ -1292,7 +1292,7 @@ class Game {
 
         if (currentPlayerObject && currentPlayerObject.isAI) { // Check if the current player is AI
             console.log('Agent\'s turn');
-            const gameState = getCurrentGameState();
+            const gameState = getGameState(this);
             setTimeout(() => {
                 getAgentMoves(gameState);
             }, 1000); // 1 second delay
@@ -1975,65 +1975,9 @@ function findTileByRingAndSector(ring, sector) {
     return gameInstance.scene.scenes[0].game.tiles.find(tile => tile.ring === ring && tile.sector === sector);
 }
 
-function getCurrentGameState() {
-    const game = gameInstance.scene.scenes[0].game;
-    const currentPlayer = game.turn;
 
-    // Log current game state for debugging
-    console.log('Current turn:', game.turn);
-    console.log('All Pieces:', game.pieces);
-    console.log('Must move pieces:', game.mustMovePieces);
-
-    game.dice.forEach((die, index) => {
-        console.log(`Die ${index + 1} value: ${die.value}`)});
-
-    const piecesToConsider = game.mustMovePieces.length > 0
-        ? game.mustMovePieces
-        : game.pieces.filter(piece => {
-            if (piece.player !== currentPlayer) return false;
-            if (piece.currentTile && ['home', 'field', 'save'].includes(piece.currentTile.type)) return true;
-            if (piece.rack && piece.rack.type === 'unentered' && piece.rack.pieces[0] === piece) return true;
-            return false;
-        });
-
-    const gameState = {
-        current_player: currentPlayer,
-        dice: game.dice.filter(die => !die.used).map(die => die.value),
-        pieces: piecesToConsider.map(piece => {
-            console.log('Piece before calculating reachable tiles:', {
-                id: piece.number + (piece.player === 'black' ? 14 : 0),
-                player: piece.player,
-                currentTile: piece.currentTile ? piece.currentTile.type : null,
-                rack: piece.rack ? piece.rack.type : null
-            });
-
-            const reachableTiles = game.getReachableTilesByDice(piece);
-
-            const pieceState = {
-                id: piece.number + (piece.player === 'black' ? 14 : 0),
-                player: piece.player,
-                available_moves: [
-                    ...(reachableTiles.reachableByFirstDie || []).map(tile => ({ ring: tile.ring, sector: tile.sector })),
-                    ...(reachableTiles.reachableBySecondDie || []).map(tile => ({ ring: tile.ring, sector: tile.sector })),
-                    ...(reachableTiles.reachableBySum || []).map(tile => ({ ring: tile.ring, sector: tile.sector }))
-                ]
-            };
-
-            console.log('Piece state:', pieceState); // Log each piece's state separately
-            return pieceState;
-        })
-    };
-
-    console.log('Game State:', gameState); // Log the final game state
-    return gameState;
-}
-
-
-
-
-
-
-function getGameStateDetails(game) {
+function getGameState(game) {
+    console.log('Getting game state details');
     const gameStateDetails = {
         currentTurn: game.turn,
         dice: game.dice.map(die => ({
@@ -2060,7 +2004,7 @@ function getGameStateDetails(game) {
         },
         boardPieces: game.pieces.filter(piece => piece.currentTile).map(piece => {
             const pieceDetails = {
-                color: piece.color,
+                color: piece.player,
                 number: piece.number,
                 tile: {
                     ring: piece.currentTile.ring,
