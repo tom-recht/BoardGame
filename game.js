@@ -1,4 +1,4 @@
-const DEBUG_MODE = true; 
+const DEBUG_MODE = false; 
 
 const WHITE_IS_AI = false;
 const BLACK_IS_AI = true;
@@ -112,7 +112,6 @@ class Piece {
                 this.reachableTiles = this.game.getReachableTilesByDice(this);
                 this.highlightReachableTiles();
             } else {
-                console.log('Deselecting piece');
                 this.game.unhighlightAllTiles();
                 this.game.selectedPiece = null;
                 this.reachableTiles = null;
@@ -241,7 +240,6 @@ class Piece {
 
     canBeSaved() {
         const player = this.color === 0xffffff ? this.game.players[0] : this.game.players[1];
-        console.log(player)
         if (player.getGamePhase() === 'opening') return false;
         
         if (!this.currentTile || this.currentTile.type !== 'save') return false;
@@ -264,16 +262,12 @@ class Piece {
 
         if (this.canBeSaved()) {
             const saveTileNumber = this.currentTile.number;
-            console.log(`Piece ${this.number} can be saved on tile ${saveTileNumber}`);
             const dice = this.game.dice.filter(die => !die.used);
             let dieToUse = dice.find(die => die.value === saveTileNumber);
 
-            console.log(`Available dice: ${dice.map(die => die.value).join(', ')}`);
-            console.log(`Selected die for save: ${dieToUse ? dieToUse.value : 'None'}`);
 
             if (!dieToUse && this.number > 6) {
                 // If player is in the endgame they can save unnumbered pieces with higher die rolls
-                console.log(`Checking endgame conditions for piece ${this.number}`);
                 const isEndgame = player.getGamePhase() === 'endgame';
                 console.log(`Is player ${player.name} in endgame: ${isEndgame}`);
 
@@ -1070,11 +1064,16 @@ class Game {
     
         const reachableByFirstDie = this.getReachableTiles(piece.currentTile, diceValues[0]);
         const reachableBySecondDie = diceValues.length > 1 ? this.getReachableTiles(piece.currentTile, diceValues[1]) : [];
-        const reachableBySum = this.getReachableTiles(piece.currentTile, diceValues[0] + (diceValues[1] || 0));
+        let reachableBySum = this.getReachableTiles(piece.currentTile, diceValues[0] + (diceValues[1] || 0));
     
+        const homeTile = this.tiles.find(tile => tile.type === 'home');
+        if (homeTile.pieces.filter(p => p.color === piece.color).length > 1) {
+            console.log('Player has more than one captured piece');
+            reachableBySum = [];
+        }
+
         // Filter reachableByFirstDie and reachableBySecondDie based on piece.reachableTiles
         if (piece.reachableTiles)  {
-            console.log('reachableTiles', piece.reachableTiles.reachableByFirstDie, piece.reachableTiles.reachableBySecondDie, piece.reachableTiles.reachableBySum)
 
             const reachableTilesSet = new Set(piece.reachableTiles.reachableBySum); // Assuming each tile has a unique id
     
@@ -1083,7 +1082,6 @@ class Game {
             const filteredReachableByFirstDie = filterTiles(reachableByFirstDie);
             const filteredReachableBySecondDie = filterTiles(reachableBySecondDie);
             const filteredReachableBySum = filterTiles(reachableBySum);
-            console.log(1, filteredReachableByFirstDie, filteredReachableBySecondDie);
     
             return {
                 reachableByFirstDie: filteredReachableByFirstDie,
@@ -1091,7 +1089,6 @@ class Game {
                 reachableBySum: filteredReachableBySum
             };
         }
-        console.log(2, reachableByFirstDie, reachableBySecondDie, reachableBySum);
         return {
             reachableByFirstDie: reachableByFirstDie,
             reachableBySecondDie: reachableBySecondDie,
@@ -1119,9 +1116,8 @@ class Game {
 
         if (!reachableTiles) return false;
 
-    
         const { reachableByFirstDie, reachableBySecondDie, reachableBySum } = reachableTiles;
-    
+
         const allReachableTiles = new Set([...reachableByFirstDie, ...reachableBySecondDie, ...reachableBySum]);
     
         if (allReachableTiles.has(targetTile)) {
@@ -1197,15 +1193,10 @@ class Game {
         const reachableWithFirstDie = this.getReachableTiles(piece.currentTile, firstDieValue);
         const reachableWithSecondDie = this.getReachableTiles(piece.currentTile, secondDieValue);
     
-        console.log('Reachable with first die:', reachableWithFirstDie);
-        console.log('Reachable with second die:', reachableWithSecondDie);
-    
         // Find all intermediate tiles leading to the target tile
         const intermediateTiles1 = reachableWithFirstDie.filter(tile => this.getReachableTiles(tile, secondDieValue).includes(targetTile));
         const intermediateTiles2 = reachableWithSecondDie.filter(tile => this.getReachableTiles(tile, firstDieValue).includes(targetTile));
-    
-        console.log('Intermediate tiles set 1:', intermediateTiles1);
-        console.log('Intermediate tiles set 2:', intermediateTiles2);
+
     
         // Combine the intermediate tiles
         const allIntermediateTiles = [...intermediateTiles1, ...intermediateTiles2];
@@ -1236,13 +1227,11 @@ class Game {
         const homePieces = homeTile.pieces.filter(piece => piece.color === currentPlayerColor);
         if (homePieces.length > 0) {
             this.mustMovePieces = homePieces;
-            console.log('Must move captured pieces:', homePieces.map(p => p.number).join(', '));
             return; // If there are captured pieces, no other pieces may move
         }
 
         // Check if there's a piece in the unentered rack
         if (unenteredRack.pieces.length > 0) {
-            console.log('Must move a piece from the unentered rack');
             this.mustMovePieces = [unenteredRack.pieces[0]]; // The first piece in the unentered rack must move
         }
     }
@@ -1293,7 +1282,6 @@ class Game {
         this.rollDice();
         this.movedOnce = false;
         this.updateMovablePieces();
-        console.log(`Switched turn to ${this.turn}`, 'Must move pieces:', this.mustMovePieces.map(p => p.number).join(', '));
         this.pieces.forEach(piece => piece.reachableTiles = null);
         this.state = this.captureState();
 
@@ -1309,6 +1297,7 @@ class Game {
                 getAgentMoves(gameState);
             }, 1000); // 1 second delay
         }
+
     }
 
     checkMidgame() {
@@ -1904,31 +1893,31 @@ function applyMoves(moves) {
         const piece = findPieceById(move.piece_id);
         const targetTile = findTileByRingAndSector(move.target.ring, move.target.sector);
         if (piece && targetTile) {
+            // Highlight the piece
+            piece.isSelected = true;
+            piece.updateColor();
+            targetTile.highlight();
+            setTimeout(() => {
+                if (game.movePiece(piece, targetTile, true)) {
+                    console.log(`Piece ${move.piece_id} moved to ring ${move.target.ring}, sector ${move.target.sector}`);
+                    piece.reachableTiles = game.getReachableTilesByDice(piece); // Update reachable tiles
+                    
 
-/*                 piece.circle.fillColor = this.color === 0xffffff ? 0x90ee90 : 0xee82ee;
-                piece.circle.setStrokeStyle(2, this.borderColor);
-                targetTile.highlight() */
-
-            if (game.movePiece(piece, targetTile, true)) {
-
-                console.log(`Piece ${move.piece_id} moved to ring ${move.target.ring}, sector ${move.target.sector}`);
-                piece.reachableTiles = game.getReachableTilesByDice(piece); // Update reachable tiles
-                
-                // Update game state after applying the move
-                game.state = game.captureState();
-                
-                // Apply the next move in the sequence after a short delay
-                setTimeout(() => {
+                    // Update game state after applying the move
+                    game.state = game.captureState();
+                    
+                    // Apply the next move in the sequence after a short delay
+                    setTimeout(() => {
+                        piece.isSelected = false;
+                        piece.updateColor();
+                        targetTile.unhighlight();
+                        applyMoveSequence(moveIndex + 1);
+                    }, 1000); // 1 second delay between moves
+                } else {
+                    console.log('Move not valid according to game rules.');
                     applyMoveSequence(moveIndex + 1);
-/*                     piece.circle.fillColor = piece.color;
-                    piece.circle.setStrokeStyle(2, this.borderColor);
-                    targetTile.unhighlight()    */ 
-                }, 1000); // 1 second delay between moves
-
-            } else {
-                console.log('Move not valid according to game rules.');
-                applyMoveSequence(moveIndex + 1);
-            }
+                }
+            }, 1000); // 1 second delay to highlight the piece before moving
         } else {
             console.log('Piece or target tile not found for move:', move);
             applyMoveSequence(moveIndex + 1);
@@ -1937,6 +1926,7 @@ function applyMoves(moves) {
 
     applyMoveSequence(0); // Start applying the move sequence
 }
+
 
 
 function findPieceById(id) {
@@ -2001,7 +1991,6 @@ function getCurrentGameState() {
     };
 
     console.log('Game State:', gameState); // Log the final game state
-    logPiecesInHomeTile(); // Log all pieces in the home tile
     return gameState;
 }
 
@@ -2009,25 +1998,55 @@ function getCurrentGameState() {
 
 
 
-function logPiecesInHomeTile() {
-    const game = gameInstance.scene.scenes[0].game;
-    const homeTile = game.tiles.find(tile => tile.type === 'home');
 
-    if (homeTile) {
-        console.log('Pieces in the home tile:');
-        homeTile.pieces.forEach(piece => {
-            console.log({
-                id: piece.number + (piece.player === 'black' ? 14 : 0),
-                player: piece.player,
+function getGameStateDetails(game) {
+    const gameStateDetails = {
+        currentTurn: game.turn,
+        dice: game.dice.map(die => ({
+            value: die.value,
+            used: die.used
+        })),
+        racks: {
+            whiteUnentered: game.whiteUnenteredRack.pieces.map(piece => ({
+                color: piece.color,
                 number: piece.number
-            });
-        });
-    } else {
-        console.log('No home tile found.');
-    }
+            })),
+            whiteSaved: game.whiteSavedRack.pieces.map(piece => ({
+                color: piece.color,
+                number: piece.number
+            })),
+            blackUnentered: game.blackUnenteredRack.pieces.map(piece => ({
+                color: piece.color,
+                number: piece.number
+            })),
+            blackSaved: game.blackSavedRack.pieces.map(piece => ({
+                color: piece.color,
+                number: piece.number
+            })),
+        },
+        boardPieces: game.pieces.filter(piece => piece.currentTile).map(piece => {
+            const pieceDetails = {
+                color: piece.color,
+                number: piece.number,
+                tile: {
+                    ring: piece.currentTile.ring,
+                    sector: piece.currentTile.sector
+                }
+            };
+
+            if (piece.reachableTiles && piece.reachableTiles.reachableBySum) {
+                pieceDetails.reachableBySum = piece.reachableTiles.reachableBySum.map(tile => ({
+                    ring: tile.ring,
+                    sector: tile.sector
+                }));
+            }
+
+            return pieceDetails;
+        })
+    };
+
+    return gameStateDetails;
 }
-
-
 
 
 
@@ -2041,13 +2060,10 @@ const config = {
 
 const gameInstance = new Phaser.Game(config);
 
-
 // add saving opponent's pieces
 // clicking on a selectable piece should select it even if another piece is selected
 // should be able to make moves in either order when must move a piece
 // missing border for save tiles
 // make ring 6 nogo tiles that abut on the outer border invisible
 
-// when agent has two captured pieces, it only moves one out of home
 // agent doesn't know how to save pieces
-// highlight pieces and tiles when agent moves

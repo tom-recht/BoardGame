@@ -1,3 +1,8 @@
+# python -m http.server 8000
+# python app.py
+# http://localhost:8000
+
+
 import random
 from flask import Flask, request, jsonify
 from flask_cors import CORS
