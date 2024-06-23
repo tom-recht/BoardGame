@@ -1,7 +1,7 @@
-const DEBUG_MODE = false; 
+const DEBUG_MODE = true; 
 
 const WHITE_IS_AI = false;
-const BLACK_IS_AI = true;
+const BLACK_IS_AI = false;
 
 const PIECE_RADIUS_BASE = 20; 
 const TILE_RADIUS_STEP = 60; 
@@ -1699,6 +1699,22 @@ class MainGameScene extends Phaser.Scene {
                     this.showNewGameConfirmationModal();
                 });
 
+        // Add save game state button
+        if(DEBUG_MODE) {
+        const saveGameStateButton = this.add.text(300, 100, 'Save Game', {
+            fontSize: '24px',
+            backgroundColor: '#87CEEB',
+            padding: { x: 15, y: 7.5 },
+            borderColor: '#000',
+            borderWidth: 1.5,
+            borderRadius: 3.75
+        }).setOrigin(0.5).setInteractive();
+
+        saveGameStateButton.on('pointerdown', () => {
+            this.saveGameState(gameInstance.scene.scenes[0].game);
+        });
+    }
+
     }
 
     showNewGameConfirmationModal() {
@@ -1762,6 +1778,25 @@ class MainGameScene extends Phaser.Scene {
             this.confirmationModal.destroy(true);
             this.confirmationModal = null;
         }
+    }
+
+    saveGameState(game) {
+        const state = getGameState(game);
+        const json = JSON.stringify(state, null, 2);
+        this.saveJSONToFile(json, 'game_state.json');
+    }
+
+    saveJSONToFile(json, filename) {
+        const blob = new Blob([json], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
     }
 
     update() {
@@ -1913,7 +1948,7 @@ function applyMoves(moves) {
             // All moves applied, check if there are unused dice
             if (game.dice.some(die => !die.used)) {
                 // Call the agent again for additional moves
-                const gameState = getCurrentGameState();
+                const gameState = getGameState(game);
                 setTimeout(() => getAgentMoves(gameState), 1000); // Delay before making the next move
             } else {
                 // No unused dice, switch the turn
@@ -1986,19 +2021,19 @@ function getGameState(game) {
         })),
         racks: {
             whiteUnentered: game.whiteUnenteredRack.pieces.map(piece => ({
-                color: piece.color,
+                color: piece.player,
                 number: piece.number
             })),
             whiteSaved: game.whiteSavedRack.pieces.map(piece => ({
-                color: piece.color,
+                color: piece.player,
                 number: piece.number
             })),
             blackUnentered: game.blackUnenteredRack.pieces.map(piece => ({
-                color: piece.color,
+                color: piece.player,
                 number: piece.number
             })),
             blackSaved: game.blackSavedRack.pieces.map(piece => ({
-                color: piece.color,
+                color: piece.player,
                 number: piece.number
             })),
         },

@@ -1,0 +1,165 @@
+{
+  "currentTurn": "white",
+  "dice": [
+    {
+      "value": 3,
+      "used": false
+    },
+    {
+      "value": 5,
+      "used": false
+    }
+  ],
+  "racks": {
+    "whiteUnentered": [
+      {
+        "color": "white",
+        "number": 9
+      },
+      {
+        "color": "white",
+        "number": 13
+      },
+      {
+        "color": "white",
+        "number": 8
+      },
+      {
+        "color": "white",
+        "number": 1
+      },
+      {
+        "color": "white",
+        "number": 11
+      },
+      {
+        "color": "white",
+        "number": 7
+      },
+      {
+        "color": "white",
+        "number": 4
+      },
+      {
+        "color": "white",
+        "number": 3
+      },
+      {
+        "color": "white",
+        "number": 12
+      },
+      {
+        "color": "white",
+        "number": 2
+      },
+      {
+        "color": "white",
+        "number": 6
+      },
+      {
+        "color": "white",
+        "number": 5
+      },
+      {
+        "color": "white",
+        "number": 10
+      }
+    ],
+    "whiteSaved": [],
+    "blackUnentered": [
+      {
+        "color": "black",
+        "number": 10
+      },
+      {
+        "color": "black",
+        "number": 11
+      },
+      {
+        "color": "black",
+        "number": 6
+      },
+      {
+        "color": "black",
+        "number": 8
+      },
+      {
+        "color": "black",
+        "number": 5
+      },
+      {
+        "color": "black",
+        "number": 4
+      },
+      {
+        "color": "black",
+        "number": 13
+      },
+      {
+        "color": "black",
+        "number": 1
+      },
+      {
+        "color": "black",
+        "number": 14
+      },
+      {
+        "color": "black",
+        "number": 12
+      },
+      {
+        "color": "black",
+        "number": 3
+      },
+      {
+        "color": "black",
+        "number": 9
+      },
+      {
+        "color": "black",
+        "number": 2
+      },
+      {
+        "color": "black",
+        "number": 7
+      }
+    ],
+    "blackSaved": []
+  },
+  "boardPieces": [
+    {
+      "color": "white",
+      "number": 14,
+      "tile": {
+        "ring": 7,
+        "sector": 8
+      },
+      "reachableBySum": [
+        {
+          "ring": 7,
+          "sector": 2
+        },
+        {
+          "ring": 7,
+          "sector": 4
+        },
+        {
+          "ring": 7,
+          "sector": 6
+        },
+        {
+          "ring": 7,
+          "sector": 8
+        },
+        {
+          "ring": 7,
+          "sector": 10
+        },
+        {
+          "ring": 7,
+          "sector": 12
+        }
+      ]
+    }
+  ]
+}
