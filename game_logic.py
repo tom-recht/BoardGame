@@ -220,7 +220,7 @@ class Board:
 
         self.roll_dice()
         self.moved_piece = None
-        self.final_tiles_for_moved_piece = None
+
 
     def check_game_over(self):
         saved_pieces = self.get_tile(10,0).pieces
@@ -520,6 +520,13 @@ class Board:
                 pieces_str = ', '.join(piece.player[0].capitalize() + str(piece.number) for piece in tile.pieces)
                 print(f'{tile}: {pieces_str}')
 
+
+    def update_state(self, state):
+        self.current_player = state['currentPlayer']
+        for die in state['dice']:
+            self.dice[die['index']].number = die['value']
+            self.dice[die['index']].used = die['used']
+
 class Die:
     def __init__(self, board):
         self.board = board
@@ -533,68 +540,6 @@ class Die:
 
 
 
-
-
-
-board = Board()
-
-
-
-def main_game_loop_random(board):
-    while True:
-        board.render()
-        valid_moves = board.get_valid_moves(readable=True)
-
-        if board.game_over:
-            break
-
-        print(f"{board.current_player.capitalize()} rolls {board.dice[0].number, board.dice[1].number}. ")
-
-        # Filter the valid moves based on the preferences
-        valid_moves_to_98 = {move: dest for move, dest in valid_moves.items() if dest[1] == 98 and not (board.tiles[move[1][1]].type == 'save' and (move[0] < 7 and board.tiles[move[1][1]].number == move[0] or move[0] >= 7))}
-        valid_moves_to_save = {move: dest for move, dest in valid_moves.items() if board.tiles[dest[1]].type == 'save' and (move[0] >= 7 or board.tiles[dest[1]].number == move[0]) and not (board.tiles[move[1][1]].type == 'save' and (move[0] < 7 and board.tiles[move[1][1]].number == move[0] or move[0] >= 7))}
-        valid_moves_to_same_color = {move: dest for move, dest in valid_moves.items() if dest[1] != 0 and board.tiles[dest[1]].pieces and board.tiles[dest[1]].pieces[0].player == board.current_player and not (board.tiles[move[1][1]].type == 'save' and (move[0] < 7 and board.tiles[move[1][1]].number == move[0] or move[0] >= 7))}
-
-        # Choose a move based on the preferences
-        if valid_moves_to_98:
-            selected_move = random.choice(list(valid_moves_to_98.keys()))
-        elif valid_moves_to_save:
-            selected_move = random.choice(list(valid_moves_to_save.keys()))
-        elif valid_moves_to_same_color:
-            selected_move = random.choice(list(valid_moves_to_same_color.keys()))
-        else:
-            selected_move = random.choice(list(valid_moves.keys()))
-
-        print(f"Chosen move: {selected_move}")  # Print the chosen move
-
-        board.move_from_tuple(valid_moves[selected_move])
-
-
-
-def main_game_loop(board):
-    while True:
-        board.render()
-        valid_moves = board.get_valid_moves(readable=True)
-
-        if board.game_over:
-            break
-
-        print(f"{board.current_player.capitalize()} rolls {board.dice[0].number, board.dice[1].number}. ")
-
-        # Print all valid moves with an index
-        for i, move in enumerate(valid_moves):
-            print(f"{i}: {move}")
-
-        # Ask the user to input the index of the move they want to make
-        selected_index = int(input("Enter the index of the move you want to make: "))
-        selected_move = list(valid_moves.keys())[selected_index]
-
-        print(f"Chosen move: {selected_move}")  # Print the chosen move
-
-        board.move_from_tuple(valid_moves[selected_move])
-
-
-main_game_loop_random(board)
 
 
 # observation space: for each of 14*2 pieces, its location; for each field tile, whether it's blocked; game stage for each player; # of saved pieces for each player; current player?; dice rolls
