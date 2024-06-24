@@ -80,6 +80,15 @@ class Board:
             board_repr += f"  {piece}\n"
         return board_repr
 
+    def clear(self):
+        self.white_unentered.clear()
+        self.black_unentered.clear()
+        self.white_saved.clear()
+        self.black_saved.clear()
+        self.pieces.clear()
+        for tile in self.tiles:
+            tile.pieces.clear()
+
     def add_tile(self, tile):
         self.tiles.append(tile)
         key = (tile.ring, tile.pos)
@@ -113,12 +122,14 @@ class Board:
         self.current_player = game_state_details['currentTurn']
 
         # Clear the board pieces
-        self.pieces.clear()
+        self.clear()
         
         # Set dice values and used status
         for die, die_details in zip(self.dice, game_state_details['dice']):
             die.number = die_details['value']
             die.used = die_details['used']
+
+        print('Home tile pieces 0:', self.home_tile.pieces)
 
         # Function to place pieces in their respective racks
         def place_pieces_in_rack(rack, pieces_details, player):
@@ -135,7 +146,7 @@ class Board:
         place_pieces_in_rack(self.black_unentered, game_state_details['racks']['blackUnentered'], 'black')
         place_pieces_in_rack(self.black_saved, game_state_details['racks']['blackSaved'], 'black')
         
-        
+        print('Home tile pieces 1:', self.home_tile.pieces)
         
         # Place pieces on the board
         for piece_details in game_state_details['boardPieces']:
@@ -148,6 +159,8 @@ class Board:
             piece.tile = tile
             tile.pieces.append(piece)
             self.pieces.append(piece)
+
+            print('Placed piece:', piece, 'on tile:', tile)
             
             if 'reachableBySum' in piece_details:
                 piece.reachable_by_sum = [self.get_tile(t['ring'], t['sector']) for t in piece_details['reachableBySum']]
@@ -155,18 +168,18 @@ class Board:
         self.assign_piece_indices()
         self.game_stages[self.current_player] = self.get_game_stage(self.current_player)
 
+        print('Home tile pieces :', self.home_tile.pieces)
+
     def assign_tile_indices(self):
         for i in range(len(self.tiles)):
             self.tiles[i].index = i
 
     def assign_piece_indices(self):
-        print('Assigning piece indices')
         # Sort the pieces list by color (white then black) and then by their number
         self.pieces.sort(key=lambda piece: (piece.player != 'white', piece.number))
         # Assign the indices
         for i in range(len(self.pieces)):
             self.pieces[i].index = i+1
-            print(self.pieces[i], self.pieces[i].index)
 
     def get_game_stage(self, player):
         player_pieces = [p for p in self.pieces if p.player == player]
@@ -177,9 +190,10 @@ class Board:
         return 'midgame'
     
     def get_unentered_piece(self):
-        unentered_ring = self.white_unentered if self.current_player == 'white' else self.black_unentered
-        if len(unentered_ring) > 0:
-            return unentered_ring[0]
+        unentered_rack = self.white_unentered if self.current_player == 'white' else self.black_unentered
+        print('Unentered rack:', unentered_rack)
+        if len(unentered_rack) > 0:
+            return unentered_rack[0]
         return None
 
     def must_move_unentered(self):
@@ -272,21 +286,21 @@ class Board:
         if piece.tile and piece.tile.type == 'save' and self.game_stages[piece.player] != 'opening':
             save_roll = self.get_saving_die(piece)
             if save_roll:             
-                reachable_tiles[save_roll].append(piece.player + ' save rack')  # this needs changing
+                reachable_tiles[save_roll].append('save')  # this needs changing?
                 print('Save roll', reachable_tiles[save_roll])
 
         piece.reachable_tiles = reachable_tiles
         print(piece, reachable_tiles)
 
     def get_valid_moves(self):
-        # need to change this so it uses tile index as in original, not tile object
 
         # if must move captured piece(s), do so
         captured_pieces = [piece for piece in self.home_tile.pieces if piece.player == self.current_player]
         if captured_pieces:
+            print('Captured pieces:', captured_pieces)
             for piece in captured_pieces:
                 self.get_reachable_tiles_by_dice(piece)
-            self.destinations_by_piece = {piece.index: piece.reachable_tiles for piece in captured_pieces}
+            self.destinations_by_piece = {piece: piece.reachable_tiles for piece in captured_pieces}
 
         # if must move unentered piece, do so
         elif self.must_move_unentered():
@@ -294,7 +308,7 @@ class Board:
             piece = self.get_unentered_piece()
             print('Unentered piece:', piece)
             self.get_reachable_tiles_by_dice(piece)
-            self.destinations_by_piece = {piece.index: piece.reachable_tiles}
+            self.destinations_by_piece = {piece: piece.reachable_tiles}
             
         else:
             player_pieces = [p for p in self.pieces if p.player == self.current_player and p.tile.type in ['field', 'save']]
@@ -304,10 +318,12 @@ class Board:
             if unentered_piece:
                 player_pieces.append(unentered_piece)
 
+            print('Player pieces:', player_pieces)
+
             for piece in player_pieces:
                 self.get_reachable_tiles_by_dice(piece)
         
-            self.destinations_by_piece = {piece.index: piece.reachable_tiles for piece in player_pieces}
+            self.destinations_by_piece = {piece: piece.reachable_tiles for piece in player_pieces}
 
 
         print('Destinations by piece:', self.destinations_by_piece)
@@ -315,16 +331,19 @@ class Board:
         tuples_list = []
         for piece, moves in self.destinations_by_piece.items():
             for roll, destinations in moves.items():
-                if destinations:  # Ignore 'total' rolls and empty destinations
+                if destinations:  # Ignore empty destinations
                     for destination in destinations:
-                        tuples_list.append((piece, destination.index, roll))
+                        if destination == 'save':
+                            tuples_list.append(((piece.player, piece.number), destination, roll))
+                        else:
+                            tuples_list.append(((piece.player, piece.number), (destination.ring, destination.pos), roll))
 
         tuples_list.append((0, 0, 0))  # add a pass move
 
-        # add tuples of form (0, tile_index, 0) for saving opponent's block
-        for tile in self.tiles:
-            if tile.is_blocked():
-                tuples_list.append((0, tile, 0))
+        # add tuples of form (0, tile_index, 0) for saving opponent's block -- this doesn't seem to work
+      #  for tile in self.tiles:
+       #     if tile.is_blocked():
+        #        tuples_list.append((0, (tile.ring, tile.pos), 0))
   
         return tuples_list
         

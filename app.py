@@ -22,6 +22,7 @@ def select_moves():
         print(f"Moves: {moves}")
         if moves:
             chosen_move = random.choice(moves)
+            print(f"Chosen move: {chosen_move}")
             return jsonify({"message": "Game state updated successfully", "move": chosen_move}), 200
         else:
             return jsonify({"message": "No valid moves available"}), 200

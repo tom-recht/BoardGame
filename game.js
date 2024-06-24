@@ -1177,6 +1177,7 @@ class Game {
         const homeTile = this.tiles.find(tile => tile.type === 'home');
         if (homeTile) {
             piece.move(homeTile);
+            piece.currentTile = homeTile;
             console.log(`Piece captured and sent to home tile: ${piece.color} ${piece.number}`);
         }
     }
@@ -1922,79 +1923,116 @@ function getAgentMoves(gameState) {
     })
     .then(response => {
         console.log('Response status:', response.status);
-        if (response.status === 204) {
-            console.log('No moves received from agent');
-            return null;
-        }
         return response.json();
     })
-    .then(moves => {
-        if (moves && moves.length > 0) {
-            console.log('Agent moves:', moves);
-            applyMoves(moves);
+    .then(data => {
+        if (data.move) {
+            console.log('Agent move:', data.move);
+            applyMove(data.move);
         } else {
-            console.log('No moves to apply');
+            console.log('No move to apply:', data.message);
             gameInstance.scene.scenes[0].game.switchTurn();
         }
     })
     .catch(error => console.error('Error:', error));
 }
 
-function applyMoves(moves) {
+function applyMove(move) { // need to add saving opponent pieces
     const game = gameInstance.scene.scenes[0].game;
-    
-    const applyMoveSequence = (moveIndex) => {
-        if (moveIndex >= moves.length) {
-            // All moves applied, check if there are unused dice
-            if (game.dice.some(die => !die.used)) {
-                // Call the agent again for additional moves
-                const gameState = getGameState(game);
-                setTimeout(() => getAgentMoves(gameState), 1000); // Delay before making the next move
+
+    console.log('Applying move:', move);
+    if (!Array.isArray(move) || move.length !== 3) {
+        console.error('Invalid move format:', move);
+        return;
+    }
+
+    const pieceColorNumber = move[0];
+    const targetRingSector = move[1];
+    const dieRoll = move[2];
+
+    // Check for the (0, 0, 0) tuple
+    if (pieceColorNumber === 0 && targetRingSector === 0 && dieRoll === 0) {
+        console.log('Received (0, 0, 0) tuple, switching turn.');
+        game.switchTurn();
+        return;
+    }
+
+    if (!Array.isArray(pieceColorNumber) || pieceColorNumber.length !== 2) {
+        console.error('Invalid piece color and number format:', pieceColorNumber);
+        return;
+    }
+
+    if (!Array.isArray(targetRingSector) || targetRingSector.length !== 2) {
+        console.error('Invalid target ring and sector format:', targetRingSector);
+        return;
+    }
+
+    const piece = findPieceByColorAndNumber(pieceColorNumber[0], pieceColorNumber[1]);
+    const targetTile = findTileByRingAndSector(targetRingSector[0], targetRingSector[1]);
+    console.log('Piece:', piece, 'Target tile:', targetTile);
+
+    if (piece && targetTile) {
+        // Highlight the piece
+        piece.isSelected = true;
+        piece.updateColor();
+        targetTile.highlight();
+        setTimeout(() => {
+            if (game.movePiece(piece, targetTile, true)) {
+                console.log(`Piece ${pieceColorNumber[0]} ${pieceColorNumber[1]} moved to ring ${targetRingSector[0]}, sector ${targetRingSector[1]}`);
+                piece.reachableTiles = game.getReachableTilesByDice(piece); // Update reachable tiles
+
+                // Find and use the appropriate die/dice
+                if (dieRoll === 'total') {
+                    game.dice.forEach(die => die.setUsed());
+                } else {
+                    const usedDie = game.dice.find(die => die.value === dieRoll && !die.used);
+                    if (usedDie) {
+                        usedDie.setUsed();
+                    } else {
+                        console.error('Used die not found for die roll:', dieRoll);
+                    }
+                }
+
+                piece.isSelected = false;
+                piece.updateColor();
+                targetTile.unhighlight();
+                    
+                // Update game state after applying the move
+                game.state = game.captureState();
+                
+                // Check if there are unused dice
+                if (game.dice.some(die => !die.used)) {
+                    // Call the agent again for additional moves
+                    console.log('Unused dice found, calling agent for additional moves.');
+                    const gameState = getGameState(game);
+                    setTimeout(() => getAgentMoves(gameState), 1000); // Delay before making the next move
+                } else {
+                    // No unused dice, switch the turn
+                    console.log('No unused dice, switching turn.');
+                    game.switchTurn();
+                }
             } else {
-                // No unused dice, switch the turn
+                console.log('Move not valid according to game rules.');
                 game.switchTurn();
             }
-            return;
-        }
-
-        const move = moves[moveIndex];
-        console.log('Applying move:', move);
-        const piece = findPieceById(move.piece_id);
-        const targetTile = findTileByRingAndSector(move.target.ring, move.target.sector);
-        if (piece && targetTile) {
-            // Highlight the piece
-            piece.isSelected = true;
-            piece.updateColor();
-            targetTile.highlight();
-            setTimeout(() => {
-                if (game.movePiece(piece, targetTile, true)) {
-                    console.log(`Piece ${move.piece_id} moved to ring ${move.target.ring}, sector ${move.target.sector}`);
-                    piece.reachableTiles = game.getReachableTilesByDice(piece); // Update reachable tiles
-                    
-
-                    // Update game state after applying the move
-                    game.state = game.captureState();
-                    
-                    // Apply the next move in the sequence after a short delay
-                    setTimeout(() => {
-                        piece.isSelected = false;
-                        piece.updateColor();
-                        targetTile.unhighlight();
-                        applyMoveSequence(moveIndex + 1);
-                    }, 1000); // 1 second delay between moves
-                } else {
-                    console.log('Move not valid according to game rules.');
-                    applyMoveSequence(moveIndex + 1);
-                }
-            }, 1000); // 1 second delay to highlight the piece before moving
-        } else {
-            console.log('Piece or target tile not found for move:', move);
-            applyMoveSequence(moveIndex + 1);
-        }
-    };
-
-    applyMoveSequence(0); // Start applying the move sequence
+        }, 1000); // 1 second delay to highlight the piece before moving
+    } else {
+        console.log('Piece or target tile not found for move:', move);
+        game.switchTurn();
+    }
 }
+
+function findPieceByColorAndNumber(color, number) {
+    // Implement this function to find the piece by its color and number
+    return gameInstance.scene.scenes[0].game.pieces.find(piece => piece.player === color && piece.number === number);
+}
+
+function findTileByRingAndSector(ring, sector) {
+    // Implement this function to find the tile by its ring and sector
+    return gameInstance.scene.scenes[0].game.tiles.find(tile => tile.ring === ring && tile.sector === sector);
+}
+
+
 
 
 
@@ -2006,9 +2044,6 @@ function findPieceById(id) {
     });
 }
 
-function findTileByRingAndSector(ring, sector) {
-    return gameInstance.scene.scenes[0].game.tiles.find(tile => tile.ring === ring && tile.sector === sector);
-}
 
 
 function getGameState(game) {
