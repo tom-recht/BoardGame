@@ -6,7 +6,10 @@ import json
 class Die:
     def __init__(self, board):
         self.board = board
-        self.number = None
+        self.roll()
+
+    def roll(self):
+        self.number = random.randint(1, 6)  
         self.used = False
 
 class Piece:
@@ -67,6 +70,7 @@ class Board:
         self.black_saved = []
         self.assign_tile_indices()
         self.game_stages = {'white': 'opening', 'black': 'opening'}
+        self.initialize_pieces()
         self.firstMove = None
 
     def __repr__(self):
@@ -97,6 +101,22 @@ class Board:
 
     def get_tile(self, ring, pos):
         return self.tile_map.get((ring, pos))
+
+    def initialize_pieces(self):
+        for player in self.players:
+            pieces = [Piece(player, i + 1, self) for i in range(14)]
+            random.shuffle(pieces)  # Shuffle the pieces randomly
+
+            if player == 'white':
+                self.white_unentered.extend(pieces)
+                for piece in pieces:
+                    piece.rack = self.white_unentered
+            else:
+                self.black_unentered.extend(pieces)
+                for piece in pieces:
+                    piece.rack = self.black_unentered
+
+            self.pieces.extend(pieces)
 
     def load_from_json(self, filename):
         with open(filename, 'r') as f:
@@ -130,8 +150,6 @@ class Board:
             die.number = die_details['value']
             die.used = die_details['used']
 
-        print('Home tile pieces 0:', self.home_tile.pieces)
-
         # Function to place pieces in their respective racks
         def place_pieces_in_rack(rack, pieces_details, player):
             rack.clear()
@@ -146,8 +164,7 @@ class Board:
         place_pieces_in_rack(self.white_saved, game_state_details['racks']['whiteSaved'], 'white')
         place_pieces_in_rack(self.black_unentered, game_state_details['racks']['blackUnentered'], 'black')
         place_pieces_in_rack(self.black_saved, game_state_details['racks']['blackSaved'], 'black')
-        
-        print('Home tile pieces 1:', self.home_tile.pieces)
+
         
         # Place pieces on the board
         for piece_details in game_state_details['boardPieces']:
@@ -169,7 +186,6 @@ class Board:
         self.assign_piece_indices()
         self.game_stages[self.current_player] = self.get_game_stage(self.current_player)
 
-        print('Home tile pieces :', self.home_tile.pieces)
 
     def assign_tile_indices(self):
         for i in range(len(self.tiles)):
@@ -194,8 +210,8 @@ class Board:
     
     def switch_turn(self):
         self.firstMove = None  
-        self.dice[0].used = False
-        self.dice[1].used = False
+        for die in self.dice:
+            die.roll()
         self.current_player = 'white' if self.current_player == 'black' else 'black'
 
     def check_game_over(self):
@@ -215,7 +231,6 @@ class Board:
 
     def get_unentered_piece(self):
         unentered_rack = self.white_unentered if self.current_player == 'white' else self.black_unentered
-        print('Unentered rack:', unentered_rack)
         if len(unentered_rack) > 0:
             return unentered_rack[0]
         return None
@@ -419,10 +434,11 @@ class Board:
             piece.tile = new_tile
 
         # Mark the die as used
-        if roll == self.dice[0].number:
+        if roll == self.dice[0].number and not self.dice[0].used:
             self.dice[0].used = True
-        elif roll == self.dice[1].number:
+        elif roll == self.dice[1].number and not self.dice[1].used:
             self.dice[1].used = True
+
 
         self.game_stages[self.current_player] = self.get_game_stage(self.current_player)
 
@@ -470,6 +486,8 @@ def text_interface(board):
 
 def random_play(self):
     while True:
+        print('Dice:', [die.number for die in self.dice])
+        print('Current player:', board.current_player)
         # Get valid moves
         valid_moves = self.get_valid_moves()
 
@@ -519,6 +537,8 @@ def random_play(self):
         # Display the current state of the board
         print("\nCurrent Board State:")
         print(self)
+
+
 
     while True:
         # Get valid moves
@@ -611,10 +631,10 @@ def random_play(self):
 # Initialize the board and load the game state
 board = Board()
 
-filename = 'game_state (4).json'
+""" filename = 'game_state (4).json'
 with open(filename, 'r') as f:
     data = json.load(f)
-board.update_state(data)
+board.update_state(data) """
 
 # Run the text interface
 random_play(board)
