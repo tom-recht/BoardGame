@@ -1,4 +1,4 @@
-const DEBUG_MODE = true; 
+const DEBUG_MODE = false; 
 
 const WHITE_IS_AI = false;
 const BLACK_IS_AI = true;
@@ -1981,22 +1981,10 @@ function applyMove(move) { // need to add saving opponent pieces
                 console.log(`Piece ${pieceColorNumber[0]} ${pieceColorNumber[1]} moved to ring ${targetRingSector[0]}, sector ${targetRingSector[1]}`);
                 piece.reachableTiles = game.getReachableTilesByDice(piece); // Update reachable tiles
 
-                // Find and use the appropriate die/dice
-                if (dieRoll === 'total') {
-                    game.dice.forEach(die => die.setUsed());
-                } else {
-                    const usedDie = game.dice.find(die => die.value === dieRoll && !die.used);
-                    if (usedDie) {
-                        usedDie.setUsed();
-                    } else {
-                        console.error('Used die not found for die roll:', dieRoll);
-                    }
-                }
-
                 piece.isSelected = false;
                 piece.updateColor();
                 targetTile.unhighlight();
-                    
+
                 // Update game state after applying the move
                 game.state = game.captureState();
                 
@@ -2113,5 +2101,3 @@ const gameInstance = new Phaser.Game(config);
 // should be able to make moves in either order when must move a piece
 // missing border for save tiles
 // make ring 6 nogo tiles that abut on the outer border invisible
-
-// agent doesn't know how to save pieces
