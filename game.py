@@ -183,9 +183,11 @@ class Board:
             self.pieces[i].index = i+1
 
     def get_game_stage(self, player):
-        player_pieces = [p for p in self.pieces if p.player == player]
-        if any(p.rack == self.white_unentered or p.rack == self.black_unentered for p in player_pieces):
+        unentered_rack = self.white_unentered if player == 'white' else self.black_unentered
+        if len(unentered_rack) > 0:
             return 'opening'
+        
+        player_pieces = [p for p in self.pieces if p.player == player]
         if all(p.can_be_saved() for p in player_pieces):
             return 'endgame'
         return 'midgame'
@@ -195,7 +197,22 @@ class Board:
         self.dice[0].used = False
         self.dice[1].used = False
         self.current_player = 'white' if self.current_player == 'black' else 'black'
+
+    def check_game_over(self):
+        TOTAL_PIECES = len(self.pieces) // 2 
+        white_saved_count = len(self.white_saved)
+        black_saved_count = len(self.black_saved)
         
+        if white_saved_count == TOTAL_PIECES:
+            black_unsaved_count = TOTAL_PIECES - black_saved_count
+            return 'white', black_unsaved_count
+        
+        if black_saved_count == TOTAL_PIECES:
+            white_unsaved_count = TOTAL_PIECES - white_saved_count
+            return 'black', white_unsaved_count
+        
+        return None, None  # No winner yet
+
     def get_unentered_piece(self):
         unentered_rack = self.white_unentered if self.current_player == 'white' else self.black_unentered
         print('Unentered rack:', unentered_rack)
@@ -272,8 +289,6 @@ class Board:
             elif self.firstMove and self.firstMove['piece'] == piece: 
                 origin_tile = self.firstMove['origin_tile'] or self.home_tile
                 reachable_by_sum = self.get_reachable_tiles(origin_tile, self.dice[0].number + self.dice[1].number)
-                print('First move:', self.firstMove, 'Origin tile:', origin_tile, 'Reachable by sum:', reachable_by_sum)
-                print(reachable_tiles)
             if reachable_by_sum:
                 reachable_tiles[self.dice[0].number] = [tile for tile in reachable_tiles[self.dice[0].number] if tile in reachable_by_sum]
 
@@ -285,9 +300,7 @@ class Board:
                 reachable_by_sum = piece.reachable_by_sum
             elif self.firstMove and self.firstMove['piece'] == piece:
                 origin_tile = self.firstMove['origin_tile'] or self.home_tile
-                reachable_by_sum = self.get_reachable_tiles(origin_tile, self.dice[0].number + self.dice[1].number)  
-                print('First move:', self.firstMove, 'Origin tile:', origin_tile, 'Reachable by sum:', reachable_by_sum)
-                print(reachable_tiles)        
+                reachable_by_sum = self.get_reachable_tiles(origin_tile, self.dice[0].number + self.dice[1].number)      
             if reachable_by_sum:
                 reachable_tiles[self.dice[1].number] = [tile for tile in reachable_tiles[self.dice[1].number] if tile in reachable_by_sum]
        
@@ -330,15 +343,11 @@ class Board:
             if unentered_piece:
                 player_pieces.append(unentered_piece)
 
-            print('Player pieces:', player_pieces)
-
             for piece in player_pieces:
                 self.get_reachable_tiles_by_dice(piece)
         
             self.destinations_by_piece = {piece: piece.reachable_tiles for piece in player_pieces}
 
-
-        print('Destinations by piece:', self.destinations_by_piece)
         # transform the dictionary so that items are tuples of (piece, tile, roll)
         tuples_list = []
         for piece, moves in self.destinations_by_piece.items():
@@ -415,6 +424,8 @@ class Board:
         elif roll == self.dice[1].number:
             self.dice[1].used = True
 
+        self.game_stages[self.current_player] = self.get_game_stage(self.current_player)
+
         # Switch to the next player if both dice are used
         if all(die.used for die in self.dice):
             self.switch_turn()
@@ -457,7 +468,145 @@ def text_interface(board):
         except ValueError:
             print("Invalid input. Please enter a number.")
 
+def random_play(self):
+    while True:
+        # Get valid moves
+        valid_moves = self.get_valid_moves()
 
+        # Check for the end of the game
+        winner, score = self.check_game_over()
+        if winner:
+            print(f"Game over! {winner} wins with a score of {score}.")
+            break
+
+        # Check for save moves and prioritize them
+        save_moves = [move for move in valid_moves if move[1] == 'save']
+        if save_moves:
+            chosen_move = random.choice(save_moves)
+        else:
+            # Check for moves that place a piece on a save goal where it can be saved
+            prioritized_moves = []
+            for move in valid_moves:
+                piece_id, destination, roll = move
+                if isinstance(destination, tuple):
+                    ring, pos = destination
+                    tile = self.get_tile(ring, pos)
+                    if tile and tile.type == 'save':
+                        piece = next((p for p in self.pieces if (p.player, p.number) == piece_id), None)
+                        if piece and (piece.number > 6 or piece.number == tile.number):
+                            prioritized_moves.append(move)
+
+            # Filter out moves that involve moving pieces already on save goals where they can be saved
+            valid_moves = [
+                move for move in valid_moves
+                if move[1] == 'save' or 
+                not (isinstance(move[1], tuple) and 
+                     self.get_tile(*move[1]) and 
+                     self.get_tile(*move[1]).type == 'save' and 
+                     any(p.number > 6 or (p.number == self.get_tile(*move[1]).number) 
+                         for p in self.get_tile(*move[1]).pieces))
+            ]
+
+            if prioritized_moves:
+                chosen_move = random.choice(prioritized_moves)
+            else:
+                chosen_move = random.choice(valid_moves)
+
+        # Apply the move
+        self.apply_move(chosen_move)
+        print(f"Applied move: {chosen_move}")
+
+        # Display the current state of the board
+        print("\nCurrent Board State:")
+        print(self)
+
+    while True:
+        # Get valid moves
+        valid_moves = board.get_valid_moves()
+
+        # Check for the end of the game
+        winner, score = board.check_game_over()
+        if winner:
+            print(f"Game over! {winner} wins with a score of {score}.")
+            break
+
+        # Check for save moves and prioritize them
+        save_moves = [move for move in valid_moves if move[1] == 'save']
+        if save_moves:
+            chosen_move = random.choice(save_moves)
+        else:
+            # Check for moves that place a piece on a save goal where it can be saved
+            prioritized_moves = []
+            for move in valid_moves:
+                piece_id, destination, roll = move
+                if destination != 'save' and destination != 0:
+                    ring, pos = destination
+                    tile = board.get_tile(ring, pos)
+                    if tile and tile.type == 'save':
+                        piece = next((p for p in board.pieces if (p.player, p.number) == piece_id), None)
+                        if piece and piece.number > 6 or (piece and piece.number == tile.number):
+                            prioritized_moves.append(move)
+
+            # Filter out moves that involve moving pieces already on save goals where they can be saved
+            valid_moves = [
+                move for move in valid_moves
+                if move[1] == 0 or (isinstance(move[1], tuple) and board.get_tile(*move[1]) and 
+                     board.get_tile(*move[1]).type == 'save' and 
+                     any(p.number > 6 or (p.number == board.get_tile(*move[1]).number) 
+                         for p in board.get_tile(*move[1]).pieces))
+            ]
+
+            if prioritized_moves:
+                chosen_move = random.choice(prioritized_moves)
+            else:
+                chosen_move = random.choice(valid_moves)
+
+        # Apply the move
+        board.apply_move(chosen_move)
+        print(f"Applied move: {chosen_move}")
+
+        # Display the current state of the board
+        print("\nCurrent Board State:")
+        print(board)
+    while True:
+        # Get valid moves
+        valid_moves = board.get_valid_moves()
+
+        # Check for the end of the game
+        winner, score = board.check_game_over()
+        if winner:
+            print(f"Game over! {winner} wins with a score of {score}.")
+            break
+
+        # Check for save moves and prioritize them
+        save_moves = [move for move in valid_moves if move[1] == 'save']
+        if save_moves:
+            chosen_move = random.choice(save_moves)
+        else:
+            # Check for moves that place a piece on a save goal where it can be saved
+            prioritized_moves = []
+            for move in valid_moves:
+                piece_id, destination, roll = move
+                if destination != 'save' and destination != 0:
+                    ring, pos = destination
+                    tile = board.get_tile(ring, pos)
+                    if tile and tile.type == 'save':
+                        piece = next((p for p in board.pieces if (p.player, p.number) == piece_id), None)
+                        if piece and piece.number > 6 or (piece and piece.number == tile.number):
+                            prioritized_moves.append(move)
+            
+            if prioritized_moves:
+                chosen_move = random.choice(prioritized_moves)
+            else:
+                chosen_move = random.choice(valid_moves)
+
+        # Apply the move
+        board.apply_move(chosen_move)
+        print(f"Applied move: {chosen_move}")
+
+        # Display the current state of the board
+        print("\nCurrent Board State:")
+        print(board)
 
 # Initialize the board and load the game state
 board = Board()
@@ -468,7 +617,7 @@ with open(filename, 'r') as f:
 board.update_state(data)
 
 # Run the text interface
-text_interface(board)
+random_play(board)
 
 
 # add logic for saving opponent's block
