@@ -1,4 +1,4 @@
-const DEBUG_MODE = false; 
+const DEBUG_MODE = true; 
 
 const WHITE_IS_AI = false;
 const BLACK_IS_AI = true;
@@ -2101,3 +2101,5 @@ const gameInstance = new Phaser.Game(config);
 // should be able to make moves in either order when must move a piece
 // missing border for save tiles
 // make ring 6 nogo tiles that abut on the outer border invisible
+
+// handle agent's save moves
