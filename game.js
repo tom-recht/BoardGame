@@ -1,4 +1,4 @@
-const DEBUG_MODE = true; 
+const DEBUG_MODE = false; 
 
 const WHITE_IS_AI = false;
 const BLACK_IS_AI = true;
@@ -184,6 +184,7 @@ class Piece {
         }
         rack.addPiece(this);
         this.currentTile.removePiece(this);
+        this.currentTile = null;
         this.isSelected = false;
         this.isHovered = false;
         this.game.selectedPiece = null;
@@ -1937,7 +1938,7 @@ function getAgentMoves(gameState) {
     .catch(error => console.error('Error:', error));
 }
 
-function applyMove(move) { // need to add saving opponent pieces
+function applyMove(move) { 
     const game = gameInstance.scene.scenes[0].game;
 
     console.log('Applying move:', move);
@@ -1955,29 +1956,50 @@ function applyMove(move) { // need to add saving opponent pieces
         console.log('Received (0, 0, 0) tuple, switching turn.');
         game.switchTurn();
         return;
-    }
+    }        
 
     if (!Array.isArray(pieceColorNumber) || pieceColorNumber.length !== 2) {
         console.error('Invalid piece color and number format:', pieceColorNumber);
         return;
     }
 
-    if (!Array.isArray(targetRingSector) || targetRingSector.length !== 2) {
+    if (targetRingSector !== 'save' && (!Array.isArray(targetRingSector) || targetRingSector.length !== 2)) {
         console.error('Invalid target ring and sector format:', targetRingSector);
         return;
     }
 
     const piece = findPieceByColorAndNumber(pieceColorNumber[0], pieceColorNumber[1]);
-    const targetTile = findTileByRingAndSector(targetRingSector[0], targetRingSector[1]);
+    const targetTile = targetRingSector === 'save' ? 'save' : findTileByRingAndSector(targetRingSector[0], targetRingSector[1]);
     console.log('Piece:', piece, 'Target tile:', targetTile);
 
     if (piece && targetTile) {
         // Highlight the piece
         piece.isSelected = true;
         piece.updateColor();
-        targetTile.highlight();
+        if (targetTile !== 'save') targetTile.highlight();
         setTimeout(() => {
-            if (game.movePiece(piece, targetTile, true)) {
+            if (targetTile === 'save') {
+                piece.save();
+                console.log(`Piece ${pieceColorNumber[0]} ${pieceColorNumber[1]} saved`);
+
+                piece.isSelected = false;
+                piece.updateColor();
+                
+                // Update game state after applying the move
+                game.state = game.captureState();
+                
+                // Check if there are unused dice
+                if (game.dice.some(die => !die.used)) {
+                    // Call the agent again for additional moves
+                    console.log('Unused dice found, calling agent for additional moves.');
+                    const gameState = getGameState(game);
+                    setTimeout(() => getAgentMoves(gameState), 1000); // Delay before making the next move
+                } else {
+                    // No unused dice, switch the turn
+                    console.log('No unused dice, switching turn.');
+                    game.switchTurn();
+                }
+            } else if (game.movePiece(piece, targetTile, true)) {
                 console.log(`Piece ${pieceColorNumber[0]} ${pieceColorNumber[1]} moved to ring ${targetRingSector[0]}, sector ${targetRingSector[1]}`);
                 piece.reachableTiles = game.getReachableTilesByDice(piece); // Update reachable tiles
 
@@ -2009,6 +2031,7 @@ function applyMove(move) { // need to add saving opponent pieces
         game.switchTurn();
     }
 }
+
 
 function findPieceByColorAndNumber(color, number) {
     // Implement this function to find the piece by its color and number
@@ -2102,4 +2125,4 @@ const gameInstance = new Phaser.Game(config);
 // missing border for save tiles
 // make ring 6 nogo tiles that abut on the outer border invisible
 
-// handle agent's save moves
+// endgame isn't being detected

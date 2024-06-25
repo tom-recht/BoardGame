@@ -1,5 +1,4 @@
 import random
-import itertools
 from collections import deque
 import json
 
@@ -552,3 +551,4 @@ random_play(board)
 
 
 # add logic for saving opponent's block
+# agent sometimes tries to move same piece twice against shortest move rule

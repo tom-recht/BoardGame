@@ -1,4 +1,5 @@
 import random
+from collections import deque
 from game import Board
 
 class Agent():
@@ -30,8 +31,8 @@ class Agent():
                             prioritized_moves.append(move)
 
             # Filter out moves that involve moving pieces already on save goals where they can be saved
-            valid_moves = [
-                move for move in valid_moves
+            non_pass_moves = [
+                move for move in non_pass_moves
                 if move[1] == 'save' or 
                 not (isinstance(move[1], tuple) and 
                     self.board.get_tile(*move[1]) and 
@@ -43,7 +44,26 @@ class Agent():
             if prioritized_moves:
                 chosen_move = random.choice(prioritized_moves)
             else:
-                chosen_move = random.choice(valid_moves)
+                chosen_move = random.choice(non_pass_moves)
 
         return chosen_move
 
+    def shortest_distance(self, start_tile, end_tile):
+        if start_tile == end_tile:
+            return 0
+        
+        queue = deque([(start_tile, 0)])  # (current_tile, distance)
+        visited = set()
+        visited.add(start_tile)
+
+        while queue:
+            current_tile, distance = queue.popleft()
+
+            for neighbor in current_tile.neighbors:
+                if neighbor == end_tile:
+                    return distance + 1
+                if neighbor not in visited and not neighbor.is_blocked():
+                    visited.add(neighbor)
+                    queue.append((neighbor, distance + 1))
+        
+        return float('inf')  # Return a large number if there is no path
