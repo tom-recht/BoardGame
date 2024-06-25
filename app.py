@@ -7,11 +7,13 @@ import random
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from game import Board
+from agent import Agent
 
 app = Flask(__name__)
 CORS(app)
 
 board = Board()
+agent = Agent(board)
 
 @app.route('/select_moves', methods=['POST'])
 def select_moves():
@@ -21,7 +23,7 @@ def select_moves():
         moves = board.get_valid_moves()
         print(f"Moves: {moves}")
         if moves:
-            chosen_move = random.choice(moves)
+            chosen_move = agent.choose_move(moves)
             print(f"Chosen move: {chosen_move}")
             return jsonify({"message": "Game state updated successfully", "move": chosen_move}), 200
         else:
