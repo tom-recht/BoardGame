@@ -577,4 +577,3 @@ if __name__ == '__main__':
 
 
 # add logic for saving opponent's block
-# agent sometimes tries to move same piece twice against shortest move rule

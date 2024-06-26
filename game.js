@@ -240,10 +240,18 @@ class Piece {
     }
 
     canBeSaved() {
+        if (this.rack === this.game.whiteSavedRack || this.rack === this.game.blackSavedRack) {
+            return true;
+        }
+
         const player = this.color === 0xffffff ? this.game.players[0] : this.game.players[1];
-        if (player.getGamePhase() === 'opening') return false;
-        
-        if (!this.currentTile || this.currentTile.type !== 'save') return false;
+        if (player.getGamePhase() === 'opening') {
+            console.log(`${player.name} is in the opening phase and cannot save pieces.`);
+            return false;
+        }
+        if (!this.currentTile || this.currentTile.type !== 'save') 
+            {console.log(`Piece ${this.number} is not on a save tile`);
+            return false;}
 
         if (this.number > 6) {
             return true;
@@ -1003,7 +1011,7 @@ class Game {
     }
     
     checkEndgame(player) {
-
+        console.log(`Checking endgame for player ${player.name} in phase ${player.getGamePhase()}`);
         if (this.debug) {
             player.setGamePhase('endgame');
             console.log(`${player.name} is in debug mode and will stay in the endgame phase.`);
@@ -1011,6 +1019,9 @@ class Game {
         }
 
         const pieces = this.pieces.filter(piece => piece.color === (player.name === 'white' ? 0xffffff : 0x000000));
+        pieces.forEach(piece => {
+            console.log(`Piece ${piece.id} can be saved: ${piece.canBeSaved()}`);
+        });
         const allCanBeSaved = pieces.every(piece => piece.canBeSaved());
 
         // Check if all pieces have been moved onto the board and can be saved
@@ -2088,9 +2099,6 @@ function applyMovePair(movePair) {
                     piece.isSelected = false;
                     piece.updateColor();
                     
-                    // Update game state after applying the move
-                    game.state = game.captureState();
-                    
                     callback();
                 } else if (game.movePiece(piece, targetTile, true)) {
                     console.log(`Piece ${pieceColorNumber[0]} ${pieceColorNumber[1]} moved to ring ${targetRingSector[0]}, sector ${targetRingSector[1]}`);
@@ -2099,9 +2107,6 @@ function applyMovePair(movePair) {
                     piece.isSelected = false;
                     piece.updateColor();
                     targetTile.unhighlight();
-
-                    // Update game state after applying the move
-                    game.state = game.captureState();
 
                     callback();
                 } else {
@@ -2218,5 +2223,3 @@ const gameInstance = new Phaser.Game(config);
 // should be able to make moves in either order when must move a piece
 // missing border for save tiles
 // make ring 6 nogo tiles that abut on the outer border invisible
-
-// endgame isn't being detected

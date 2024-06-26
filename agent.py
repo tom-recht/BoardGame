@@ -69,7 +69,7 @@ class Agent():
 
         # number of pieces on goals
         goal_pieces = [piece for piece in board.pieces if piece.player == player and piece.can_be_saved()]
-        goal_bonus = sum(self.weights['goal_bonuses'].get(piece.number, 0) for piece in goal_pieces)
+        goal_bonus = sum(self.weights['goal_bonuses'].get(piece.number, 0) for piece in goal_pieces if piece.number <= 6)
         print(f"Player {player} - Goal pieces: {len(goal_pieces)}, Goal bonus: {goal_bonus}")
 
         # number of pieces within reach of a goal
@@ -151,3 +151,4 @@ class Agent():
 
         best_move_pair = max(move_scores, key=move_scores.get)
         return best_move_pair
+
