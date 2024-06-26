@@ -445,7 +445,33 @@ class Board:
         if all(die.used for die in self.dice):
             self.switch_turn()
 
+    def get_save_rack(self, player):
+        return self.white_saved if player == 'white' else self.black_saved
+    
+    def get_unentered_rack(self, player):
+        return self.white_unentered if player == 'white' else self.black_unentered
 
+    def shortest_route_to_goal(self, piece):
+        start_tile = piece.tile if piece.tile else self.home_tile  # Use home tile if the piece has no tile
+
+        if piece.can_be_saved():
+            return 0
+
+        queue = deque([(start_tile, 0)])  # (current tile, distance)
+        visited = set([start_tile])
+
+        while queue:
+            current_tile, distance = queue.popleft()
+
+            for neighbor in current_tile.neighbors:
+                if neighbor not in visited:
+                    visited.add(neighbor)
+                    if neighbor.type == 'save' and (piece.number > 6 or piece.number == neighbor.number):
+                        return distance + 1  # Found a goal tile from which the piece can be saved
+                    if neighbor.type not in ['nogo', 'home'] and not neighbor.is_blocked():
+                        queue.append((neighbor, distance + 1))
+
+        return float('inf')  # No path found to a goal tile
 
         
 def text_interface(board):
@@ -537,17 +563,17 @@ def random_play(self):
         print("\nCurrent Board State:")
         print(self)
 
+if __name__ == '__main__':
+    # Initialize the board and load the game state
+    board = Board()
 
-# Initialize the board and load the game state
-board = Board()
+    """ filename = 'game_state (4).json'
+    with open(filename, 'r') as f:
+        data = json.load(f)
+    board.update_state(data) """
 
-""" filename = 'game_state (4).json'
-with open(filename, 'r') as f:
-    data = json.load(f)
-board.update_state(data) """
-
-# Run the text interface
-random_play(board)
+    # Run the text interface
+    random_play(board)
 
 
 # add logic for saving opponent's block

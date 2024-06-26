@@ -1929,7 +1929,7 @@ function getAgentMoves(gameState) {
     .then(data => {
         if (data.move) {
             console.log('Agent move:', data.move);
-            applyMove(data.move);
+            applyMovePair(data.move);
         } else {
             console.log('No move to apply:', data.message);
             gameInstance.scene.scenes[0].game.switchTurn();
@@ -2031,6 +2031,100 @@ function applyMove(move) {
         game.switchTurn();
     }
 }
+
+function applyMovePair(movePair) {
+    const game = gameInstance.scene.scenes[0].game;
+
+    console.log('Applying move pair:', movePair);
+    if (!Array.isArray(movePair) || movePair.length !== 2) {
+        console.error('Invalid move pair format:', movePair);
+        return;
+    }
+
+    const [move1, move2] = movePair;
+
+    function processMove(move, callback) {
+        console.log('Applying move:', move);
+        if (!Array.isArray(move) || move.length !== 3) {
+            console.error('Invalid move format:', move);
+            return;
+        }
+
+        const pieceColorNumber = move[0];
+        const targetRingSector = move[1];
+        const dieRoll = move[2];
+
+        // Check for the (0, 0, 0) tuple
+        if (pieceColorNumber === 0 && targetRingSector === 0 && dieRoll === 0) {
+            console.log('Received (0, 0, 0) tuple, switching turn.');
+            game.switchTurn();
+            return;
+        }
+
+        if (!Array.isArray(pieceColorNumber) || pieceColorNumber.length !== 2) {
+            console.error('Invalid piece color and number format:', pieceColorNumber);
+            return;
+        }
+
+        if (targetRingSector !== 'save' && (!Array.isArray(targetRingSector) || targetRingSector.length !== 2)) {
+            console.error('Invalid target ring and sector format:', targetRingSector);
+            return;
+        }
+
+        const piece = findPieceByColorAndNumber(pieceColorNumber[0], pieceColorNumber[1]);
+        const targetTile = targetRingSector === 'save' ? 'save' : findTileByRingAndSector(targetRingSector[0], targetRingSector[1]);
+        console.log('Piece:', piece, 'Target tile:', targetTile);
+
+        if (piece && targetTile) {
+            // Highlight the piece
+            piece.isSelected = true;
+            piece.updateColor();
+            if (targetTile !== 'save') targetTile.highlight();
+            setTimeout(() => {
+                if (targetTile === 'save') {
+                    piece.save();
+                    console.log(`Piece ${pieceColorNumber[0]} ${pieceColorNumber[1]} saved`);
+
+                    piece.isSelected = false;
+                    piece.updateColor();
+                    
+                    // Update game state after applying the move
+                    game.state = game.captureState();
+                    
+                    callback();
+                } else if (game.movePiece(piece, targetTile, true)) {
+                    console.log(`Piece ${pieceColorNumber[0]} ${pieceColorNumber[1]} moved to ring ${targetRingSector[0]}, sector ${targetRingSector[1]}`);
+                    piece.reachableTiles = game.getReachableTilesByDice(piece); // Update reachable tiles
+
+                    piece.isSelected = false;
+                    piece.updateColor();
+                    targetTile.unhighlight();
+
+                    // Update game state after applying the move
+                    game.state = game.captureState();
+
+                    callback();
+                } else {
+                    console.log('Move not valid according to game rules.');
+                    game.switchTurn();
+                }
+            }, 1000); // 1 second delay to highlight the piece before moving
+        } else {
+            console.log('Piece or target tile not found for move:', move);
+            game.switchTurn();
+        }
+    }
+
+    // Apply the first move, then the second move in sequence
+    processMove(move1, () => {
+        processMove(move2, () => {
+                console.log('Applied both moves, switching turn.');
+                game.switchTurn();
+            
+        });
+    });
+}
+
 
 
 function findPieceByColorAndNumber(color, number) {

@@ -13,7 +13,7 @@ app = Flask(__name__)
 CORS(app)
 
 board = Board()
-agent = Agent(board)
+agent = Agent()
 
 @app.route('/select_moves', methods=['POST'])
 def select_moves():
@@ -23,7 +23,7 @@ def select_moves():
         moves = board.get_valid_moves()
         print(f"Moves: {moves}")
         if moves:
-            chosen_move = agent.choose_move(moves)
+            chosen_move = agent.select_move_pair(moves, board, board.current_player)
             print(f"Chosen move: {chosen_move}")
             return jsonify({"message": "Game state updated successfully", "move": chosen_move}), 200
         else:
