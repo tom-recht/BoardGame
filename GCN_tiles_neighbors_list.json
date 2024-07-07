@@ -1,0 +1,426 @@
+{
+    "ring0_sector0": [
+        "ring1_sector2",
+        "ring1_sector3",
+        "ring1_sector4",
+        "ring1_sector6",
+        "ring1_sector7",
+        "ring1_sector8",
+        "ring1_sector10",
+        "ring1_sector11",
+        "ring1_sector12"
+    ],
+    "ring1_sector2": [
+        "ring0_sector0",
+        "ring1_sector3",
+        "ring2_sector2"
+    ],
+    "ring1_sector3": [
+        "ring0_sector0",
+        "ring1_sector2",
+        "ring1_sector4"
+    ],
+    "ring1_sector4": [
+        "ring0_sector0",
+        "ring1_sector3",
+        "ring2_sector4"
+    ],
+    "ring1_sector6": [
+        "ring0_sector0",
+        "ring1_sector7",
+        "ring2_sector6"
+    ],
+    "ring1_sector7": [
+        "ring0_sector0",
+        "ring1_sector6",
+        "ring1_sector8"
+    ],
+    "ring1_sector8": [
+        "ring0_sector0",
+        "ring1_sector7",
+        "ring2_sector8"
+    ],
+    "ring1_sector10": [
+        "ring0_sector0",
+        "ring1_sector11",
+        "ring2_sector10"
+    ],
+    "ring1_sector11": [
+        "ring0_sector0",
+        "ring1_sector10",
+        "ring1_sector12"
+    ],
+    "ring1_sector12": [
+        "ring0_sector0",
+        "ring1_sector11",
+        "ring2_sector12"
+    ],
+    "ring2_sector1": [
+        "ring2_sector2",
+        "ring2_sector12",
+        "ring3_sector1"
+    ],
+    "ring2_sector2": [
+        "ring1_sector2",
+        "ring2_sector1",
+        "ring3_sector2"
+    ],
+    "ring2_sector4": [
+        "ring1_sector4",
+        "ring2_sector5",
+        "ring3_sector4"
+    ],
+    "ring2_sector5": [
+        "ring2_sector4",
+        "ring2_sector6",
+        "ring3_sector5"
+    ],
+    "ring2_sector6": [
+        "ring1_sector6",
+        "ring2_sector5",
+        "ring3_sector6"
+    ],
+    "ring2_sector8": [
+        "ring1_sector8",
+        "ring2_sector9",
+        "ring3_sector8"
+    ],
+    "ring2_sector9": [
+        "ring2_sector8",
+        "ring2_sector10",
+        "ring3_sector9"
+    ],
+    "ring2_sector10": [
+        "ring1_sector10",
+        "ring2_sector9",
+        "ring3_sector10"
+    ],
+    "ring2_sector12": [
+        "ring1_sector12",
+        "ring2_sector1",
+        "ring3_sector12"
+    ],
+    "ring3_sector1": [
+        "ring2_sector1",
+        "ring3_sector2",
+        "ring3_sector12"
+    ],
+    "ring3_sector2": [
+        "ring2_sector2",
+        "ring3_sector1",
+        "ring3_sector3",
+        "ring4_sector2"
+    ],
+    "ring3_sector3": [
+        "ring3_sector2",
+        "ring3_sector4"
+    ],
+    "ring3_sector4": [
+        "ring2_sector4",
+        "ring3_sector3",
+        "ring3_sector5",
+        "ring4_sector4"
+    ],
+    "ring3_sector5": [
+        "ring2_sector5",
+        "ring3_sector4",
+        "ring3_sector6"
+    ],
+    "ring3_sector6": [
+        "ring2_sector6",
+        "ring3_sector5",
+        "ring3_sector7",
+        "ring4_sector6"
+    ],
+    "ring3_sector7": [
+        "ring3_sector6",
+        "ring3_sector8"
+    ],
+    "ring3_sector8": [
+        "ring2_sector8",
+        "ring3_sector7",
+        "ring3_sector9",
+        "ring4_sector8"
+    ],
+    "ring3_sector9": [
+        "ring2_sector9",
+        "ring3_sector8",
+        "ring3_sector10"
+    ],
+    "ring3_sector10": [
+        "ring2_sector10",
+        "ring3_sector9",
+        "ring3_sector11",
+        "ring4_sector10"
+    ],
+    "ring3_sector11": [
+        "ring3_sector10",
+        "ring3_sector12"
+    ],
+    "ring3_sector12": [
+        "ring2_sector12",
+        "ring3_sector1",
+        "ring3_sector11",
+        "ring4_sector12"
+    ],
+    "ring4_sector2": [
+        "ring3_sector2",
+        "ring5_sector2"
+    ],
+    "ring4_sector4": [
+        "ring3_sector4",
+        "ring5_sector4"
+    ],
+    "ring4_sector6": [
+        "ring3_sector6",
+        "ring5_sector6"
+    ],
+    "ring4_sector8": [
+        "ring3_sector8",
+        "ring5_sector8"
+    ],
+    "ring4_sector10": [
+        "ring3_sector10",
+        "ring5_sector10"
+    ],
+    "ring4_sector12": [
+        "ring3_sector12",
+        "ring5_sector12"
+    ],
+    "ring5_sector13": [
+        "ring5_sector14",
+        "ring5_sector12"
+    ],
+    "ring5_sector14": [
+        "ring5_sector13",
+        "ring5_sector2"
+    ],
+    "ring5_sector2": [
+        "ring4_sector2",
+        "ring5_sector14",
+        "ring6_sector2"
+    ],
+    "ring5_sector4": [
+        "ring4_sector4",
+        "ring6_sector4",
+        "ring5_sector21"
+    ],
+    "ring5_sector21": [
+        "ring5_sector4",
+        "ring5_sector22"
+    ],
+    "ring5_sector22": [
+        "ring5_sector21",
+        "ring5_sector6"
+    ],
+    "ring5_sector6": [
+        "ring4_sector6",
+        "ring5_sector22",
+        "ring6_sector6"
+    ],
+    "ring5_sector8": [
+        "ring4_sector8",
+        "ring6_sector8",
+        "ring5_sector29"
+    ],
+    "ring5_sector29": [
+        "ring5_sector8",
+        "ring5_sector30"
+    ],
+    "ring5_sector30": [
+        "ring5_sector29",
+        "ring5_sector10"
+    ],
+    "ring5_sector10": [
+        "ring4_sector10",
+        "ring5_sector30",
+        "ring6_sector10"
+    ],
+    "ring5_sector12": [
+        "ring4_sector12",
+        "ring5_sector13",
+        "ring6_sector12"
+    ],
+    "ring6_sector2": [
+        "ring5_sector2",
+        "ring7_sector2"
+    ],
+    "ring6_sector4": [
+        "ring5_sector4",
+        "ring7_sector4"
+    ],
+    "ring6_sector6": [
+        "ring5_sector6",
+        "ring7_sector6"
+    ],
+    "ring6_sector8": [
+        "ring5_sector8",
+        "ring7_sector8"
+    ],
+    "ring6_sector10": [
+        "ring5_sector10",
+        "ring7_sector10"
+    ],
+    "ring6_sector12": [
+        "ring5_sector12",
+        "ring7_sector12"
+    ],
+    "ring7_sector2": [
+        "ring6_sector2",
+        "ring7_sector19",
+        "white_saved",
+        "black_saved"
+    ],
+    "ring7_sector19": [
+        "ring7_sector2",
+        "ring7_sector20"
+    ],
+    "ring7_sector20": [
+        "ring7_sector19",
+        "ring7_sector21"
+    ],
+    "ring7_sector21": [
+        "ring7_sector20",
+        "ring7_sector4"
+    ],
+    "ring7_sector4": [
+        "ring6_sector4",
+        "ring7_sector21",
+        "white_saved",
+        "black_saved"
+    ],
+    "ring7_sector6": [
+        "ring6_sector6",
+        "ring7_sector31",
+        "white_saved",
+        "black_saved"
+    ],
+    "ring7_sector31": [
+        "ring7_sector6",
+        "ring7_sector32"
+    ],
+    "ring7_sector32": [
+        "ring7_sector31",
+        "ring7_sector33"
+    ],
+    "ring7_sector33": [
+        "ring7_sector32",
+        "ring7_sector8"
+    ],
+    "ring7_sector8": [
+        "ring6_sector8",
+        "ring7_sector33",
+        "white_saved",
+        "black_saved"
+    ],
+    "ring7_sector10": [
+        "ring6_sector10",
+        "ring7_sector43",
+        "white_saved",
+        "black_saved"
+    ],
+    "ring7_sector43": [
+        "ring7_sector10",
+        "ring7_sector44"
+    ],
+    "ring7_sector44": [
+        "ring7_sector43",
+        "ring7_sector45"
+    ],
+    "ring7_sector45": [
+        "ring7_sector44",
+        "ring7_sector12"
+    ],
+    "ring7_sector12": [
+        "ring6_sector12",
+        "ring7_sector45",
+        "white_saved",
+        "black_saved"
+    ],
+    "white_saved": [],
+    "black_saved": [],
+    "white_unentered_0": [
+        "ring0_sector0"
+    ],
+    "white_unentered_1": [
+        "white_unentered_0"
+    ],
+    "white_unentered_2": [
+        "white_unentered_1"
+    ],
+    "white_unentered_3": [
+        "white_unentered_2"
+    ],
+    "white_unentered_4": [
+        "white_unentered_3"
+    ],
+    "white_unentered_5": [
+        "white_unentered_4"
+    ],
+    "white_unentered_6": [
+        "white_unentered_5"
+    ],
+    "white_unentered_7": [
+        "white_unentered_6"
+    ],
+    "white_unentered_8": [
+        "white_unentered_7"
+    ],
+    "white_unentered_9": [
+        "white_unentered_8"
+    ],
+    "white_unentered_10": [
+        "white_unentered_9"
+    ],
+    "white_unentered_11": [
+        "white_unentered_10"
+    ],
+    "white_unentered_12": [
+        "white_unentered_11"
+    ],
+    "white_unentered_13": [
+        "white_unentered_12"
+    ],
+    "black_unentered_0": [
+        "ring0_sector0"
+    ],
+    "black_unentered_1": [
+        "black_unentered_0"
+    ],
+    "black_unentered_2": [
+        "black_unentered_1"
+    ],
+    "black_unentered_3": [
+        "black_unentered_2"
+    ],
+    "black_unentered_4": [
+        "black_unentered_3"
+    ],
+    "black_unentered_5": [
+        "black_unentered_4"
+    ],
+    "black_unentered_6": [
+        "black_unentered_5"
+    ],
+    "black_unentered_7": [
+        "black_unentered_6"
+    ],
+    "black_unentered_8": [
+        "black_unentered_7"
+    ],
+    "black_unentered_9": [
+        "black_unentered_8"
+    ],
+    "black_unentered_10": [
+        "black_unentered_9"
+    ],
+    "black_unentered_11": [
+        "black_unentered_10"
+    ],
+    "black_unentered_12": [
+        "black_unentered_11"
+    ],
+    "black_unentered_13": [
+        "black_unentered_12"
+    ]
+}

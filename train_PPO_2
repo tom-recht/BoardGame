@@ -1,0 +1,265 @@
+import torch
+import torch.nn as nn
+import torch.optim as optim
+from torch.distributions import Categorical
+import numpy as np
+import matplotlib.pyplot as plt
+from collections import deque
+import os
+from game import Board
+
+class PolicyNetwork(nn.Module):
+    def __init__(self, input_size, hidden_size, output_size):
+        super(PolicyNetwork, self).__init__()
+        self.fc1 = nn.Linear(input_size, hidden_size)
+        self.fc2 = nn.Linear(hidden_size, hidden_size)
+        self.fc3 = nn.Linear(hidden_size, output_size)
+
+    def forward(self, x):
+        x = torch.relu(self.fc1(x))
+        x = torch.relu(self.fc2(x))
+        x = self.fc3(x)
+        return Categorical(logits=x)
+
+class ValueNetwork(nn.Module):
+    def __init__(self, input_size, hidden_size):
+        super(ValueNetwork, self).__init__()
+        self.fc1 = nn.Linear(input_size, hidden_size)
+        self.fc2 = nn.Linear(hidden_size, hidden_size)
+        self.fc3 = nn.Linear(hidden_size, 1)
+
+    def forward(self, x):
+        x = torch.relu(self.fc1(x))
+        x = torch.relu(self.fc2(x))
+        return self.fc3(x)
+
+def compute_advantages(rewards, values, gamma=0.99, lam=0.95):
+    advantages = []
+    gae = 0
+    for i in reversed(range(len(rewards))):
+        delta = rewards[i] + gamma * values[i + 1] - values[i]
+        gae = delta + gamma * lam * gae
+        advantages.insert(0, gae)
+    return advantages
+
+def get_action_mask(board):
+    valid_moves = board.get_valid_moves()
+    mask = torch.zeros(len(board.get_all_possible_moves()))
+    for move in valid_moves:
+        mask[move_to_index(move, board)] = 1
+    return mask
+
+index_to_roll_mapping = {}
+
+def move_to_index(move, board):
+    if move == (0, 0, 0):
+        return 0  # Pass move
+
+    piece_id, destination, roll = move
+    _, number = piece_id
+    piece_offset = (number - 1)
+
+    if destination == 'save':
+        destination_offset = len(board.tiles)  # Separate index for 'save' move
+    else:
+        ring, pos = destination
+        destination_offset = board.get_tile(ring, pos).index
+
+    piece = next((p for p in board.pieces if (p.player, p.number) == piece_id), None)
+    current_tile = piece.tile
+    if current_tile and current_tile.type == 'save':
+        is_on_goal_tile = 1 
+    else:
+        is_on_goal_tile = 0
+
+    index = (
+        piece_offset * (len(board.tiles) + 1) * 2 +  # +1 for the 'save' move index, *2 for the flag
+        destination_offset * 2 + 
+        is_on_goal_tile
+    )
+
+    index_to_roll_mapping[index] = roll
+    return index
+
+def index_to_move(index, board):
+    if index == 0:
+        return (0, 0, 0, board.current_player)  # Pass move
+
+    num_tiles = len(board.tiles) + 1  # +1 for the 'save' move index
+    is_on_goal_tile = index % 2
+    index //= 2
+
+    piece_offset = index // num_tiles
+    destination_offset = index % num_tiles
+
+    piece_number = piece_offset + 1  # Since piece_offset = (number - 1)
+
+    if destination_offset == len(board.tiles):
+        destination = 'save'
+    else:
+        tile = board.tiles[destination_offset]
+        ring = tile.ring
+        pos = tile.pos
+        destination = (ring, pos)
+
+    roll = index_to_roll_mapping.get(index * 2 + is_on_goal_tile, None)
+
+    current_player = board.current_player
+    piece = (current_player, piece_number)
+
+    print(f"Index: {index}, Piece: {piece}, Destination: {destination}, Roll: {roll}, Current Player: {current_player}")
+
+    return (piece, destination, roll, current_player)
+
+def save_checkpoint(policy_net, value_net, policy_optimizer, value_optimizer, epoch):
+    path = f"ppo_checkpoint_{epoch}.pth"
+    torch.save({
+        'epoch': epoch,
+        'policy_state_dict': policy_net.state_dict(),
+        'value_state_dict': value_net.state_dict(),
+        'policy_optimizer_state_dict': policy_optimizer.state_dict(),
+        'value_optimizer_state_dict': value_optimizer.state_dict(),
+    }, path)
+    print(f"Model saved at {path}\n")
+
+def load_checkpoint(path, policy_net, value_net, policy_optimizer, value_optimizer):
+    checkpoint = torch.load(path)
+    policy_net.load_state_dict(checkpoint['policy_state_dict'])
+    value_net.load_state_dict(checkpoint['value_state_dict'])
+    policy_optimizer.load_state_dict(checkpoint['policy_optimizer_state_dict'])
+    value_optimizer.load_state_dict(checkpoint['value_optimizer_state_dict'])
+    epoch = checkpoint['epoch']
+    return policy_net, value_net, policy_optimizer, value_optimizer, epoch
+
+def train_ppo(model_path=None):
+    num_episodes = 10000
+    batch_size = 128
+    learning_rate = 0.0005
+    gamma = 0.99
+    lam = 0.95
+    clip_epsilon = 0.2
+    update_epochs = 10
+
+    input_size = 97   # based on game.encode_state()
+    hidden_size = 128  
+    output_size = len(Board().get_all_possible_moves()) * 2  # *2 for the goal flag
+
+    policy_net = PolicyNetwork(input_size, hidden_size, output_size)
+    value_net = ValueNetwork(input_size, hidden_size)
+    policy_optimizer = optim.Adam(policy_net.parameters(), lr=learning_rate)
+    value_optimizer = optim.Adam(value_net.parameters(), lr=learning_rate)
+
+    if model_path and os.path.exists(model_path):
+        policy_net, value_net, policy_optimizer, value_optimizer, start_epoch = load_checkpoint(model_path, policy_net, value_net, policy_optimizer, value_optimizer)
+        print(f"Loaded model from {model_path}")
+    else:
+        start_epoch = 0
+
+    rewards = []
+    episode_lengths = []
+
+    for episode in range(start_epoch, num_episodes):
+        board = Board()
+        state = board.encode_state()
+        states, actions, rewards_for_episode, masks = [], [], [], []
+        episode_reward = {'white': 0, 'black': 0}
+        steps = 0
+        done = False
+
+        while not done:
+            current_player = board.current_player           
+            state_tensor = torch.tensor(state, dtype=torch.float32).unsqueeze(0)
+            mask = get_action_mask(board)
+            mask_tensor = torch.tensor(mask, dtype=torch.float32).unsqueeze(0)
+
+            dist = policy_net(state_tensor)
+            action = dist.sample()
+            log_prob = dist.log_prob(action)
+
+            item = action.item()
+            print(f"Action: {item}, Log Prob: {log_prob}")
+          #  next_state, reward, done = board.step(index_to_move(action.item(), board))
+            next_state, reward, done = board.step(index_to_move(item, board))
+            next_state_tensor = torch.tensor(next_state, dtype=torch.float32).unsqueeze(0)
+            reward_tensor = torch.tensor([reward], dtype=torch.float32)
+
+            states.append(state_tensor)
+            actions.append(action)
+            rewards_for_episode.append(reward_tensor)
+            masks.append(mask_tensor)
+
+            state = next_state
+            episode_reward[current_player] += reward
+            steps += 1
+
+        # Compute advantages and returns
+        returns, values, advantages = [], [], []
+        for i in range(len(states)):
+            state_tensor = states[i]
+            value = value_net(state_tensor).detach()
+            values.append(value)
+            returns.append(rewards_for_episode[i] + gamma * (values[i + 1] if i + 1 < len(states) else 0))
+        advantages = compute_advantages(rewards_for_episode, values, gamma, lam)
+
+        # Convert lists to tensors
+        states = torch.cat(states)
+        actions = torch.cat(actions)
+        returns = torch.cat(returns).detach()
+        advantages = torch.cat(advantages).detach()
+        masks = torch.cat(masks)
+
+        # PPO policy update
+        for _ in range(update_epochs):
+            dist = policy_net(states)
+            new_log_probs = dist.log_prob(actions)
+            ratio = torch.exp(new_log_probs - log_prob.detach())
+            surr1 = ratio * advantages
+            surr2 = torch.clamp(ratio, 1.0 - clip_epsilon, 1.0 + clip_epsilon) * advantages
+            policy_loss = -torch.min(surr1, surr2).mean()
+
+            policy_optimizer.zero_grad()
+            policy_loss.backward()
+            policy_optimizer.step()
+
+        # Value function update
+        value_loss = F.mse_loss(value_net(states), returns)
+        value_optimizer.zero_grad()
+        value_loss.backward()
+        value_optimizer.step()
+
+        # Update rewards and episode lengths
+        total_reward = sum(rewards_for_episode)
+        rewards.append(total_reward)
+        episode_lengths.append(steps)
+
+        # Print episode information
+        print(f"Episode {episode} ended after {steps} moves. Total reward: {total_reward}")
+
+        if episode % 10 == 0 and episode >= 10:
+            avg_length = np.mean(episode_lengths[-10:])
+            print(f"Average length of the last 10 episodes: {avg_length}")
+
+        # Save the trained model and optimizer state periodically
+        if episode % 100 == 0:
+            save_checkpoint(policy_net, value_net, policy_optimizer, value_optimizer, episode)
+
+    # Plotting results
+    plt.figure(figsize=(12, 5))
+    plt.subplot(1, 2, 1)
+    plt.plot(rewards)
+    plt.title('Rewards over Episodes')
+    plt.xlabel('Episode')
+    plt.ylabel('Reward')
+
+    plt.subplot(1, 2, 2)
+    plt.plot(episode_lengths)
+    plt.title('Episode Lengths over Episodes')
+    plt.xlabel('Episode')
+    plt.ylabel('Length')
+
+    plt.tight_layout()
+    plt.show()
+
+if __name__ == "__main__":
+    model_path = "ppo_policy_net.pth"  # Example model path
+    train_ppo()
