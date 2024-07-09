@@ -1915,7 +1915,6 @@ class InstructionsScene extends Phaser.Scene {
             'A piece must take the shortest available route to its destination tile, both when using one die and when using two dice. \n\n' +
             'You may pass your turn without using one or both dice. \n\n' +
             'When all your pieces are either saved or on goal tiles from which they can be saved, you are in the endgame. In the endgame, you may save unnumbered pieces using a higher roll than the goal tile number, as long as you don\'t have any pieces on higher-numbered goals. \n\n' +
-            'You can get rid of an opponent\'s block by double-clicking on the blocked tile at the start of your turn, but your opponent\'s pieces will be saved and you can make no other moves that turn. \n\n' +
             'Click the back arrow to undo your moves or the right arrow to end your turn. \n\n' +
             'Good luck!'
 
