@@ -18,6 +18,10 @@ const colorFirstDie = 0x40E0D0; // Turquoise
 const colorSecondDie = 0xFFC0CB; 
 const colorSum = 0xFFFF00; // Yellow
 
+const CONFIG = {
+    AI_SERVER_URL: 'https://boardgame-tg08.onrender.com'
+};
+
 class Piece {
     constructor(scene, game, color, number, x, y, rack = null) {
         this.scene = scene;
@@ -1962,7 +1966,7 @@ class InstructionsScene extends Phaser.Scene {
 // Ensure these functions are defined outside of any class or method
 function getAgentMoves(gameState) {
     console.log('Sending game state to agent:', gameState);
-    return fetch('http://localhost:5000/select_moves', {
+    return fetch(`${CONFIG.AI_SERVER_URL}/select_moves`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
