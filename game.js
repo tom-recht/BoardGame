@@ -1,7 +1,7 @@
 const DEBUG_MODE = false; 
 
 const WHITE_IS_AI = false;
-const BLACK_IS_AI = true;
+let BLACK_IS_AI = true;
 
 const PIECE_RADIUS_BASE = 20; 
 const TILE_RADIUS_STEP = 60; 
@@ -1620,6 +1620,12 @@ class Game {
         }
     }
 
+    updateBlackPlayerAIStatus(isAI) {
+        const blackPlayer = this.players.find(player => player.name === 'black');
+        if (blackPlayer) {
+            blackPlayer.isAI = isAI;
+        }
+    }
 
     saveTileNeighborsToFile() {
         const tileNeighbors = {};
@@ -1697,6 +1703,8 @@ class MainGameScene extends Phaser.Scene {
 
         this.game = new Game(this, debugMode);
 
+        this.createRadioButton();
+
         const iconSize = 192;
         const xPosition = this.sys.game.config.width - iconSize / 2 - 100; 
         const yPosition = this.sys.game.config.height - iconSize / 2 - 100; 
@@ -1751,6 +1759,27 @@ class MainGameScene extends Phaser.Scene {
     }
 
     }
+
+    createRadioButton() {
+        const circleX = this.sys.game.config.width - 350;
+        const circleY = this.sys.game.config.height - 60;
+        const textX = circleX + 30;
+        const textY = circleY;
+    
+        const circle = this.add.circle(circleX, circleY, 15, BLACK_IS_AI ? 0x87CEEB : 0xD3D3D3)
+            .setInteractive()
+            .on('pointerdown', () => {
+                BLACK_IS_AI = !BLACK_IS_AI;
+                this.game.updateBlackPlayerAIStatus(BLACK_IS_AI);
+                circle.setFillStyle(BLACK_IS_AI ? 0x87CEEB : 0xD3D3D3);
+            });
+    
+        const text = this.add.text(textX, textY, 'Play Computer', {
+            fontSize: '24px',
+            color: '#000'
+        }).setOrigin(0, 0.5);
+    }
+    
 
     showThinkingIcon() {
         this.thinkingIcon.setAlpha(0); // Ensure it starts from fully transparent
