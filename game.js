@@ -1749,22 +1749,24 @@ class MainGameScene extends Phaser.Scene {
     }
 
     showThinkingIcon() {
+        this.thinkingIcon.setAlpha(0); // Ensure it starts from fully transparent
+        this.thinkingIcon.setVisible(true);
+    
         this.tweens.add({
             targets: this.thinkingIcon,
-            alpha: 1, // Fade in to fully visible
-            duration: 500, // Duration of fade in (in ms)
+            alpha: { from: 0, to: 1 },
+            duration: 1000, // Duration of fade in (in ms)
+            yoyo: true, // Enable yoyo to reverse the tween
+            repeat: -1, // Repeat indefinitely
             ease: 'Power1'
         });
     }
     
     hideThinkingIcon() {
-        this.tweens.add({
-            targets: this.thinkingIcon,
-            alpha: 0, // Fade out to fully transparent
-            duration: 500, // Duration of fade out (in ms)
-            ease: 'Power1'
-        });
+        this.tweens.killTweensOf(this.thinkingIcon); // Stop all tweens related to thinkingIcon
+        this.thinkingIcon.setVisible(false);
     }
+    
     showNewGameConfirmationModal() {
         if (this.confirmationModal) {
             this.confirmationModal.destroy(true);
