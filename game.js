@@ -1307,9 +1307,11 @@ class Game {
         const currentPlayer = this.turn;
 
         const currentPlayerObject = this.players.find(player => player.name === currentPlayer);
+        console.log('Current player is AI:', currentPlayerObject.isAI);
 
         if (currentPlayerObject && currentPlayerObject.isAI) { // Check if the current player is AI
             console.log('Agent\'s turn');
+            this.scene.showThinkingIcon(); 
             const gameState = getGameState(this);
             setTimeout(() => {
                 getAgentMoves(gameState);
@@ -1682,12 +1684,23 @@ class MainGameScene extends Phaser.Scene {
     preload() {
         this.load.image('leftWavyArrow', 'assets/left-arrow.png');
         this.load.image('rightWavyArrow', 'assets/right-arrow.png');
+        this.load.image('thinkingIcon', 'assets/thinking.png'); 
+
     }
 
     create() {
         const debugMode = false; // Set this to false to disable debug mode
 
         this.game = new Game(this, debugMode);
+
+        const iconSize = 192;
+        const xPosition = this.sys.game.config.width - iconSize / 2 - 100; 
+        const yPosition = this.sys.game.config.height - iconSize / 2 - 100; 
+        this.thinkingIcon = this.add.image(xPosition, yPosition, 'thinkingIcon')
+        .setDisplaySize(iconSize, iconSize) 
+        .setAlpha(0)
+        .setVisible(true);
+
 
         // Add instructions button
         const instructionsButton = this.add.text(150, 50, 'How to Play', {
@@ -1735,6 +1748,23 @@ class MainGameScene extends Phaser.Scene {
 
     }
 
+    showThinkingIcon() {
+        this.tweens.add({
+            targets: this.thinkingIcon,
+            alpha: 1, // Fade in to fully visible
+            duration: 500, // Duration of fade in (in ms)
+            ease: 'Power1'
+        });
+    }
+    
+    hideThinkingIcon() {
+        this.tweens.add({
+            targets: this.thinkingIcon,
+            alpha: 0, // Fade out to fully transparent
+            duration: 500, // Duration of fade out (in ms)
+            ease: 'Power1'
+        });
+    }
     showNewGameConfirmationModal() {
         if (this.confirmationModal) {
             this.confirmationModal.destroy(true);
@@ -1944,14 +1974,19 @@ function getAgentMoves(gameState) {
     })
     .then(data => {
         if (data.move) {
-            console.log('Agent move:', data.move);
-            applyMove(data.move);
+            console.log('Agent moves:', data.move);
+            applyMovePair(data.move);
         } else {
             console.log('No move to apply:', data.message);
+            gameInstance.scene.scenes[0].hideThinkingIcon();
             gameInstance.scene.scenes[0].game.switchTurn();
         }
+        gameInstance.scene.scenes[0].hideThinkingIcon();
     })
-    .catch(error => console.error('Error:', error));
+    .catch(error => {
+        console.error('Error:', error);
+        gameInstance.scene.scenes[0].hideThinkingIcon();
+    });
 }
 
 function applyMove(move) { 
