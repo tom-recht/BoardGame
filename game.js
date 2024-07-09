@@ -68,7 +68,15 @@ class Piece {
     handleClick(pointer) {
         if (this.game.gameOver) return; 
         if (this.game.dice[0].used && this.game.dice[1].used) return;
-        if (this.game.selectedPiece && this.game.selectedPiece !== this) return;
+        if (this.game.selectedPiece && this.game.selectedPiece !== this) {
+            this.game.selectedPiece.isSelected = false;
+            if (this.game.selectedPiece.currentTile && this.game.selectedPiece.currentTile.type === 'home' && this.game.selectedPiece.justMovedHome) {
+                this.game.selectedPiece.returnToRack();}
+            this.game.selectedPiece.updateColor();
+            this.game.selectedPiece = this;
+            this.game.unhighlightAllTiles();
+            this.isSelected = false;
+        }
         if (this.player !== this.game.turn) return; 
         if (this.rack && this.rack.type === 'saved') return;
         if (this.rack && this.rack.type === 'unentered' && this.rack.pieces[0] !== this) return;
@@ -94,7 +102,6 @@ class Piece {
     }
     
     onClick() {
-        
         if (this.rack && this.rack.type === 'unentered' && this.game.turn === this.rack.color) {
             this.moveFromRack();
             this.justMovedHome = true;
@@ -183,7 +190,9 @@ class Piece {
             this.text.setPosition(this.x, this.y);
         }
         rack.addPiece(this);
-        this.currentTile.removePiece(this);
+        if (this.currentTile) {
+            this.currentTile.removePiece(this);
+        }
         this.currentTile = null;
         this.isSelected = false;
         this.isHovered = false;
@@ -246,13 +255,11 @@ class Piece {
 
         const player = this.color === 0xffffff ? this.game.players[0] : this.game.players[1];
         if (player.getGamePhase() === 'opening') {
-            console.log(`${player.name} is in the opening phase and cannot save pieces.`);
             return false;
         }
-        if (!this.currentTile || this.currentTile.type !== 'save') 
-            {console.log(`Piece ${this.number} is not on a save tile`);
-            return false;}
-
+        if (!this.currentTile || this.currentTile.type !== 'save') {
+            return false;
+        }
         if (this.number > 6) {
             return true;
         } else {
@@ -310,7 +317,6 @@ class Piece {
                 return false;
             }
         } else {
-            console.log(`Piece ${this.number} cannot be saved`);
             return false;
         }
     }
@@ -1011,7 +1017,6 @@ class Game {
     }
     
     checkEndgame(player) {
-        console.log(`Checking endgame for player ${player.name} in phase ${player.getGamePhase()}`);
         if (this.debug) {
             player.setGamePhase('endgame');
             console.log(`${player.name} is in debug mode and will stay in the endgame phase.`);
@@ -1981,7 +1986,6 @@ function applyMove(move) {
 
     const piece = findPieceByColorAndNumber(pieceColorNumber[0], pieceColorNumber[1]);
     const targetTile = targetRingSector === 'save' ? 'save' : findTileByRingAndSector(targetRingSector[0], targetRingSector[1]);
-    console.log('Piece:', piece, 'Target tile:', targetTile);
 
     if (piece && targetTile) {
         // Highlight the piece
@@ -1991,8 +1995,6 @@ function applyMove(move) {
         setTimeout(() => {
             if (targetTile === 'save') {
                 piece.save();
-                console.log(`Piece ${pieceColorNumber[0]} ${pieceColorNumber[1]} saved`);
-
                 piece.isSelected = false;
                 piece.updateColor();
                 
@@ -2219,7 +2221,7 @@ const config = {
 const gameInstance = new Phaser.Game(config);
 
 // add saving opponent's pieces
-// clicking on a selectable piece should select it even if another piece is selected
+
 // should be able to make moves in either order when must move a piece
 // missing border for save tiles
 // make ring 6 nogo tiles that abut on the outer border invisible

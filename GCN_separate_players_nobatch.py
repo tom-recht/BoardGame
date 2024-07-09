@@ -326,9 +326,6 @@ def select_action(policy_logits, action_mask, epsilon=0.1):
     # Debugging log
     if len(valid_actions) == 0:
         logger.error("No valid actions available. Action mask may be incorrect.")
-
-    # Fallback to a default action if no valid actions (should not happen)
-    if len(valid_actions) == 0:
         valid_actions = [0]  # Assuming 0 is the index for passing the turn or a default action
 
     if np.random.rand() < epsilon:
@@ -412,7 +409,10 @@ def action_index_to_move(action_index, board):
     if action_index == 0:
         return (0, 0, 0, board.current_player)  # Pass move
 
-    roll = index_to_roll_mapping[action_index]
+    roll = index_to_roll_mapping.get(action_index, None)
+    if roll is None:
+        logger.error(f"Roll not found for action index {action_index}.")
+
     num_destinations = len(board.tiles) + 1  # Include 'save' destination
 
     # Extract destination index
@@ -559,7 +559,7 @@ if __name__ == '__main__':
         total_rewards_per_episode.append(sum(white_trajectories[2]) + sum(black_trajectories[2]))
         steps_per_episode.append(len(white_trajectories[2]) + len(black_trajectories[2]))
         
-        if episode > 0 and episode % 50 == 0:  # Save checkpoint 
+        if episode > 0 and episode % 20 == 0:  # Save checkpoint 
             save_checkpoint(model, optimizer, episode)
             logger.info(f"Saved checkpoint at episode {episode}")
 
