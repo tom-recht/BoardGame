@@ -1,7 +1,7 @@
 const DEBUG_MODE = false; 
 
 const WHITE_IS_AI = false;
-let BLACK_IS_AI = true;
+let BLACK_IS_AI = false;
 
 const PIECE_RADIUS_BASE = 20; 
 const TILE_RADIUS_STEP = 60; 
