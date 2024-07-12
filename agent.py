@@ -79,8 +79,8 @@ class Agent():
         pieces_near_goal = len([piece for piece in board_pieces if board.shortest_route_to_goal(piece) <= 6])
 
         # numbered piece not on goal
-        numbered_off_goal = [piece for piece in board.pieces if piece.number <= 6 and not piece.can_be_saved()]
-        off_goal_penalty = -1 * sum(self.weights['goal_bonuses'].get(piece.number, 0) for piece in numbered_off_goal)
+        #numbered_off_goal = [piece for piece in board.pieces if piece.number <= 6 and not piece.can_be_saved()]
+        #off_goal_penalty = -1 * sum(self.weights['goal_bonuses'].get(piece.number, 0) for piece in numbered_off_goal)
 
         # total distance froms goals of other pieces
         pieces_not_near_goal = [piece for piece in board_pieces if board.shortest_route_to_goal(piece) > 6]
@@ -104,7 +104,7 @@ class Agent():
                     loose_pieces * self.weights['loose_piece'] +
                     total_distance * self.weights['distance_penalty'] +
                     unentered_pieces * self.weights['unentered_piece'] +
-                    off_goal_penalty +
+                    #off_goal_penalty +
                     game_stage_bonus)
         
         score_components = {
@@ -198,4 +198,4 @@ class Agent():
 
 
 # agent tries to make sum moves that ignore shortest route rule
-# log the moves and the scores
+# agent doesn't like bringing out numbered pieces
