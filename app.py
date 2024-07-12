@@ -9,7 +9,7 @@ from game import Board
 from agent import Agent
 
 app = Flask(__name__, static_folder='', static_url_path='')
-CORS(app, resources={r"/*": {"origins": "https://tom-recht.github.io"}})
+CORS(app, resources={r"/*": {"origins": "https://tom-recht.github.io", "methods": ["GET", "POST"], "allow_headers": ["Content-Type"]}})
 
 # Initialize board
 board = Board()
