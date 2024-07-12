@@ -8,8 +8,8 @@ import os
 from game import Board
 from agent import Agent
 
-app = Flask(__name__)
-CORS(app) 
+app = Flask(__name__, static_folder='', static_url_path='')
+CORS(app, resources={r"/*": {"origins": "https://tom-recht.github.io"}})
 
 # Initialize board
 board = Board()
