@@ -5,12 +5,13 @@ from collections import deque
 GAME_OVER_SCORE = 10000
 
 INITIAL_WEIGHTS = {
-    'saved_bonuses': {0:0, 1:1, 2:2, 3:3, 4:4, 5:5, 6:6},
-    'goal_bonuses': {0:0, 1:1, 2:2, 3:3, 4:4, 5:5, 6:6},
+    'saved_bonuses': {0:0, 1:5, 2:6, 3:7, 4:8, 5:9, 6:10},
+    'goal_bonuses': {0:0, 1:5, 2:6, 3:7, 4:8, 5:9, 6:10},
     'game_stage_bonuses': {'midgame': 50, 'endgame': 100},
-    'saved_piece': 20,
+    'saved_piece': 15,
     'goal_piece': 10,
     'near_goal_piece': 4,
+    'unentered_piece': -1,
     'loose_piece': -1,
     'distance_penalty': -.5
 }
@@ -83,6 +84,10 @@ class Agent():
         # number of loose pieces
         loose_pieces = len([piece for piece in board_pieces if piece.tile.type == 'field' and len(piece.tile.pieces) == 1])
 
+        # number of pieces not entered
+        unentered_rack = board.get_unentered_rack(player)
+        unentered_pieces = len(unentered_rack)
+
         # game stage bonus
         game_stage = board.game_stages[player]
         game_stage_bonus = self.weights['game_stage_bonuses'].get(game_stage, 0)
@@ -92,6 +97,7 @@ class Agent():
                     pieces_near_goal * self.weights['near_goal_piece'] +
                     loose_pieces * self.weights['loose_piece'] +
                     total_distance * self.weights['distance_penalty'] +
+                    unentered_pieces * self.weights['unentered_piece'] +
                     game_stage_bonus)
 
         return total_score
