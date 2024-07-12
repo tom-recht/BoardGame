@@ -12,7 +12,7 @@ INITIAL_WEIGHTS = {
     'goal_piece': 10,
     'near_goal_piece': 4,
     'loose_piece': -1,
-    'distance_penalty': -.2
+    'distance_penalty': -.5
 }
 class Agent():
     def __init__(self, board = None, weights = INITIAL_WEIGHTS):
