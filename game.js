@@ -23,7 +23,7 @@ const colorSum = 0xFFFF00; // Yellow
 };
  */
 const CONFIG = {
-    AI_SERVER_URL: 'https://www.board-game-indol-sigma.vercel.app/'
+    AI_SERVER_URL: 'https://board-game-indol-sigma.vercel.app/'
 };
 
 class Piece {
