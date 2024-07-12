@@ -3,6 +3,7 @@ import copy
 import json
 
 GAME_OVER_SCORE = 10000
+LOG_TO_FILE = True
 
 INITIAL_WEIGHTS = {
     'saved_bonuses': {0:0, 1:12, 2:14, 3:16, 4:18, 5:20, 6:22},
@@ -21,6 +22,9 @@ class Agent():
         self.weights = weights
         self.log = []
         self.log_file = log_file
+        with open(self.log_file, 'w') as file:
+            file.write(json.dumps(self.log, indent=4))
+        print(f"Log file {self.log_file} created.")
 
     def random_move(self, valid_moves):
 
@@ -187,14 +191,16 @@ class Agent():
             'score': best_move_score,
             'components': best_move_components
         })
-                # Save log to file after selecting the move pair
-        self.save_log_to_file()
 
+        if LOG_TO_FILE:
+            with open(self.log_file, 'w') as file:
+                file.write(json.dumps(self.log, indent=4))
+            print(f"Log updated with move: {best_move_pair}")
+        
         return best_move_pair
 
     def save_log_to_file(self):
-        with open(self.log_file, 'w') as file:
-            json.dump(self.log, file, indent=4)
+        return json.dumps(self.log, indent=4)
 
 
 # agent tries to make sum moves that ignore shortest route rule

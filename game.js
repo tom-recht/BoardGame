@@ -1,4 +1,5 @@
 const DEBUG_MODE = false; 
+const LOCAL_AI = true;
 
 const WHITE_IS_AI = false;
 let BLACK_IS_AI = false;
@@ -21,6 +22,8 @@ const colorSum = 0xFFFF00; // Yellow
 const CONFIG = {
     AI_SERVER_URL: 'https://boardgame-tg08.onrender.com'
 }; 
+
+SERVER_URL = LOCAL_AI ? 'http://localhost:10000' : CONFIG.AI_SERVER_URL;
 
 /* const CONFIG = {
     AI_SERVER_URL: 'https://board-game-indol-sigma.vercel.app/'
@@ -1996,7 +1999,7 @@ class InstructionsScene extends Phaser.Scene {
 // Ensure these functions are defined outside of any class or method
 function getAgentMoves(gameState) {
     console.log('Sending game state to agent:', gameState);
-    return fetch(`${CONFIG.AI_SERVER_URL}/select_moves`, {
+    return fetch(`${SERVER_URL}/select_moves`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
