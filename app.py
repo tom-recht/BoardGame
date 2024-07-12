@@ -3,7 +3,7 @@
 # http://localhost:8000
 # 
 from flask import Flask, request, jsonify
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 import os
 from game import Board
 from agent import Agent
@@ -16,6 +16,7 @@ board = Board()
 agent = Agent()
 
 @app.route('/select_moves', methods=['POST'])
+@cross_origin(origin='https://tom-recht.github.io', headers=['Content-Type'])
 def select_moves():
     try:
         state = request.json
