@@ -18,13 +18,13 @@ const colorFirstDie = 0x40E0D0; // Turquoise
 const colorSecondDie = 0xFFC0CB; 
 const colorSum = 0xFFFF00; // Yellow
 
-/* const CONFIG = {
-    AI_SERVER_URL: 'https://boardgame-tg08.onrender.com'
-};
- */
 const CONFIG = {
+    AI_SERVER_URL: 'https://boardgame-tg08.onrender.com'
+}; 
+
+/* const CONFIG = {
     AI_SERVER_URL: 'https://board-game-indol-sigma.vercel.app/'
-};
+}; */
 
 class Piece {
     constructor(scene, game, color, number, x, y, rack = null) {
