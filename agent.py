@@ -5,8 +5,8 @@ from collections import deque
 GAME_OVER_SCORE = 10000
 
 INITIAL_WEIGHTS = {
-    'saved_bonuses': {0:0, 1:5, 2:6, 3:7, 4:8, 5:9, 6:10},
-    'goal_bonuses': {0:0, 1:5, 2:6, 3:7, 4:8, 5:9, 6:10},
+    'saved_bonuses': {0:0, 1:12, 2:14, 3:16, 4:18, 5:20, 6:22},
+    'goal_bonuses': {0:0, 1:12, 2:14, 3:16, 4:18, 5:20, 6:22},
     'game_stage_bonuses': {'midgame': 50, 'endgame': 100},
     'saved_piece': 20,
     'goal_piece': 10,
