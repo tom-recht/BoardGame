@@ -1,7 +1,17 @@
 {
+  "version": 2,
+  "builds": [
+    { "src": "app.py", "use": "@vercel/python" }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "app.py"
+    }
+  ],
   "headers": [
     {
-      "source": "/api/(.*)",
+      "source": "/(.*)",
       "headers": [
         { "key": "Access-Control-Allow-Credentials", "value": "true" },
         { "key": "Access-Control-Allow-Origin", "value": "*" },
@@ -9,12 +19,8 @@
         { "key": "Access-Control-Allow-Headers", "value": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version" }
       ]
     }
-  ]
-
-
-  "build": {
-    "env": {
-      "VERCEL_ROUTER_INCLUDE": "http://3.111.128.67/*"
-    }
+  ],
+  "env": {
+    "VERCEL_ROUTER_INCLUDE": "http://3.111.128.67/*"
   }
 }
