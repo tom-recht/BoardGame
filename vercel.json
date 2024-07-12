@@ -10,8 +10,8 @@
       ]
     }
   ]
-}
-{
+
+
   "build": {
     "env": {
       "VERCEL_ROUTER_INCLUDE": "http://3.111.128.67/*"
