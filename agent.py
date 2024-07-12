@@ -79,7 +79,7 @@ class Agent():
         pieces_near_goal = len([piece for piece in board_pieces if board.shortest_route_to_goal(piece) <= 6])
 
         # numbered piece not on goal
-        numbered_off_goal = [piece for piece in board_pieces if piece.number <= 6 and not piece.can_be_saved()]
+        numbered_off_goal = [piece for piece in board.pieces if piece.number <= 6 and not piece.can_be_saved()]
         off_goal_penalty = -1 * sum(self.weights['goal_bonuses'].get(piece.number, 0) for piece in numbered_off_goal)
 
         # total distance froms goals of other pieces
@@ -181,7 +181,7 @@ class Agent():
         best_move_pair = max(move_scores, key=lambda k: move_scores[k][0])
 
         best_move_score, best_move_components = move_scores[best_move_pair]
-        
+
         self.log.append({
             'move': best_move_pair,
             'score': best_move_score,
