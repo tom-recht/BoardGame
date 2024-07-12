@@ -1,6 +1,6 @@
 import random
 import copy
-from collections import deque
+import json
 
 GAME_OVER_SCORE = 10000
 
@@ -16,9 +16,11 @@ INITIAL_WEIGHTS = {
     'distance_penalty': -.5
 }
 class Agent():
-    def __init__(self, board = None, weights = INITIAL_WEIGHTS):
+    def __init__(self, board = None, weights = INITIAL_WEIGHTS, log_file='game_log.json'):
         self.board = board
         self.weights = weights
+        self.log = []
+        self.log_file = log_file
 
     def random_move(self, valid_moves):
 
@@ -104,21 +106,40 @@ class Agent():
                     unentered_pieces * self.weights['unentered_piece'] +
                     off_goal_penalty +
                     game_stage_bonus)
+        
+        score_components = {
+            'saved_pieces': saved_pieces * self.weights['saved_piece'],
+            'saved_bonus': saved_bonus,
+            'goal_pieces': len(goal_pieces) * self.weights['goal_piece'],
+            'goal_bonus': goal_bonus,
+            'pieces_near_goal': pieces_near_goal * self.weights['near_goal_piece'],
+            'loose_pieces': loose_pieces * self.weights['loose_piece'],
+            'total_distance': total_distance * self.weights['distance_penalty'],
+            'unentered_pieces': unentered_pieces * self.weights['unentered_piece'],
+            'off_goal_penalty': off_goal_penalty,
+            'game_stage_bonus': game_stage_bonus
+        }
 
-        return total_score
+        return total_score, score_components
 
 
     def evaluate(self, board, player):
         winner, score = board.check_game_over()
         if winner:
             factor = 1 if winner == player else -1
-            return factor * score * GAME_OVER_SCORE
+            return factor * score * GAME_OVER_SCORE, {}
 
-        player_eval = self.evaluate_player(board, player)
+        player_eval, player_components = self.evaluate_player(board, player)
         opponent = 'white' if player == 'black' else 'black'
-        opponent_eval = self.evaluate_player(board, opponent)
+        opponent_eval, opponent_components = self.evaluate_player(board, opponent)
 
-        return player_eval - opponent_eval
+        total_score = player_eval - opponent_eval
+        score_components = {
+            'player': player_components,
+            'opponent': opponent_components
+        }
+
+        return total_score, score_components
 
     def select_move_pair(self, moves, board, player):
         move_scores = dict()
@@ -157,7 +178,24 @@ class Agent():
                 simulated_board2.apply_move(next_move)
                 move_scores[(move, next_move)] = self.evaluate(simulated_board2, player)
 
-        best_move_pair = max(move_scores, key=move_scores.get)
+        best_move_pair = max(move_scores, key=lambda k: move_scores[k][0])
+
+        best_move_score, best_move_components = move_scores[best_move_pair]
+        
+        self.log.append({
+            'move': best_move_pair,
+            'score': best_move_score,
+            'components': best_move_components
+        })
+                # Save log to file after selecting the move pair
+        self.save_log_to_file()
+
         return best_move_pair
 
+    def save_log_to_file(self):
+        with open(self.log_file, 'w') as file:
+            json.dump(self.log, file, indent=4)
+
+
 # agent tries to make sum moves that ignore shortest route rule
+# log the moves and the scores
