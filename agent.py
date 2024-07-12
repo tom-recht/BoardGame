@@ -11,7 +11,8 @@ INITIAL_WEIGHTS = {
     'saved_piece': 20,
     'goal_piece': 10,
     'near_goal_piece': 4,
-    'loose_piece': -1
+    'loose_piece': -1,
+    'distance_penalty': -.2
 }
 class Agent():
     def __init__(self, board = None, weights = INITIAL_WEIGHTS):
@@ -74,6 +75,10 @@ class Agent():
         board_pieces = [piece for piece in board.pieces if piece.player == player and piece.tile]
         pieces_near_goal = len([piece for piece in board_pieces if board.shortest_route_to_goal(piece) <= 6])
 
+        # total distance froms goals of other pieces
+        pieces_not_near_goal = [piece for piece in board_pieces if board.shortest_route_to_goal(piece) > 6]
+        total_distance = sum(board.shortest_route_to_goal(piece) for piece in pieces_not_near_goal)
+
         # number of loose pieces
         loose_pieces = len([piece for piece in board_pieces if piece.tile.type == 'field' and len(piece.tile.pieces) == 1])
 
@@ -85,6 +90,7 @@ class Agent():
                     len(goal_pieces) * self.weights['goal_piece'] + goal_bonus +
                     pieces_near_goal * self.weights['near_goal_piece'] +
                     loose_pieces * self.weights['loose_piece'] +
+                    total_distance * self.weights['distance_penalty'] +
                     game_stage_bonus)
 
         return total_score
