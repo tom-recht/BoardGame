@@ -79,7 +79,7 @@ class Agent():
         # total distance froms goals of other pieces
         pieces_not_near_goal = [piece for piece in board_pieces if board.shortest_route_to_goal(piece) > 6]
         total_distance = sum(board.shortest_route_to_goal(piece) for piece in pieces_not_near_goal)
-        total_distance -= sum(self.weights['goal_bonuses'].get(piece.number, 0) for piece in pieces_not_near_goal if piece.number <= 6) / 10
+        total_distance += sum(self.weights['goal_bonuses'].get(piece.number, 0) for piece in pieces_not_near_goal if piece.number <= 6) / 10
 
         # number of loose pieces
         loose_pieces = len([piece for piece in board_pieces if piece.tile.type == 'field' and len(piece.tile.pieces) == 1])
