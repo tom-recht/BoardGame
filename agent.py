@@ -69,7 +69,7 @@ class Agent():
         saved_bonus = sum(self.weights['saved_bonuses'].get(piece.number, 0) for piece in save_rack)
 
         # number of pieces on goals
-        goal_pieces = [piece for piece in board.pieces if piece.player == player and piece.can_be_saved()]
+        goal_pieces = [piece for piece in board.pieces if piece.player == player and piece.tile and piece.can_be_saved()]
         goal_bonus = sum(self.weights['goal_bonuses'].get(piece.number, 0) for piece in goal_pieces if piece.number <= 6)
 
         # number of pieces within reach of a goal

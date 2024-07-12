@@ -1032,9 +1032,6 @@ class Game {
         }
 
         const pieces = this.pieces.filter(piece => piece.color === (player.name === 'white' ? 0xffffff : 0x000000));
-        pieces.forEach(piece => {
-            console.log(`Piece ${piece.id} can be saved: ${piece.canBeSaved()}`);
-        });
         const allCanBeSaved = pieces.every(piece => piece.canBeSaved());
 
         // Check if all pieces have been moved onto the board and can be saved
