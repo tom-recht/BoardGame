@@ -185,6 +185,7 @@ class Board:
             
             if 'reachableBySum' in piece_details:
                 piece.reachable_by_sum = [self.get_tile(t['ring'], t['sector']) for t in piece_details['reachableBySum']]
+                self.firstMove = {'piece': piece, 'origin_tile': tile}
 
         self.assign_piece_indices()
         self.game_stages[self.current_player] = self.get_game_stage(self.current_player)
@@ -302,9 +303,9 @@ class Board:
 
             # uses 2 alternative ways of finding the sum-reachable tiles for a moved piece
             reachable_by_sum = None
-            if piece.reachable_by_sum:  # this comes from update_state()
-                reachable_by_sum = piece.reachable_by_sum
-            elif self.firstMove and self.firstMove['piece'] == piece: 
+         #   if piece.reachable_by_sum:  # this comes from update_state()
+         #       reachable_by_sum = piece.reachable_by_sum
+            if self.firstMove and self.firstMove['piece'] == piece: 
                 origin_tile = self.firstMove['origin_tile'] or self.home_tile
                 reachable_by_sum = self.get_reachable_tiles(origin_tile, self.dice[0].number + self.dice[1].number)
             if reachable_by_sum:

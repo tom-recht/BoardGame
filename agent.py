@@ -87,8 +87,8 @@ class Agent():
         off_goal_penalty = -1 * sum(self.weights['goal_bonuses'].get(piece.number, 0) for piece in numbered_off_goal)
 
         # total distance froms goals of other pieces
-        pieces_not_near_goal = [piece for piece in board_pieces if board.shortest_route_to_goal(piece) > 6]
-        total_distance = sum(board.shortest_route_to_goal(piece) for piece in pieces_not_near_goal)
+        pieces_not_near_goal = [piece for piece in board.pieces if board.shortest_route_to_goal(piece) > 6]
+        total_distance = min(sum(board.shortest_route_to_goal(piece) for piece in pieces_not_near_goal), 100)
         total_distance += sum(self.weights['goal_bonuses'].get(piece.number, 0) for piece in pieces_not_near_goal if piece.number <= 6) / 10
 
         # number of loose pieces
@@ -167,7 +167,7 @@ class Agent():
             simulated_board.apply_move(move)
             move_scores[(move, (0, 0, 0))] = self.evaluate(simulated_board, player)  # make one move then pass
             
-            next_moves = set(simulated_board.get_valid_moves())
+            next_moves = set(simulated_board.get_valid_moves(mask_offgoals=True))
         
             
             if not next_moves:
