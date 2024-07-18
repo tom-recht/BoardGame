@@ -401,8 +401,13 @@ class Board:
 
         # Undo the move
         if destination == 'save':
+            print('Undoing save move:', piece, origin_tile)
             saved_rack = self.white_saved if piece.player == 'white' else self.black_saved
+            print('Saved rack:', saved_rack)
+            print('Piece:', piece)
+            print('Pieces in saved rack:', [piece for piece in saved_rack])
             saved_rack.remove(piece)
+            piece.rack = None
             piece.tile = origin_tile
             origin_tile.pieces.append(piece)
         else:
@@ -412,7 +417,7 @@ class Board:
             if origin_tile:
                 origin_tile.pieces.append(piece)
             elif origin_rack:
-                origin_rack.append(piece)
+                origin_rack.insert(0, piece)
 
             if captured_piece:      # undo the capture
                 new_tile.pieces.append(captured_piece)
@@ -424,13 +429,16 @@ class Board:
         elif roll == self.dice[1].number and self.dice[1].used:
             self.dice[1].used = False
 
-        # if both dice are now unused, this was the first move, so clear self.firstMove
-        if not self.dice[0].used and not self.dice[1].used:
+        # if exactly one die is now unused, this was the first move, so clear self.firstMove
+        if sum(not die.used for die in self.dice) == 1:
             self.firstMove = None
+        
 
+        self.current_player = piece.player
         self.game_stages[self.current_player] = self.get_game_stage(self.current_player)
+        self.check_game_over()
     
-    def apply_move(self, move):
+    def apply_move(self, move, switch_turn = True):
         piece_id, destination, roll = move
 
         captured_piece = None
@@ -466,9 +474,9 @@ class Board:
 
             # Remove the piece from its current location (rack or tile)
             if piece.rack:
+                origin_rack = piece.rack
                 piece.rack.remove(piece)
                 piece.rack = None
-                origin_rack = piece.rack
             if piece.tile:
                 piece.tile.pieces.remove(piece)
                 origin_tile = piece.tile
@@ -498,7 +506,7 @@ class Board:
         self.save_move(move, origin_tile, origin_rack, captured_piece)
 
         # Switch to the next player if both dice are used
-        if all(die.used for die in self.dice):
+        if switch_turn and all(die.used for die in self.dice):
             self.switch_turn()
 
     def get_save_rack(self, player):

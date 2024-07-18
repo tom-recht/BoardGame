@@ -104,7 +104,6 @@ class Agent():
 
     def select_move_pair(self, moves, board, player):
         move_scores = dict()
-        move_log_data = {}
 
         # Ensure moves is a set and does not contain integers
         if not isinstance(moves, (list, set)) or not all(isinstance(m, tuple) for m in moves):
@@ -121,11 +120,10 @@ class Agent():
             if not isinstance(move, tuple) or len(move) != 3:
                 raise ValueError('Invalid move format: each move should be a tuple of length 3.')
 
-            simulated_board = copy.deepcopy(board)
-            simulated_board.apply_move(move)
-            move_scores[(move, (0, 0, 0))] = self.evaluate(simulated_board, player)  # make one move then pass
-            
-            next_moves = set(simulated_board.get_valid_moves(mask_offgoals=True))
+            board.apply_move(move)
+            move_scores[(move, (0, 0, 0))] = self.evaluate(board, player)  # make one move then pass
+
+            next_moves = set(board.get_valid_moves(mask_offgoals=True))
 
             if not next_moves:
                 continue
@@ -135,9 +133,11 @@ class Agent():
                 if not isinstance(next_move, tuple) or len(next_move) != 3:
                     raise ValueError('Invalid next move format: each move should be a tuple of length 3.')
 
-                simulated_board2 = copy.deepcopy(simulated_board)
-                simulated_board2.apply_move(next_move)
-                move_scores[(move, next_move)] = self.evaluate(simulated_board2, player)
+                board.apply_move(next_move, switch_turn = False)
+                move_scores[(move, next_move)] = self.evaluate(board, player)
+                board.undo_last_move()
+
+            board.undo_last_move()
 
         best_move_pair = max(move_scores, key=lambda k: move_scores[k][0])
         best_move_score, best_move_components = move_scores[best_move_pair]
@@ -156,9 +156,9 @@ class Agent():
         return best_move_pair
 
 
+
     def save_log_to_file(self):
         return json.dumps(self.log, indent=4)
 
 
-# agent tries to make sum moves that ignore shortest route rule
-# agent doesn't like bringing out numbered pieces
+# when agent brings out a captured piece it sometimes thinks it has no further moves?
