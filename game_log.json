@@ -51,5 +51,5630 @@
                 "game_stage_bonus": 0
             }
         }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    12
+                ],
+                [
+                    3,
+                    5
+                ],
+                4
+            ],
+            [
+                [
+                    "black",
+                    3
+                ],
+                [
+                    7,
+                    8
+                ],
+                6
+            ]
+        ],
+        "score": 4.0,
+        "components": {
+            "player": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 10,
+                "goal_bonus": 16,
+                "pieces_near_goal": 12,
+                "loose_pieces": 0,
+                "total_distance": -83.6,
+                "unentered_pieces": -11,
+                "off_goal_penalty": -174,
+                "game_stage_bonus": 0
+            },
+            "opponent": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 10,
+                "goal_bonus": 14,
+                "pieces_near_goal": 12,
+                "loose_pieces": -2,
+                "total_distance": -83.6,
+                "unentered_pieces": -11,
+                "off_goal_penalty": -174,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    8
+                ],
+                [
+                    5,
+                    22
+                ],
+                6
+            ],
+            [
+                [
+                    "black",
+                    2
+                ],
+                [
+                    5,
+                    22
+                ],
+                6
+            ]
+        ],
+        "score": 8.0,
+        "components": {
+            "player": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 10,
+                "goal_bonus": 16,
+                "pieces_near_goal": 20,
+                "loose_pieces": 0,
+                "total_distance": -72.4,
+                "unentered_pieces": -9,
+                "off_goal_penalty": -174,
+                "game_stage_bonus": 0
+            },
+            "opponent": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 10,
+                "goal_bonus": 14,
+                "pieces_near_goal": 16,
+                "loose_pieces": -1,
+                "total_distance": -72.4,
+                "unentered_pieces": -10,
+                "off_goal_penalty": -174,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    9
+                ],
+                [
+                    1,
+                    12
+                ],
+                1
+            ],
+            [
+                [
+                    "black",
+                    8
+                ],
+                [
+                    7,
+                    6
+                ],
+                3
+            ]
+        ],
+        "score": 15.0,
+        "components": {
+            "player": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 20,
+                "goal_bonus": 16,
+                "pieces_near_goal": 24,
+                "loose_pieces": -2,
+                "total_distance": -65.4,
+                "unentered_pieces": -8,
+                "off_goal_penalty": -174,
+                "game_stage_bonus": 0
+            },
+            "opponent": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 10,
+                "goal_bonus": 14,
+                "pieces_near_goal": 20,
+                "loose_pieces": 0,
+                "total_distance": -65.4,
+                "unentered_pieces": -9,
+                "off_goal_penalty": -174,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    9
+                ],
+                [
+                    1,
+                    12
+                ],
+                1
+            ],
+            [
+                [
+                    "black",
+                    5
+                ],
+                [
+                    7,
+                    6
+                ],
+                5
+            ]
+        ],
+        "score": 38.0,
+        "components": {
+            "player": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 30,
+                "goal_bonus": 36,
+                "pieces_near_goal": 24,
+                "loose_pieces": -3,
+                "total_distance": -61.1,
+                "unentered_pieces": -8,
+                "off_goal_penalty": -154,
+                "game_stage_bonus": 0
+            },
+            "opponent": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 10,
+                "goal_bonus": 14,
+                "pieces_near_goal": 24,
+                "loose_pieces": 0,
+                "total_distance": -61.1,
+                "unentered_pieces": -7,
+                "off_goal_penalty": -154,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    13
+                ],
+                [
+                    3,
+                    5
+                ],
+                4
+            ],
+            [
+                [
+                    "black",
+                    7
+                ],
+                [
+                    1,
+                    12
+                ],
+                1
+            ]
+        ],
+        "score": 21.0,
+        "components": {
+            "player": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 30,
+                "goal_bonus": 36,
+                "pieces_near_goal": 32,
+                "loose_pieces": -1,
+                "total_distance": -52.6,
+                "unentered_pieces": -6,
+                "off_goal_penalty": -138,
+                "game_stage_bonus": 0
+            },
+            "opponent": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 20,
+                "goal_bonus": 30,
+                "pieces_near_goal": 28,
+                "loose_pieces": -1,
+                "total_distance": -52.6,
+                "unentered_pieces": -7,
+                "off_goal_penalty": -138,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    10
+                ],
+                [
+                    3,
+                    8
+                ],
+                3
+            ],
+            [
+                [
+                    "black",
+                    11
+                ],
+                [
+                    3,
+                    8
+                ],
+                3
+            ]
+        ],
+        "score": -6.000000000000007,
+        "components": {
+            "player": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 30,
+                "goal_bonus": 36,
+                "pieces_near_goal": 40,
+                "loose_pieces": -1,
+                "total_distance": -42.1,
+                "unentered_pieces": -4,
+                "off_goal_penalty": -116,
+                "game_stage_bonus": 0
+            },
+            "opponent": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 30,
+                "goal_bonus": 52,
+                "pieces_near_goal": 32,
+                "loose_pieces": -1,
+                "total_distance": -42.1,
+                "unentered_pieces": -6,
+                "off_goal_penalty": -116,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    4
+                ],
+                [
+                    2,
+                    2
+                ],
+                2
+            ],
+            [
+                [
+                    "black",
+                    6
+                ],
+                [
+                    3,
+                    8
+                ],
+                3
+            ]
+        ],
+        "score": -2.0,
+        "components": {
+            "player": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 30,
+                "goal_bonus": 36,
+                "pieces_near_goal": 48,
+                "loose_pieces": -2,
+                "total_distance": -28.0,
+                "unentered_pieces": -2,
+                "off_goal_penalty": -116,
+                "game_stage_bonus": 0
+            },
+            "opponent": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 30,
+                "goal_bonus": 52,
+                "pieces_near_goal": 36,
+                "loose_pieces": -2,
+                "total_distance": -28.0,
+                "unentered_pieces": -4,
+                "off_goal_penalty": -116,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    1
+                ],
+                [
+                    5,
+                    2
+                ],
+                5
+            ],
+            [
+                [
+                    "black",
+                    14
+                ],
+                [
+                    5,
+                    22
+                ],
+                6
+            ]
+        ],
+        "score": 54.0,
+        "components": {
+            "player": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 30,
+                "goal_bonus": 36,
+                "pieces_near_goal": 56,
+                "loose_pieces": -2,
+                "total_distance": -14.9,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -116,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 30,
+                "goal_bonus": 52,
+                "pieces_near_goal": 40,
+                "loose_pieces": -3,
+                "total_distance": -14.9,
+                "unentered_pieces": -3,
+                "off_goal_penalty": -116,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    1
+                ],
+                [
+                    6,
+                    12
+                ],
+                6
+            ],
+            [
+                [
+                    "black",
+                    1
+                ],
+                [
+                    7,
+                    12
+                ],
+                1
+            ]
+        ],
+        "score": 45.0,
+        "components": {
+            "player": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 40,
+                "goal_bonus": 48,
+                "pieces_near_goal": 56,
+                "loose_pieces": -1,
+                "total_distance": -10.5,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -86,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 40,
+                "goal_bonus": 70,
+                "pieces_near_goal": 44,
+                "loose_pieces": -3,
+                "total_distance": -10.5,
+                "unentered_pieces": -3,
+                "off_goal_penalty": -86,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    3
+                ],
+                "save",
+                3
+            ],
+            [
+                [
+                    "black",
+                    10
+                ],
+                [
+                    7,
+                    8
+                ],
+                4
+            ]
+        ],
+        "score": 60.0,
+        "components": {
+            "player": {
+                "saved_pieces": 20,
+                "saved_bonus": 16,
+                "goal_pieces": 50,
+                "goal_bonus": 48,
+                "pieces_near_goal": 52,
+                "loose_pieces": -1,
+                "total_distance": -7.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -74,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 50,
+                "goal_bonus": 82,
+                "pieces_near_goal": 48,
+                "loose_pieces": -3,
+                "total_distance": -7.0,
+                "unentered_pieces": -2,
+                "off_goal_penalty": -74,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    10
+                ],
+                "save",
+                3
+            ],
+            [
+                [
+                    "black",
+                    5
+                ],
+                "save",
+                5
+            ]
+        ],
+        "score": 97.0,
+        "components": {
+            "player": {
+                "saved_pieces": 60,
+                "saved_bonus": 36,
+                "goal_pieces": 50,
+                "goal_bonus": 48,
+                "pieces_near_goal": 44,
+                "loose_pieces": -1,
+                "total_distance": -3.5,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -74,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 60,
+                "goal_bonus": 82,
+                "pieces_near_goal": 52,
+                "loose_pieces": -3,
+                "total_distance": -3.5,
+                "unentered_pieces": -1,
+                "off_goal_penalty": -74,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    7
+                ],
+                [
+                    7,
+                    12
+                ],
+                6
+            ],
+            [
+                [
+                    "black",
+                    11
+                ],
+                [
+                    7,
+                    8
+                ],
+                4
+            ]
+        ],
+        "score": 79.0,
+        "components": {
+            "player": {
+                "saved_pieces": 60,
+                "saved_bonus": 36,
+                "goal_pieces": 70,
+                "goal_bonus": 48,
+                "pieces_near_goal": 44,
+                "loose_pieces": -3,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -74,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 20,
+                "saved_bonus": 16,
+                "goal_pieces": 60,
+                "goal_bonus": 82,
+                "pieces_near_goal": 52,
+                "loose_pieces": -4,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -74,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    7
+                ],
+                [
+                    7,
+                    10
+                ],
+                4
+            ],
+            [
+                [
+                    "black",
+                    7
+                ],
+                "save",
+                6
+            ]
+        ],
+        "score": 34.0,
+        "components": {
+            "player": {
+                "saved_pieces": 80,
+                "saved_bonus": 36,
+                "goal_pieces": 70,
+                "goal_bonus": 48,
+                "pieces_near_goal": 40,
+                "loose_pieces": -3,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -54,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 40,
+                "saved_bonus": 30,
+                "goal_pieces": 70,
+                "goal_bonus": 102,
+                "pieces_near_goal": 48,
+                "loose_pieces": -3,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -54,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    9
+                ],
+                [
+                    1,
+                    10
+                ],
+                2
+            ],
+            [
+                [
+                    "black",
+                    1
+                ],
+                "save",
+                1
+            ]
+        ],
+        "score": 13.0,
+        "components": {
+            "player": {
+                "saved_pieces": 100,
+                "saved_bonus": 48,
+                "goal_pieces": 70,
+                "goal_bonus": 48,
+                "pieces_near_goal": 36,
+                "loose_pieces": -3,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -54,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 60,
+                "saved_bonus": 52,
+                "goal_pieces": 80,
+                "goal_bonus": 102,
+                "pieces_near_goal": 44,
+                "loose_pieces": -2,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -54,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    4
+                ],
+                [
+                    2,
+                    2
+                ],
+                2
+            ],
+            [
+                [
+                    "black",
+                    6
+                ],
+                [
+                    4,
+                    8
+                ],
+                1
+            ]
+        ],
+        "score": -18.0,
+        "components": {
+            "player": {
+                "saved_pieces": 100,
+                "saved_bonus": 48,
+                "goal_pieces": 70,
+                "goal_bonus": 48,
+                "pieces_near_goal": 36,
+                "loose_pieces": -3,
+                "total_distance": -3.5,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -54,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 80,
+                "saved_bonus": 70,
+                "goal_pieces": 80,
+                "goal_bonus": 102,
+                "pieces_near_goal": 36,
+                "loose_pieces": -1,
+                "total_distance": -3.5,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -54,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    4
+                ],
+                [
+                    3,
+                    3
+                ],
+                4
+            ],
+            [
+                [
+                    "black",
+                    8
+                ],
+                "save",
+                5
+            ]
+        ],
+        "score": -21.0,
+        "components": {
+            "player": {
+                "saved_pieces": 120,
+                "saved_bonus": 48,
+                "goal_pieces": 70,
+                "goal_bonus": 48,
+                "pieces_near_goal": 32,
+                "loose_pieces": -3,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -54,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 100,
+                "saved_bonus": 70,
+                "goal_pieces": 80,
+                "goal_bonus": 102,
+                "pieces_near_goal": 36,
+                "loose_pieces": -2,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -54,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    6
+                ],
+                [
+                    7,
+                    10
+                ],
+                6
+            ],
+            [
+                [
+                    "black",
+                    4
+                ],
+                [
+                    7,
+                    2
+                ],
+                5
+            ]
+        ],
+        "score": 5.0,
+        "components": {
+            "player": {
+                "saved_pieces": 120,
+                "saved_bonus": 48,
+                "goal_pieces": 90,
+                "goal_bonus": 88,
+                "pieces_near_goal": 32,
+                "loose_pieces": -1,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -14,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 120,
+                "saved_bonus": 90,
+                "goal_pieces": 80,
+                "goal_bonus": 102,
+                "pieces_near_goal": 32,
+                "loose_pieces": -2,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -14,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    12
+                ],
+                [
+                    3,
+                    4
+                ],
+                1
+            ],
+            [
+                [
+                    "black",
+                    13
+                ],
+                [
+                    7,
+                    6
+                ],
+                5
+            ]
+        ],
+        "score": -25.0,
+        "components": {
+            "player": {
+                "saved_pieces": 120,
+                "saved_bonus": 48,
+                "goal_pieces": 100,
+                "goal_bonus": 88,
+                "pieces_near_goal": 32,
+                "loose_pieces": -2,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -14,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 140,
+                "saved_bonus": 102,
+                "goal_pieces": 90,
+                "goal_bonus": 102,
+                "pieces_near_goal": 28,
+                "loose_pieces": -1,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -14,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    13
+                ],
+                "save",
+                5
+            ],
+            [
+                [
+                    "black",
+                    11
+                ],
+                "save",
+                3
+            ]
+        ],
+        "score": -7.0,
+        "components": {
+            "player": {
+                "saved_pieces": 160,
+                "saved_bonus": 48,
+                "goal_pieces": 100,
+                "goal_bonus": 88,
+                "pieces_near_goal": 24,
+                "loose_pieces": -2,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -14,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 160,
+                "saved_bonus": 102,
+                "goal_pieces": 90,
+                "goal_bonus": 102,
+                "pieces_near_goal": 24,
+                "loose_pieces": -3,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -14,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    14
+                ],
+                [
+                    6,
+                    6
+                ],
+                2
+            ],
+            [
+                [
+                    "black",
+                    14
+                ],
+                [
+                    7,
+                    6
+                ],
+                1
+            ]
+        ],
+        "score": -9.0,
+        "components": {
+            "player": {
+                "saved_pieces": 160,
+                "saved_bonus": 48,
+                "goal_pieces": 110,
+                "goal_bonus": 88,
+                "pieces_near_goal": 24,
+                "loose_pieces": -3,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -14,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 160,
+                "saved_bonus": 102,
+                "goal_pieces": 100,
+                "goal_bonus": 102,
+                "pieces_near_goal": 24,
+                "loose_pieces": -2,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -14,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    2
+                ],
+                [
+                    5,
+                    4
+                ],
+                2
+            ],
+            [
+                [
+                    "black",
+                    6
+                ],
+                "save",
+                6
+            ]
+        ],
+        "score": 18.0,
+        "components": {
+            "player": {
+                "saved_pieces": 180,
+                "saved_bonus": 70,
+                "goal_pieces": 110,
+                "goal_bonus": 88,
+                "pieces_near_goal": 20,
+                "loose_pieces": -3,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -14,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 160,
+                "saved_bonus": 102,
+                "goal_pieces": 110,
+                "goal_bonus": 102,
+                "pieces_near_goal": 24,
+                "loose_pieces": -1,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -14,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    12
+                ],
+                [
+                    3,
+                    5
+                ],
+                1
+            ],
+            [
+                [
+                    "black",
+                    9
+                ],
+                [
+                    7,
+                    10
+                ],
+                6
+            ]
+        ],
+        "score": 18.0,
+        "components": {
+            "player": {
+                "saved_pieces": 180,
+                "saved_bonus": 70,
+                "goal_pieces": 120,
+                "goal_bonus": 88,
+                "pieces_near_goal": 20,
+                "loose_pieces": -2,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -14,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 160,
+                "saved_bonus": 102,
+                "goal_pieces": 120,
+                "goal_bonus": 102,
+                "pieces_near_goal": 24,
+                "loose_pieces": 0,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -14,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    2
+                ],
+                [
+                    5,
+                    2
+                ],
+                6
+            ],
+            [
+                [
+                    "black",
+                    2
+                ],
+                [
+                    7,
+                    4
+                ],
+                6
+            ]
+        ],
+        "score": 27.0,
+        "components": {
+            "player": {
+                "saved_pieces": 180,
+                "saved_bonus": 70,
+                "goal_pieces": 130,
+                "goal_bonus": 102,
+                "pieces_near_goal": 20,
+                "loose_pieces": -1,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": 0,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 180,
+                "saved_bonus": 102,
+                "goal_pieces": 120,
+                "goal_bonus": 102,
+                "pieces_near_goal": 20,
+                "loose_pieces": 0,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": 0,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    2
+                ],
+                "save",
+                2
+            ],
+            [
+                0,
+                0,
+                0
+            ]
+        ],
+        "score": 48.0,
+        "components": {
+            "player": {
+                "saved_pieces": 200,
+                "saved_bonus": 84,
+                "goal_pieces": 130,
+                "goal_bonus": 102,
+                "pieces_near_goal": 16,
+                "loose_pieces": -1,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": 0,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 180,
+                "saved_bonus": 102,
+                "goal_pieces": 130,
+                "goal_bonus": 102,
+                "pieces_near_goal": 20,
+                "loose_pieces": -1,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": 0,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    9
+                ],
+                "save",
+                6
+            ],
+            [
+                [
+                    "black",
+                    4
+                ],
+                "save",
+                4
+            ]
+        ],
+        "score": 71.0,
+        "components": {
+            "player": {
+                "saved_pieces": 240,
+                "saved_bonus": 102,
+                "goal_pieces": 130,
+                "goal_bonus": 102,
+                "pieces_near_goal": 8,
+                "loose_pieces": -1,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": 0,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 200,
+                "saved_bonus": 102,
+                "goal_pieces": 140,
+                "goal_bonus": 102,
+                "pieces_near_goal": 16,
+                "loose_pieces": 0,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": 0,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    12
+                ],
+                [
+                    6,
+                    8
+                ],
+                6
+            ],
+            [
+                [
+                    "black",
+                    12
+                ],
+                [
+                    7,
+                    8
+                ],
+                1
+            ]
+        ],
+        "score": 100.0,
+        "components": {
+            "player": {
+                "saved_pieces": 240,
+                "saved_bonus": 102,
+                "goal_pieces": 140,
+                "goal_bonus": 102,
+                "pieces_near_goal": 8,
+                "loose_pieces": 0,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": 0,
+                "game_stage_bonus": 100
+            },
+            "opponent": {
+                "saved_pieces": 240,
+                "saved_bonus": 102,
+                "goal_pieces": 140,
+                "goal_bonus": 102,
+                "pieces_near_goal": 8,
+                "loose_pieces": 0,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": 0,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    7
+                ],
+                [
+                    1,
+                    12
+                ],
+                1
+            ],
+            [
+                [
+                    "black",
+                    5
+                ],
+                [
+                    2,
+                    6
+                ],
+                2
+            ]
+        ],
+        "score": -2.0,
+        "components": {
+            "player": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 0,
+                "goal_bonus": 0,
+                "pieces_near_goal": 8,
+                "loose_pieces": -2,
+                "total_distance": -92.3,
+                "unentered_pieces": -12,
+                "off_goal_penalty": -204,
+                "game_stage_bonus": 0
+            },
+            "opponent": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 0,
+                "goal_bonus": 0,
+                "pieces_near_goal": 8,
+                "loose_pieces": 0,
+                "total_distance": -92.3,
+                "unentered_pieces": -12,
+                "off_goal_penalty": -204,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    13
+                ],
+                [
+                    4,
+                    2
+                ],
+                6
+            ],
+            [
+                [
+                    "black",
+                    1
+                ],
+                [
+                    4,
+                    2
+                ],
+                6
+            ]
+        ],
+        "score": 6.0,
+        "components": {
+            "player": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 0,
+                "goal_bonus": 0,
+                "pieces_near_goal": 16,
+                "loose_pieces": -2,
+                "total_distance": -89.6,
+                "unentered_pieces": -10,
+                "off_goal_penalty": -204,
+                "game_stage_bonus": 0
+            },
+            "opponent": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 0,
+                "goal_bonus": 0,
+                "pieces_near_goal": 8,
+                "loose_pieces": 0,
+                "total_distance": -89.6,
+                "unentered_pieces": -10,
+                "off_goal_penalty": -204,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    9
+                ],
+                [
+                    4,
+                    4
+                ],
+                4
+            ],
+            [
+                [
+                    "black",
+                    14
+                ],
+                [
+                    4,
+                    4
+                ],
+                4
+            ]
+        ],
+        "score": 11.0,
+        "components": {
+            "player": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 0,
+                "goal_bonus": 0,
+                "pieces_near_goal": 24,
+                "loose_pieces": -2,
+                "total_distance": -82.1,
+                "unentered_pieces": -8,
+                "off_goal_penalty": -204,
+                "game_stage_bonus": 0
+            },
+            "opponent": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 0,
+                "goal_bonus": 0,
+                "pieces_near_goal": 12,
+                "loose_pieces": -1,
+                "total_distance": -82.1,
+                "unentered_pieces": -8,
+                "off_goal_penalty": -204,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    12
+                ],
+                [
+                    4,
+                    8
+                ],
+                4
+            ],
+            [
+                [
+                    "black",
+                    12
+                ],
+                [
+                    7,
+                    8
+                ],
+                3
+            ]
+        ],
+        "score": -2.0,
+        "components": {
+            "player": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 10,
+                "goal_bonus": 0,
+                "pieces_near_goal": 28,
+                "loose_pieces": -2,
+                "total_distance": -72.9,
+                "unentered_pieces": -7,
+                "off_goal_penalty": -190,
+                "game_stage_bonus": 0
+            },
+            "opponent": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 10,
+                "goal_bonus": 14,
+                "pieces_near_goal": 16,
+                "loose_pieces": -1,
+                "total_distance": -72.9,
+                "unentered_pieces": -8,
+                "off_goal_penalty": -190,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    11
+                ],
+                [
+                    4,
+                    4
+                ],
+                4
+            ],
+            [
+                [
+                    "black",
+                    8
+                ],
+                [
+                    2,
+                    6
+                ],
+                2
+            ]
+        ],
+        "score": 1.0,
+        "components": {
+            "player": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 10,
+                "goal_bonus": 0,
+                "pieces_near_goal": 36,
+                "loose_pieces": -1,
+                "total_distance": -58.1,
+                "unentered_pieces": -5,
+                "off_goal_penalty": -190,
+                "game_stage_bonus": 0
+            },
+            "opponent": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 10,
+                "goal_bonus": 14,
+                "pieces_near_goal": 24,
+                "loose_pieces": -3,
+                "total_distance": -58.1,
+                "unentered_pieces": -6,
+                "off_goal_penalty": -190,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    2
+                ],
+                [
+                    5,
+                    4
+                ],
+                5
+            ],
+            [
+                [
+                    "black",
+                    1
+                ],
+                [
+                    7,
+                    12
+                ],
+                6
+            ]
+        ],
+        "score": 12.0,
+        "components": {
+            "player": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 20,
+                "goal_bonus": 12,
+                "pieces_near_goal": 40,
+                "loose_pieces": -3,
+                "total_distance": -36.0,
+                "unentered_pieces": -4,
+                "off_goal_penalty": -178,
+                "game_stage_bonus": 0
+            },
+            "opponent": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 10,
+                "goal_bonus": 14,
+                "pieces_near_goal": 36,
+                "loose_pieces": -2,
+                "total_distance": -36.0,
+                "unentered_pieces": -5,
+                "off_goal_penalty": -178,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    3
+                ],
+                [
+                    5,
+                    30
+                ],
+                6
+            ],
+            [
+                [
+                    "black",
+                    7
+                ],
+                [
+                    4,
+                    2
+                ],
+                5
+            ]
+        ],
+        "score": 16.0,
+        "components": {
+            "player": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 20,
+                "goal_bonus": 12,
+                "pieces_near_goal": 44,
+                "loose_pieces": -2,
+                "total_distance": -36.6,
+                "unentered_pieces": -3,
+                "off_goal_penalty": -178,
+                "game_stage_bonus": 0
+            },
+            "opponent": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 10,
+                "goal_bonus": 14,
+                "pieces_near_goal": 36,
+                "loose_pieces": -2,
+                "total_distance": -36.6,
+                "unentered_pieces": -3,
+                "off_goal_penalty": -178,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    6
+                ],
+                [
+                    5,
+                    10
+                ],
+                5
+            ],
+            [
+                [
+                    "black",
+                    14
+                ],
+                [
+                    7,
+                    4
+                ],
+                3
+            ]
+        ],
+        "score": -5.0,
+        "components": {
+            "player": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 30,
+                "goal_bonus": 12,
+                "pieces_near_goal": 48,
+                "loose_pieces": -3,
+                "total_distance": -28.5,
+                "unentered_pieces": -2,
+                "off_goal_penalty": -158,
+                "game_stage_bonus": 0
+            },
+            "opponent": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 20,
+                "goal_bonus": 34,
+                "pieces_near_goal": 40,
+                "loose_pieces": -2,
+                "total_distance": -28.5,
+                "unentered_pieces": -2,
+                "off_goal_penalty": -158,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    6
+                ],
+                [
+                    5,
+                    30
+                ],
+                6
+            ],
+            [
+                [
+                    "black",
+                    2
+                ],
+                [
+                    7,
+                    4
+                ],
+                2
+            ]
+        ],
+        "score": 18.0,
+        "components": {
+            "player": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 40,
+                "goal_bonus": 26,
+                "pieces_near_goal": 48,
+                "loose_pieces": 0,
+                "total_distance": -23.9,
+                "unentered_pieces": -2,
+                "off_goal_penalty": -144,
+                "game_stage_bonus": 0
+            },
+            "opponent": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 20,
+                "goal_bonus": 34,
+                "pieces_near_goal": 44,
+                "loose_pieces": -3,
+                "total_distance": -23.9,
+                "unentered_pieces": -1,
+                "off_goal_penalty": -144,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    10
+                ],
+                [
+                    3,
+                    8
+                ],
+                3
+            ],
+            [
+                [
+                    "black",
+                    4
+                ],
+                [
+                    1,
+                    12
+                ],
+                1
+            ]
+        ],
+        "score": 38.0,
+        "components": {
+            "player": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 40,
+                "goal_bonus": 26,
+                "pieces_near_goal": 52,
+                "loose_pieces": -2,
+                "total_distance": -19.9,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -122,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 30,
+                "goal_bonus": 56,
+                "pieces_near_goal": 44,
+                "loose_pieces": -2,
+                "total_distance": -19.9,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -122,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    4
+                ],
+                [
+                    1,
+                    6
+                ],
+                1
+            ],
+            [
+                [
+                    "black",
+                    6
+                ],
+                [
+                    7,
+                    10
+                ],
+                3
+            ]
+        ],
+        "score": 43.0,
+        "components": {
+            "player": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 50,
+                "goal_bonus": 48,
+                "pieces_near_goal": 52,
+                "loose_pieces": -3,
+                "total_distance": -18.8,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -88,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 40,
+                "goal_bonus": 68,
+                "pieces_near_goal": 48,
+                "loose_pieces": -2,
+                "total_distance": -18.8,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -88,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    14
+                ],
+                "save",
+                2
+            ],
+            [
+                [
+                    "black",
+                    2
+                ],
+                "save",
+                2
+            ]
+        ],
+        "score": 23.0,
+        "components": {
+            "player": {
+                "saved_pieces": 40,
+                "saved_bonus": 14,
+                "goal_pieces": 50,
+                "goal_bonus": 48,
+                "pieces_near_goal": 44,
+                "loose_pieces": -3,
+                "total_distance": -18.8,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -88,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 40,
+                "saved_bonus": 34,
+                "goal_pieces": 40,
+                "goal_bonus": 68,
+                "pieces_near_goal": 40,
+                "loose_pieces": -2,
+                "total_distance": -18.8,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -88,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    12
+                ],
+                "save",
+                3
+            ],
+            [
+                [
+                    "black",
+                    6
+                ],
+                "save",
+                6
+            ]
+        ],
+        "score": 51.0,
+        "components": {
+            "player": {
+                "saved_pieces": 80,
+                "saved_bonus": 36,
+                "goal_pieces": 50,
+                "goal_bonus": 48,
+                "pieces_near_goal": 36,
+                "loose_pieces": -3,
+                "total_distance": -17.8,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -88,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 60,
+                "saved_bonus": 46,
+                "goal_pieces": 40,
+                "goal_bonus": 68,
+                "pieces_near_goal": 36,
+                "loose_pieces": -4,
+                "total_distance": -17.8,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -88,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    11
+                ],
+                [
+                    7,
+                    4
+                ],
+                3
+            ],
+            [
+                [
+                    "black",
+                    1
+                ],
+                "save",
+                1
+            ]
+        ],
+        "score": 25.0,
+        "components": {
+            "player": {
+                "saved_pieces": 100,
+                "saved_bonus": 48,
+                "goal_pieces": 60,
+                "goal_bonus": 48,
+                "pieces_near_goal": 32,
+                "loose_pieces": -4,
+                "total_distance": -17.8,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -72,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 80,
+                "saved_bonus": 68,
+                "goal_pieces": 50,
+                "goal_bonus": 84,
+                "pieces_near_goal": 32,
+                "loose_pieces": -5,
+                "total_distance": -17.8,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -72,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    9
+                ],
+                [
+                    7,
+                    6
+                ],
+                6
+            ],
+            [
+                [
+                    "black",
+                    9
+                ],
+                "save",
+                5
+            ]
+        ],
+        "score": 37.0,
+        "components": {
+            "player": {
+                "saved_pieces": 120,
+                "saved_bonus": 48,
+                "goal_pieces": 70,
+                "goal_bonus": 48,
+                "pieces_near_goal": 28,
+                "loose_pieces": -3,
+                "total_distance": -12.4,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -72,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 80,
+                "saved_bonus": 68,
+                "goal_pieces": 60,
+                "goal_bonus": 84,
+                "pieces_near_goal": 36,
+                "loose_pieces": -4,
+                "total_distance": -12.4,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -72,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    13
+                ],
+                [
+                    7,
+                    12
+                ],
+                6
+            ],
+            [
+                [
+                    "black",
+                    7
+                ],
+                [
+                    7,
+                    2
+                ],
+                3
+            ]
+        ],
+        "score": 26.0,
+        "components": {
+            "player": {
+                "saved_pieces": 120,
+                "saved_bonus": 48,
+                "goal_pieces": 90,
+                "goal_bonus": 48,
+                "pieces_near_goal": 28,
+                "loose_pieces": -3,
+                "total_distance": -7.9,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -54,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 80,
+                "saved_bonus": 68,
+                "goal_pieces": 70,
+                "goal_bonus": 102,
+                "pieces_near_goal": 40,
+                "loose_pieces": -5,
+                "total_distance": -7.9,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -54,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    3
+                ],
+                [
+                    7,
+                    8
+                ],
+                4
+            ],
+            [
+                [
+                    "black",
+                    4
+                ],
+                [
+                    3,
+                    3
+                ],
+                5
+            ]
+        ],
+        "score": 35.0,
+        "components": {
+            "player": {
+                "saved_pieces": 120,
+                "saved_bonus": 48,
+                "goal_pieces": 100,
+                "goal_bonus": 64,
+                "pieces_near_goal": 32,
+                "loose_pieces": -2,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -38,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 80,
+                "saved_bonus": 68,
+                "goal_pieces": 90,
+                "goal_bonus": 102,
+                "pieces_near_goal": 40,
+                "loose_pieces": -3,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -38,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    11
+                ],
+                "save",
+                2
+            ],
+            [
+                [
+                    "black",
+                    10
+                ],
+                [
+                    7,
+                    10
+                ],
+                6
+            ]
+        ],
+        "score": 30.0,
+        "components": {
+            "player": {
+                "saved_pieces": 140,
+                "saved_bonus": 48,
+                "goal_pieces": 110,
+                "goal_bonus": 64,
+                "pieces_near_goal": 28,
+                "loose_pieces": -1,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -38,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 100,
+                "saved_bonus": 84,
+                "goal_pieces": 90,
+                "goal_bonus": 102,
+                "pieces_near_goal": 36,
+                "loose_pieces": -3,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -38,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    4
+                ],
+                [
+                    4,
+                    2
+                ],
+                2
+            ],
+            [
+                [
+                    "black",
+                    10
+                ],
+                "save",
+                6
+            ]
+        ],
+        "score": 24.0,
+        "components": {
+            "player": {
+                "saved_pieces": 160,
+                "saved_bonus": 48,
+                "goal_pieces": 110,
+                "goal_bonus": 64,
+                "pieces_near_goal": 24,
+                "loose_pieces": -1,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -38,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 100,
+                "saved_bonus": 84,
+                "goal_pieces": 110,
+                "goal_bonus": 102,
+                "pieces_near_goal": 36,
+                "loose_pieces": -1,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -38,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    4
+                ],
+                [
+                    6,
+                    4
+                ],
+                6
+            ],
+            [
+                [
+                    "black",
+                    3
+                ],
+                "save",
+                3
+            ]
+        ],
+        "score": 40.0,
+        "components": {
+            "player": {
+                "saved_pieces": 180,
+                "saved_bonus": 64,
+                "goal_pieces": 110,
+                "goal_bonus": 64,
+                "pieces_near_goal": 20,
+                "loose_pieces": -1,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -38,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 120,
+                "saved_bonus": 84,
+                "goal_pieces": 110,
+                "goal_bonus": 102,
+                "pieces_near_goal": 32,
+                "loose_pieces": -1,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -38,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    5
+                ],
+                [
+                    7,
+                    6
+                ],
+                5
+            ],
+            [
+                [
+                    "black",
+                    8
+                ],
+                [
+                    6,
+                    4
+                ],
+                6
+            ]
+        ],
+        "score": 62.0,
+        "components": {
+            "player": {
+                "saved_pieces": 180,
+                "saved_bonus": 64,
+                "goal_pieces": 120,
+                "goal_bonus": 84,
+                "pieces_near_goal": 20,
+                "loose_pieces": 0,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -18,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 120,
+                "saved_bonus": 84,
+                "goal_pieces": 120,
+                "goal_bonus": 102,
+                "pieces_near_goal": 32,
+                "loose_pieces": -2,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -18,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    8
+                ],
+                [
+                    5,
+                    22
+                ],
+                3
+            ],
+            [
+                [
+                    "black",
+                    8
+                ],
+                [
+                    7,
+                    6
+                ],
+                3
+            ]
+        ],
+        "score": 26.0,
+        "components": {
+            "player": {
+                "saved_pieces": 180,
+                "saved_bonus": 64,
+                "goal_pieces": 130,
+                "goal_bonus": 84,
+                "pieces_near_goal": 20,
+                "loose_pieces": -1,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -18,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 140,
+                "saved_bonus": 102,
+                "goal_pieces": 130,
+                "goal_bonus": 102,
+                "pieces_near_goal": 28,
+                "loose_pieces": -1,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -18,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    4
+                ],
+                [
+                    4,
+                    4
+                ],
+                2
+            ],
+            [
+                [
+                    "black",
+                    4
+                ],
+                [
+                    5,
+                    14
+                ],
+                6
+            ]
+        ],
+        "score": 13.0,
+        "components": {
+            "player": {
+                "saved_pieces": 180,
+                "saved_bonus": 64,
+                "goal_pieces": 130,
+                "goal_bonus": 84,
+                "pieces_near_goal": 20,
+                "loose_pieces": -1,
+                "total_distance": -3.5,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -18,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 160,
+                "saved_bonus": 102,
+                "goal_pieces": 130,
+                "goal_bonus": 102,
+                "pieces_near_goal": 20,
+                "loose_pieces": 0,
+                "total_distance": -3.5,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -18,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    4
+                ],
+                [
+                    7,
+                    2
+                ],
+                3
+            ],
+            [
+                0,
+                0,
+                0
+            ]
+        ],
+        "score": 73.0,
+        "components": {
+            "player": {
+                "saved_pieces": 180,
+                "saved_bonus": 64,
+                "goal_pieces": 140,
+                "goal_bonus": 102,
+                "pieces_near_goal": 20,
+                "loose_pieces": 0,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": 0,
+                "game_stage_bonus": 100
+            },
+            "opponent": {
+                "saved_pieces": 180,
+                "saved_bonus": 102,
+                "goal_pieces": 130,
+                "goal_bonus": 102,
+                "pieces_near_goal": 20,
+                "loose_pieces": -1,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": 0,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    8
+                ],
+                "save",
+                5
+            ],
+            [
+                [
+                    "black",
+                    5
+                ],
+                "save",
+                5
+            ]
+        ],
+        "score": 98.0,
+        "components": {
+            "player": {
+                "saved_pieces": 220,
+                "saved_bonus": 84,
+                "goal_pieces": 140,
+                "goal_bonus": 102,
+                "pieces_near_goal": 12,
+                "loose_pieces": 0,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": 0,
+                "game_stage_bonus": 100
+            },
+            "opponent": {
+                "saved_pieces": 200,
+                "saved_bonus": 102,
+                "goal_pieces": 140,
+                "goal_bonus": 102,
+                "pieces_near_goal": 16,
+                "loose_pieces": 0,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": 0,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    13
+                ],
+                "save",
+                1
+            ],
+            [
+                [
+                    "black",
+                    7
+                ],
+                "save",
+                6
+            ]
+        ],
+        "score": 98.0,
+        "components": {
+            "player": {
+                "saved_pieces": 260,
+                "saved_bonus": 84,
+                "goal_pieces": 140,
+                "goal_bonus": 102,
+                "pieces_near_goal": 4,
+                "loose_pieces": 0,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": 0,
+                "game_stage_bonus": 100
+            },
+            "opponent": {
+                "saved_pieces": 240,
+                "saved_bonus": 102,
+                "goal_pieces": 140,
+                "goal_bonus": 102,
+                "pieces_near_goal": 8,
+                "loose_pieces": 0,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": 0,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    14
+                ],
+                [
+                    5,
+                    4
+                ],
+                5
+            ],
+            [
+                [
+                    "black",
+                    11
+                ],
+                [
+                    4,
+                    8
+                ],
+                4
+            ]
+        ],
+        "score": -7.0,
+        "components": {
+            "player": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 0,
+                "goal_bonus": 0,
+                "pieces_near_goal": 8,
+                "loose_pieces": -2,
+                "total_distance": -97.7,
+                "unentered_pieces": -12,
+                "off_goal_penalty": -204,
+                "game_stage_bonus": 0
+            },
+            "opponent": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 10,
+                "goal_bonus": 0,
+                "pieces_near_goal": 4,
+                "loose_pieces": 0,
+                "total_distance": -97.7,
+                "unentered_pieces": -13,
+                "off_goal_penalty": -204,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    10
+                ],
+                [
+                    2,
+                    4
+                ],
+                2
+            ],
+            [
+                [
+                    "black",
+                    14
+                ],
+                [
+                    7,
+                    6
+                ],
+                5
+            ]
+        ],
+        "score": -27.0,
+        "components": {
+            "player": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 10,
+                "goal_bonus": 0,
+                "pieces_near_goal": 12,
+                "loose_pieces": -2,
+                "total_distance": -89.7,
+                "unentered_pieces": -11,
+                "off_goal_penalty": -184,
+                "game_stage_bonus": 0
+            },
+            "opponent": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 20,
+                "goal_bonus": 20,
+                "pieces_near_goal": 8,
+                "loose_pieces": 0,
+                "total_distance": -89.7,
+                "unentered_pieces": -12,
+                "off_goal_penalty": -184,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    10
+                ],
+                [
+                    5,
+                    10
+                ],
+                5
+            ],
+            [
+                [
+                    "black",
+                    11
+                ],
+                [
+                    5,
+                    10
+                ],
+                4
+            ]
+        ],
+        "score": -29.0,
+        "components": {
+            "player": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 10,
+                "goal_bonus": 0,
+                "pieces_near_goal": 12,
+                "loose_pieces": 0,
+                "total_distance": -90.0,
+                "unentered_pieces": -11,
+                "off_goal_penalty": -184,
+                "game_stage_bonus": 0
+            },
+            "opponent": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 20,
+                "goal_bonus": 20,
+                "pieces_near_goal": 12,
+                "loose_pieces": -2,
+                "total_distance": -90.0,
+                "unentered_pieces": -10,
+                "off_goal_penalty": -184,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    4
+                ],
+                [
+                    2,
+                    1
+                ],
+                3
+            ],
+            [
+                [
+                    "black",
+                    11
+                ],
+                [
+                    7,
+                    10
+                ],
+                2
+            ]
+        ],
+        "score": -49.0,
+        "components": {
+            "player": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 20,
+                "goal_bonus": 0,
+                "pieces_near_goal": 16,
+                "loose_pieces": -2,
+                "total_distance": -73.0,
+                "unentered_pieces": -10,
+                "off_goal_penalty": -170,
+                "game_stage_bonus": 0
+            },
+            "opponent": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 30,
+                "goal_bonus": 34,
+                "pieces_near_goal": 20,
+                "loose_pieces": -2,
+                "total_distance": -73.0,
+                "unentered_pieces": -9,
+                "off_goal_penalty": -170,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    1
+                ],
+                [
+                    3,
+                    10
+                ],
+                3
+            ],
+            [
+                [
+                    "black",
+                    13
+                ],
+                [
+                    3,
+                    10
+                ],
+                3
+            ]
+        ],
+        "score": -45.0,
+        "components": {
+            "player": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 20,
+                "goal_bonus": 0,
+                "pieces_near_goal": 24,
+                "loose_pieces": -2,
+                "total_distance": -65.7,
+                "unentered_pieces": -8,
+                "off_goal_penalty": -170,
+                "game_stage_bonus": 0
+            },
+            "opponent": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 30,
+                "goal_bonus": 34,
+                "pieces_near_goal": 24,
+                "loose_pieces": -2,
+                "total_distance": -65.7,
+                "unentered_pieces": -7,
+                "off_goal_penalty": -170,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    5
+                ],
+                [
+                    1,
+                    6
+                ],
+                1
+            ],
+            [
+                [
+                    "black",
+                    10
+                ],
+                [
+                    7,
+                    8
+                ],
+                5
+            ]
+        ],
+        "score": -40.0,
+        "components": {
+            "player": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 30,
+                "goal_bonus": 0,
+                "pieces_near_goal": 28,
+                "loose_pieces": -2,
+                "total_distance": -53.3,
+                "unentered_pieces": -7,
+                "off_goal_penalty": -170,
+                "game_stage_bonus": 0
+            },
+            "opponent": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 30,
+                "goal_bonus": 34,
+                "pieces_near_goal": 32,
+                "loose_pieces": -2,
+                "total_distance": -53.3,
+                "unentered_pieces": -5,
+                "off_goal_penalty": -170,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    6
+                ],
+                [
+                    2,
+                    12
+                ],
+                2
+            ],
+            [
+                [
+                    "black",
+                    5
+                ],
+                [
+                    7,
+                    6
+                ],
+                6
+            ]
+        ],
+        "score": -19.0,
+        "components": {
+            "player": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 40,
+                "goal_bonus": 20,
+                "pieces_near_goal": 28,
+                "loose_pieces": -2,
+                "total_distance": -45.8,
+                "unentered_pieces": -6,
+                "off_goal_penalty": -150,
+                "game_stage_bonus": 0
+            },
+            "opponent": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 30,
+                "goal_bonus": 34,
+                "pieces_near_goal": 40,
+                "loose_pieces": -2,
+                "total_distance": -45.8,
+                "unentered_pieces": -3,
+                "off_goal_penalty": -150,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    9
+                ],
+                [
+                    4,
+                    6
+                ],
+                4
+            ],
+            [
+                [
+                    "black",
+                    9
+                ],
+                [
+                    7,
+                    6
+                ],
+                3
+            ]
+        ],
+        "score": -11.0,
+        "components": {
+            "player": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 50,
+                "goal_bonus": 20,
+                "pieces_near_goal": 32,
+                "loose_pieces": -2,
+                "total_distance": -38.2,
+                "unentered_pieces": -5,
+                "off_goal_penalty": -150,
+                "game_stage_bonus": 0
+            },
+            "opponent": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 30,
+                "goal_bonus": 34,
+                "pieces_near_goal": 44,
+                "loose_pieces": -1,
+                "total_distance": -38.2,
+                "unentered_pieces": -1,
+                "off_goal_penalty": -150,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    6
+                ],
+                [
+                    5,
+                    12
+                ],
+                5
+            ],
+            [
+                [
+                    "black",
+                    4
+                ],
+                [
+                    5,
+                    12
+                ],
+                4
+            ]
+        ],
+        "score": -8.0,
+        "components": {
+            "player": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 50,
+                "goal_bonus": 20,
+                "pieces_near_goal": 32,
+                "loose_pieces": 0,
+                "total_distance": -42.8,
+                "unentered_pieces": -5,
+                "off_goal_penalty": -150,
+                "game_stage_bonus": 0
+            },
+            "opponent": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 30,
+                "goal_bonus": 34,
+                "pieces_near_goal": 44,
+                "loose_pieces": -3,
+                "total_distance": -42.8,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -150,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    8
+                ],
+                [
+                    5,
+                    13
+                ],
+                6
+            ],
+            [
+                [
+                    "black",
+                    8
+                ],
+                [
+                    7,
+                    2
+                ],
+                4
+            ]
+        ],
+        "score": -54.0,
+        "components": {
+            "player": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 60,
+                "goal_bonus": 20,
+                "pieces_near_goal": 36,
+                "loose_pieces": 0,
+                "total_distance": -39.3,
+                "unentered_pieces": -4,
+                "off_goal_penalty": -132,
+                "game_stage_bonus": 0
+            },
+            "opponent": {
+                "saved_pieces": 20,
+                "saved_bonus": 18,
+                "goal_pieces": 40,
+                "goal_bonus": 52,
+                "pieces_near_goal": 40,
+                "loose_pieces": -4,
+                "total_distance": -39.3,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -132,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    7
+                ],
+                [
+                    3,
+                    9
+                ],
+                4
+            ],
+            [
+                [
+                    "black",
+                    13
+                ],
+                [
+                    7,
+                    8
+                ],
+                6
+            ]
+        ],
+        "score": -90.00000000000001,
+        "components": {
+            "player": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 70,
+                "goal_bonus": 20,
+                "pieces_near_goal": 40,
+                "loose_pieces": -2,
+                "total_distance": -26.7,
+                "unentered_pieces": -3,
+                "off_goal_penalty": -132,
+                "game_stage_bonus": 0
+            },
+            "opponent": {
+                "saved_pieces": 40,
+                "saved_bonus": 38,
+                "goal_pieces": 50,
+                "goal_bonus": 52,
+                "pieces_near_goal": 40,
+                "loose_pieces": -5,
+                "total_distance": -26.7,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -132,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    12
+                ],
+                [
+                    2,
+                    2
+                ],
+                2
+            ],
+            [
+                [
+                    "black",
+                    3
+                ],
+                [
+                    3,
+                    9
+                ],
+                4
+            ]
+        ],
+        "score": -110.0,
+        "components": {
+            "player": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 70,
+                "goal_bonus": 20,
+                "pieces_near_goal": 48,
+                "loose_pieces": -2,
+                "total_distance": -20.9,
+                "unentered_pieces": -1,
+                "off_goal_penalty": -110,
+                "game_stage_bonus": 0
+            },
+            "opponent": {
+                "saved_pieces": 40,
+                "saved_bonus": 38,
+                "goal_pieces": 60,
+                "goal_bonus": 74,
+                "pieces_near_goal": 36,
+                "loose_pieces": -3,
+                "total_distance": -20.9,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -110,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    2
+                ],
+                [
+                    3,
+                    3
+                ],
+                4
+            ],
+            [
+                [
+                    "black",
+                    5
+                ],
+                "save",
+                5
+            ]
+        ],
+        "score": -53.0,
+        "components": {
+            "player": {
+                "saved_pieces": 20,
+                "saved_bonus": 20,
+                "goal_pieces": 70,
+                "goal_bonus": 20,
+                "pieces_near_goal": 48,
+                "loose_pieces": -3,
+                "total_distance": -13.2,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -110,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 60,
+                "saved_bonus": 52,
+                "goal_pieces": 60,
+                "goal_bonus": 74,
+                "pieces_near_goal": 36,
+                "loose_pieces": -4,
+                "total_distance": -13.2,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -110,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    1
+                ],
+                [
+                    7,
+                    10
+                ],
+                4
+            ],
+            [
+                [
+                    "black",
+                    1
+                ],
+                [
+                    7,
+                    12
+                ],
+                4
+            ]
+        ],
+        "score": -88.99999999999997,
+        "components": {
+            "player": {
+                "saved_pieces": 20,
+                "saved_bonus": 20,
+                "goal_pieces": 80,
+                "goal_bonus": 32,
+                "pieces_near_goal": 52,
+                "loose_pieces": -2,
+                "total_distance": -8.6,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -82,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 80,
+                "saved_bonus": 74,
+                "goal_pieces": 70,
+                "goal_bonus": 90,
+                "pieces_near_goal": 32,
+                "loose_pieces": -5,
+                "total_distance": -8.6,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -82,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    8
+                ],
+                "save",
+                4
+            ],
+            [
+                [
+                    "black",
+                    11
+                ],
+                "save",
+                6
+            ]
+        ],
+        "score": -72.99999999999997,
+        "components": {
+            "player": {
+                "saved_pieces": 60,
+                "saved_bonus": 20,
+                "goal_pieces": 80,
+                "goal_bonus": 32,
+                "pieces_near_goal": 44,
+                "loose_pieces": -2,
+                "total_distance": -8.1,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -82,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 100,
+                "saved_bonus": 74,
+                "goal_pieces": 70,
+                "goal_bonus": 90,
+                "pieces_near_goal": 28,
+                "loose_pieces": -5,
+                "total_distance": -8.1,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -82,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    4
+                ],
+                [
+                    7,
+                    2
+                ],
+                5
+            ],
+            [
+                [
+                    "black",
+                    12
+                ],
+                [
+                    5,
+                    12
+                ],
+                6
+            ]
+        ],
+        "score": -54.0,
+        "components": {
+            "player": {
+                "saved_pieces": 60,
+                "saved_bonus": 20,
+                "goal_pieces": 90,
+                "goal_bonus": 50,
+                "pieces_near_goal": 44,
+                "loose_pieces": -1,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -64,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 100,
+                "saved_bonus": 74,
+                "goal_pieces": 70,
+                "goal_bonus": 90,
+                "pieces_near_goal": 36,
+                "loose_pieces": -3,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -64,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    13
+                ],
+                "save",
+                3
+            ],
+            [
+                [
+                    "black",
+                    1
+                ],
+                "save",
+                1
+            ]
+        ],
+        "score": -33.0,
+        "components": {
+            "player": {
+                "saved_pieces": 100,
+                "saved_bonus": 32,
+                "goal_pieces": 90,
+                "goal_bonus": 50,
+                "pieces_near_goal": 36,
+                "loose_pieces": -1,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -52,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 100,
+                "saved_bonus": 74,
+                "goal_pieces": 80,
+                "goal_bonus": 102,
+                "pieces_near_goal": 36,
+                "loose_pieces": -2,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -52,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    10
+                ],
+                "save",
+                3
+            ],
+            [
+                [
+                    "black",
+                    4
+                ],
+                "save",
+                4
+            ]
+        ],
+        "score": 8.0,
+        "components": {
+            "player": {
+                "saved_pieces": 140,
+                "saved_bonus": 50,
+                "goal_pieces": 90,
+                "goal_bonus": 50,
+                "pieces_near_goal": 28,
+                "loose_pieces": -1,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -52,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 100,
+                "saved_bonus": 74,
+                "goal_pieces": 90,
+                "goal_bonus": 102,
+                "pieces_near_goal": 36,
+                "loose_pieces": -3,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -52,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    7
+                ],
+                [
+                    3,
+                    8
+                ],
+                1
+            ],
+            [
+                [
+                    "black",
+                    7
+                ],
+                [
+                    7,
+                    6
+                ],
+                6
+            ]
+        ],
+        "score": -5.0,
+        "components": {
+            "player": {
+                "saved_pieces": 140,
+                "saved_bonus": 50,
+                "goal_pieces": 100,
+                "goal_bonus": 50,
+                "pieces_near_goal": 28,
+                "loose_pieces": -2,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -52,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 100,
+                "saved_bonus": 74,
+                "goal_pieces": 110,
+                "goal_bonus": 102,
+                "pieces_near_goal": 36,
+                "loose_pieces": -1,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -52,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    3
+                ],
+                [
+                    3,
+                    7
+                ],
+                2
+            ],
+            [
+                [
+                    "black",
+                    2
+                ],
+                [
+                    2,
+                    4
+                ],
+                2
+            ]
+        ],
+        "score": -18.0,
+        "components": {
+            "player": {
+                "saved_pieces": 140,
+                "saved_bonus": 50,
+                "goal_pieces": 100,
+                "goal_bonus": 50,
+                "pieces_near_goal": 28,
+                "loose_pieces": -2,
+                "total_distance": -3.5,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -52,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 120,
+                "saved_bonus": 74,
+                "goal_pieces": 110,
+                "goal_bonus": 102,
+                "pieces_near_goal": 28,
+                "loose_pieces": 0,
+                "total_distance": -3.5,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -52,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    14
+                ],
+                [
+                    7,
+                    8
+                ],
+                4
+            ],
+            [
+                [
+                    "black",
+                    14
+                ],
+                "save",
+                3
+            ]
+        ],
+        "score": -21.0,
+        "components": {
+            "player": {
+                "saved_pieces": 160,
+                "saved_bonus": 50,
+                "goal_pieces": 100,
+                "goal_bonus": 50,
+                "pieces_near_goal": 24,
+                "loose_pieces": -2,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -52,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 140,
+                "saved_bonus": 74,
+                "goal_pieces": 110,
+                "goal_bonus": 102,
+                "pieces_near_goal": 28,
+                "loose_pieces": -1,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -52,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    2
+                ],
+                [
+                    3,
+                    4
+                ],
+                3
+            ],
+            [
+                [
+                    "black",
+                    3
+                ],
+                [
+                    3,
+                    4
+                ],
+                3
+            ]
+        ],
+        "score": -47.0,
+        "components": {
+            "player": {
+                "saved_pieces": 160,
+                "saved_bonus": 50,
+                "goal_pieces": 100,
+                "goal_bonus": 50,
+                "pieces_near_goal": 20,
+                "loose_pieces": 0,
+                "total_distance": -8.3,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -52,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 160,
+                "saved_bonus": 86,
+                "goal_pieces": 110,
+                "goal_bonus": 102,
+                "pieces_near_goal": 20,
+                "loose_pieces": -1,
+                "total_distance": -8.3,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -52,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    2
+                ],
+                [
+                    7,
+                    4
+                ],
+                4
+            ],
+            [
+                [
+                    "black",
+                    3
+                ],
+                [
+                    2,
+                    4
+                ],
+                1
+            ]
+        ],
+        "score": -73.00000000000006,
+        "components": {
+            "player": {
+                "saved_pieces": 160,
+                "saved_bonus": 50,
+                "goal_pieces": 110,
+                "goal_bonus": 64,
+                "pieces_near_goal": 20,
+                "loose_pieces": -1,
+                "total_distance": -8.8,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -38,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 200,
+                "saved_bonus": 102,
+                "goal_pieces": 110,
+                "goal_bonus": 102,
+                "pieces_near_goal": 12,
+                "loose_pieces": 0,
+                "total_distance": -8.8,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -38,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    12
+                ],
+                [
+                    3,
+                    10
+                ],
+                4
+            ],
+            [
+                [
+                    "black",
+                    12
+                ],
+                [
+                    7,
+                    8
+                ],
+                6
+            ]
+        ],
+        "score": -67.00000000000006,
+        "components": {
+            "player": {
+                "saved_pieces": 160,
+                "saved_bonus": 50,
+                "goal_pieces": 120,
+                "goal_bonus": 64,
+                "pieces_near_goal": 20,
+                "loose_pieces": -2,
+                "total_distance": -5.3,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -38,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 200,
+                "saved_bonus": 102,
+                "goal_pieces": 110,
+                "goal_bonus": 102,
+                "pieces_near_goal": 16,
+                "loose_pieces": -1,
+                "total_distance": -5.3,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -38,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    3
+                ],
+                [
+                    4,
+                    8
+                ],
+                6
+            ],
+            [
+                [
+                    "black",
+                    7
+                ],
+                "save",
+                5
+            ]
+        ],
+        "score": -47.0,
+        "components": {
+            "player": {
+                "saved_pieces": 180,
+                "saved_bonus": 50,
+                "goal_pieces": 120,
+                "goal_bonus": 64,
+                "pieces_near_goal": 20,
+                "loose_pieces": -2,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -38,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 200,
+                "saved_bonus": 102,
+                "goal_pieces": 110,
+                "goal_bonus": 102,
+                "pieces_near_goal": 16,
+                "loose_pieces": -1,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -38,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    2
+                ],
+                "save",
+                2
+            ],
+            [
+                [
+                    "black",
+                    9
+                ],
+                "save",
+                5
+            ]
+        ],
+        "score": -12.0,
+        "components": {
+            "player": {
+                "saved_pieces": 220,
+                "saved_bonus": 64,
+                "goal_pieces": 120,
+                "goal_bonus": 64,
+                "pieces_near_goal": 12,
+                "loose_pieces": -2,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -38,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 200,
+                "saved_bonus": 102,
+                "goal_pieces": 120,
+                "goal_bonus": 102,
+                "pieces_near_goal": 16,
+                "loose_pieces": 0,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -38,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    6
+                ],
+                [
+                    7,
+                    44
+                ],
+                4
+            ],
+            [
+                [
+                    "black",
+                    6
+                ],
+                [
+                    7,
+                    10
+                ],
+                2
+            ]
+        ],
+        "score": 12.0,
+        "components": {
+            "player": {
+                "saved_pieces": 220,
+                "saved_bonus": 64,
+                "goal_pieces": 130,
+                "goal_bonus": 86,
+                "pieces_near_goal": 12,
+                "loose_pieces": -1,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -16,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 200,
+                "saved_bonus": 102,
+                "goal_pieces": 130,
+                "goal_bonus": 102,
+                "pieces_near_goal": 16,
+                "loose_pieces": -1,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -16,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    3
+                ],
+                [
+                    7,
+                    8
+                ],
+                3
+            ],
+            [
+                0,
+                0,
+                0
+            ]
+        ],
+        "score": 62.0,
+        "components": {
+            "player": {
+                "saved_pieces": 220,
+                "saved_bonus": 64,
+                "goal_pieces": 140,
+                "goal_bonus": 102,
+                "pieces_near_goal": 12,
+                "loose_pieces": 0,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": 0,
+                "game_stage_bonus": 100
+            },
+            "opponent": {
+                "saved_pieces": 220,
+                "saved_bonus": 102,
+                "goal_pieces": 140,
+                "goal_bonus": 102,
+                "pieces_near_goal": 12,
+                "loose_pieces": 0,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": 0,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                0,
+                0,
+                0
+            ],
+            [
+                0,
+                0,
+                0
+            ]
+        ],
+        "score": 30.0,
+        "components": {
+            "player": {
+                "saved_pieces": 220,
+                "saved_bonus": 64,
+                "goal_pieces": 140,
+                "goal_bonus": 102,
+                "pieces_near_goal": 12,
+                "loose_pieces": 0,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": 0,
+                "game_stage_bonus": 100
+            },
+            "opponent": {
+                "saved_pieces": 260,
+                "saved_bonus": 102,
+                "goal_pieces": 140,
+                "goal_bonus": 102,
+                "pieces_near_goal": 4,
+                "loose_pieces": 0,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": 0,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    1
+                ],
+                [
+                    5,
+                    13
+                ],
+                6
+            ],
+            [
+                [
+                    "black",
+                    8
+                ],
+                [
+                    2,
+                    10
+                ],
+                2
+            ]
+        ],
+        "score": 0.0,
+        "components": {
+            "player": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 0,
+                "goal_bonus": 0,
+                "pieces_near_goal": 8,
+                "loose_pieces": -2,
+                "total_distance": -93.6,
+                "unentered_pieces": -12,
+                "off_goal_penalty": -204,
+                "game_stage_bonus": 0
+            },
+            "opponent": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 0,
+                "goal_bonus": 0,
+                "pieces_near_goal": 8,
+                "loose_pieces": -2,
+                "total_distance": -93.6,
+                "unentered_pieces": -12,
+                "off_goal_penalty": -204,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    14
+                ],
+                [
+                    1,
+                    4
+                ],
+                1
+            ],
+            [
+                [
+                    "black",
+                    10
+                ],
+                [
+                    3,
+                    7
+                ],
+                4
+            ]
+        ],
+        "score": -7.0,
+        "components": {
+            "player": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 0,
+                "goal_bonus": 0,
+                "pieces_near_goal": 16,
+                "loose_pieces": -4,
+                "total_distance": -83.1,
+                "unentered_pieces": -10,
+                "off_goal_penalty": -204,
+                "game_stage_bonus": 0
+            },
+            "opponent": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 10,
+                "goal_bonus": 0,
+                "pieces_near_goal": 12,
+                "loose_pieces": -2,
+                "total_distance": -83.1,
+                "unentered_pieces": -11,
+                "off_goal_penalty": -204,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    9
+                ],
+                [
+                    3,
+                    7
+                ],
+                4
+            ],
+            [
+                [
+                    "black",
+                    14
+                ],
+                [
+                    7,
+                    4
+                ],
+                6
+            ]
+        ],
+        "score": 2.0,
+        "components": {
+            "player": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 10,
+                "goal_bonus": 0,
+                "pieces_near_goal": 20,
+                "loose_pieces": -2,
+                "total_distance": -71.0,
+                "unentered_pieces": -9,
+                "off_goal_penalty": -204,
+                "game_stage_bonus": 0
+            },
+            "opponent": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 10,
+                "goal_bonus": 0,
+                "pieces_near_goal": 20,
+                "loose_pieces": -4,
+                "total_distance": -71.0,
+                "unentered_pieces": -9,
+                "off_goal_penalty": -204,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    11
+                ],
+                [
+                    3,
+                    7
+                ],
+                4
+            ],
+            [
+                [
+                    "black",
+                    1
+                ],
+                [
+                    7,
+                    12
+                ],
+                3
+            ]
+        ],
+        "score": 20.0,
+        "components": {
+            "player": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 20,
+                "goal_bonus": 12,
+                "pieces_near_goal": 24,
+                "loose_pieces": -1,
+                "total_distance": -59.7,
+                "unentered_pieces": -8,
+                "off_goal_penalty": -192,
+                "game_stage_bonus": 0
+            },
+            "opponent": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 10,
+                "goal_bonus": 0,
+                "pieces_near_goal": 28,
+                "loose_pieces": -4,
+                "total_distance": -59.7,
+                "unentered_pieces": -7,
+                "off_goal_penalty": -192,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    12
+                ],
+                [
+                    3,
+                    4
+                ],
+                3
+            ],
+            [
+                [
+                    "black",
+                    8
+                ],
+                [
+                    7,
+                    10
+                ],
+                5
+            ]
+        ],
+        "score": 28.0,
+        "components": {
+            "player": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 30,
+                "goal_bonus": 12,
+                "pieces_near_goal": 28,
+                "loose_pieces": -1,
+                "total_distance": -52.0,
+                "unentered_pieces": -7,
+                "off_goal_penalty": -192,
+                "game_stage_bonus": 0
+            },
+            "opponent": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 10,
+                "goal_bonus": 0,
+                "pieces_near_goal": 32,
+                "loose_pieces": -3,
+                "total_distance": -52.0,
+                "unentered_pieces": -5,
+                "off_goal_penalty": -192,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    4
+                ],
+                [
+                    1,
+                    2
+                ],
+                1
+            ],
+            [
+                [
+                    "black",
+                    12
+                ],
+                [
+                    7,
+                    4
+                ],
+                4
+            ]
+        ],
+        "score": 32.0,
+        "components": {
+            "player": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 40,
+                "goal_bonus": 12,
+                "pieces_near_goal": 32,
+                "loose_pieces": -1,
+                "total_distance": -40.6,
+                "unentered_pieces": -6,
+                "off_goal_penalty": -192,
+                "game_stage_bonus": 0
+            },
+            "opponent": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 10,
+                "goal_bonus": 0,
+                "pieces_near_goal": 40,
+                "loose_pieces": -1,
+                "total_distance": -40.6,
+                "unentered_pieces": -4,
+                "off_goal_penalty": -192,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    13
+                ],
+                [
+                    4,
+                    6
+                ],
+                6
+            ],
+            [
+                [
+                    "black",
+                    11
+                ],
+                [
+                    4,
+                    6
+                ],
+                2
+            ]
+        ],
+        "score": 36.0,
+        "components": {
+            "player": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 40,
+                "goal_bonus": 12,
+                "pieces_near_goal": 36,
+                "loose_pieces": -1,
+                "total_distance": -41.2,
+                "unentered_pieces": -5,
+                "off_goal_penalty": -192,
+                "game_stage_bonus": 0
+            },
+            "opponent": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 10,
+                "goal_bonus": 0,
+                "pieces_near_goal": 40,
+                "loose_pieces": -2,
+                "total_distance": -41.2,
+                "unentered_pieces": -2,
+                "off_goal_penalty": -192,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    7
+                ],
+                [
+                    1,
+                    2
+                ],
+                1
+            ],
+            [
+                [
+                    "black",
+                    6
+                ],
+                [
+                    3,
+                    10
+                ],
+                3
+            ]
+        ],
+        "score": 11.0,
+        "components": {
+            "player": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 40,
+                "goal_bonus": 12,
+                "pieces_near_goal": 44,
+                "loose_pieces": -1,
+                "total_distance": -28.5,
+                "unentered_pieces": -3,
+                "off_goal_penalty": -174,
+                "game_stage_bonus": 0
+            },
+            "opponent": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 20,
+                "goal_bonus": 18,
+                "pieces_near_goal": 44,
+                "loose_pieces": 0,
+                "total_distance": -28.5,
+                "unentered_pieces": -1,
+                "off_goal_penalty": -174,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    6
+                ],
+                [
+                    1,
+                    10
+                ],
+                1
+            ],
+            [
+                [
+                    "black",
+                    5
+                ],
+                [
+                    4,
+                    4
+                ],
+                4
+            ]
+        ],
+        "score": 12.0,
+        "components": {
+            "player": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 40,
+                "goal_bonus": 12,
+                "pieces_near_goal": 48,
+                "loose_pieces": -2,
+                "total_distance": -19.0,
+                "unentered_pieces": -2,
+                "off_goal_penalty": -174,
+                "game_stage_bonus": 0
+            },
+            "opponent": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 20,
+                "goal_bonus": 18,
+                "pieces_near_goal": 48,
+                "loose_pieces": -2,
+                "total_distance": -19.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -174,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    2
+                ],
+                [
+                    5,
+                    21
+                ],
+                6
+            ],
+            [
+                [
+                    "black",
+                    3
+                ],
+                [
+                    5,
+                    10
+                ],
+                5
+            ]
+        ],
+        "score": 45.0,
+        "components": {
+            "player": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 40,
+                "goal_bonus": 12,
+                "pieces_near_goal": 56,
+                "loose_pieces": -4,
+                "total_distance": -10.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -158,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 30,
+                "goal_bonus": 34,
+                "pieces_near_goal": 48,
+                "loose_pieces": -3,
+                "total_distance": -10.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -158,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    3
+                ],
+                [
+                    1,
+                    8
+                ],
+                1
+            ],
+            [
+                [
+                    "black",
+                    6
+                ],
+                [
+                    7,
+                    10
+                ],
+                6
+            ]
+        ],
+        "score": 77.0,
+        "components": {
+            "player": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 50,
+                "goal_bonus": 34,
+                "pieces_near_goal": 56,
+                "loose_pieces": -3,
+                "total_distance": -10.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -136,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 30,
+                "goal_bonus": 34,
+                "pieces_near_goal": 48,
+                "loose_pieces": -2,
+                "total_distance": -10.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -136,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    9
+                ],
+                [
+                    4,
+                    4
+                ],
+                4
+            ],
+            [
+                [
+                    "black",
+                    10
+                ],
+                [
+                    7,
+                    6
+                ],
+                5
+            ]
+        ],
+        "score": 58.0,
+        "components": {
+            "player": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 60,
+                "goal_bonus": 34,
+                "pieces_near_goal": 56,
+                "loose_pieces": -2,
+                "total_distance": -9.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -114,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 0,
+                "saved_bonus": 0,
+                "goal_pieces": 40,
+                "goal_bonus": 56,
+                "pieces_near_goal": 48,
+                "loose_pieces": -4,
+                "total_distance": -9.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -114,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    10
+                ],
+                "save",
+                5
+            ],
+            [
+                [
+                    "black",
+                    7
+                ],
+                [
+                    1,
+                    12
+                ],
+                4
+            ]
+        ],
+        "score": 26.0,
+        "components": {
+            "player": {
+                "saved_pieces": 20,
+                "saved_bonus": 0,
+                "goal_pieces": 60,
+                "goal_bonus": 34,
+                "pieces_near_goal": 52,
+                "loose_pieces": -4,
+                "total_distance": -12.5,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -102,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 20,
+                "saved_bonus": 12,
+                "goal_pieces": 50,
+                "goal_bonus": 68,
+                "pieces_near_goal": 40,
+                "loose_pieces": -4,
+                "total_distance": -12.5,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -102,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    4
+                ],
+                [
+                    7,
+                    2
+                ],
+                6
+            ],
+            [
+                [
+                    "black",
+                    4
+                ],
+                "save",
+                4
+            ]
+        ],
+        "score": 61.0,
+        "components": {
+            "player": {
+                "saved_pieces": 40,
+                "saved_bonus": 18,
+                "goal_pieces": 70,
+                "goal_bonus": 52,
+                "pieces_near_goal": 48,
+                "loose_pieces": -3,
+                "total_distance": -9.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -70,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 20,
+                "saved_bonus": 12,
+                "goal_pieces": 60,
+                "goal_bonus": 82,
+                "pieces_near_goal": 44,
+                "loose_pieces": -4,
+                "total_distance": -9.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -70,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    2
+                ],
+                [
+                    7,
+                    4
+                ],
+                3
+            ],
+            [
+                [
+                    "black",
+                    9
+                ],
+                [
+                    7,
+                    4
+                ],
+                3
+            ]
+        ],
+        "score": 53.0,
+        "components": {
+            "player": {
+                "saved_pieces": 40,
+                "saved_bonus": 18,
+                "goal_pieces": 90,
+                "goal_bonus": 66,
+                "pieces_near_goal": 48,
+                "loose_pieces": -3,
+                "total_distance": -4.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -56,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 40,
+                "saved_bonus": 34,
+                "goal_pieces": 60,
+                "goal_bonus": 82,
+                "pieces_near_goal": 44,
+                "loose_pieces": -4,
+                "total_distance": -4.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -56,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    5
+                ],
+                [
+                    6,
+                    6
+                ],
+                5
+            ],
+            [
+                [
+                    "black",
+                    5
+                ],
+                [
+                    7,
+                    6
+                ],
+                1
+            ]
+        ],
+        "score": 41.0,
+        "components": {
+            "player": {
+                "saved_pieces": 40,
+                "saved_bonus": 18,
+                "goal_pieces": 100,
+                "goal_bonus": 86,
+                "pieces_near_goal": 48,
+                "loose_pieces": -2,
+                "total_distance": -4.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -36,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 60,
+                "saved_bonus": 50,
+                "goal_pieces": 70,
+                "goal_bonus": 82,
+                "pieces_near_goal": 40,
+                "loose_pieces": -3,
+                "total_distance": -4.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -36,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    7
+                ],
+                [
+                    3,
+                    10
+                ],
+                4
+            ],
+            [
+                [
+                    "black",
+                    1
+                ],
+                "save",
+                1
+            ]
+        ],
+        "score": 19.0,
+        "components": {
+            "player": {
+                "saved_pieces": 60,
+                "saved_bonus": 30,
+                "goal_pieces": 100,
+                "goal_bonus": 86,
+                "pieces_near_goal": 44,
+                "loose_pieces": -2,
+                "total_distance": -4.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -36,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 100,
+                "saved_bonus": 68,
+                "goal_pieces": 70,
+                "goal_bonus": 82,
+                "pieces_near_goal": 32,
+                "loose_pieces": -3,
+                "total_distance": -4.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -36,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    7
+                ],
+                [
+                    3,
+                    11
+                ],
+                4
+            ],
+            [
+                [
+                    "black",
+                    3
+                ],
+                [
+                    2,
+                    8
+                ],
+                1
+            ]
+        ],
+        "score": 18.0,
+        "components": {
+            "player": {
+                "saved_pieces": 60,
+                "saved_bonus": 30,
+                "goal_pieces": 100,
+                "goal_bonus": 86,
+                "pieces_near_goal": 44,
+                "loose_pieces": -2,
+                "total_distance": -3.5,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -36,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 100,
+                "saved_bonus": 68,
+                "goal_pieces": 70,
+                "goal_bonus": 82,
+                "pieces_near_goal": 32,
+                "loose_pieces": -2,
+                "total_distance": -3.5,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -36,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    2
+                ],
+                "save",
+                2
+            ],
+            [
+                [
+                    "black",
+                    5
+                ],
+                "save",
+                5
+            ]
+        ],
+        "score": 81.0,
+        "components": {
+            "player": {
+                "saved_pieces": 100,
+                "saved_bonus": 64,
+                "goal_pieces": 100,
+                "goal_bonus": 86,
+                "pieces_near_goal": 36,
+                "loose_pieces": -2,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -36,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 100,
+                "saved_bonus": 68,
+                "goal_pieces": 70,
+                "goal_bonus": 82,
+                "pieces_near_goal": 36,
+                "loose_pieces": -3,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -36,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    7
+                ],
+                [
+                    2,
+                    8
+                ],
+                4
+            ],
+            [
+                [
+                    "black",
+                    6
+                ],
+                "save",
+                6
+            ]
+        ],
+        "score": 94.0,
+        "components": {
+            "player": {
+                "saved_pieces": 120,
+                "saved_bonus": 86,
+                "goal_pieces": 100,
+                "goal_bonus": 86,
+                "pieces_near_goal": 32,
+                "loose_pieces": 0,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -36,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 120,
+                "saved_bonus": 68,
+                "goal_pieces": 80,
+                "goal_bonus": 82,
+                "pieces_near_goal": 32,
+                "loose_pieces": -2,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -36,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    11
+                ],
+                [
+                    3,
+                    6
+                ],
+                1
+            ],
+            [
+                [
+                    "black",
+                    12
+                ],
+                "save",
+                2
+            ]
+        ],
+        "score": 88.0,
+        "components": {
+            "player": {
+                "saved_pieces": 140,
+                "saved_bonus": 86,
+                "goal_pieces": 100,
+                "goal_bonus": 86,
+                "pieces_near_goal": 28,
+                "loose_pieces": -2,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -36,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 120,
+                "saved_bonus": 68,
+                "goal_pieces": 100,
+                "goal_bonus": 82,
+                "pieces_near_goal": 32,
+                "loose_pieces": -2,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -36,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    14
+                ],
+                [
+                    7,
+                    2
+                ],
+                4
+            ],
+            [
+                [
+                    "black",
+                    14
+                ],
+                "save",
+                4
+            ]
+        ],
+        "score": 73.0,
+        "components": {
+            "player": {
+                "saved_pieces": 160,
+                "saved_bonus": 86,
+                "goal_pieces": 100,
+                "goal_bonus": 86,
+                "pieces_near_goal": 24,
+                "loose_pieces": -2,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -16,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 120,
+                "saved_bonus": 68,
+                "goal_pieces": 110,
+                "goal_bonus": 102,
+                "pieces_near_goal": 32,
+                "loose_pieces": -1,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -16,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    11
+                ],
+                [
+                    2,
+                    6
+                ],
+                1
+            ],
+            [
+                [
+                    "black",
+                    13
+                ],
+                [
+                    7,
+                    6
+                ],
+                3
+            ]
+        ],
+        "score": 57.0,
+        "components": {
+            "player": {
+                "saved_pieces": 160,
+                "saved_bonus": 86,
+                "goal_pieces": 110,
+                "goal_bonus": 86,
+                "pieces_near_goal": 24,
+                "loose_pieces": -1,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -16,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 140,
+                "saved_bonus": 68,
+                "goal_pieces": 120,
+                "goal_bonus": 102,
+                "pieces_near_goal": 28,
+                "loose_pieces": 0,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -16,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    11
+                ],
+                [
+                    3,
+                    4
+                ],
+                3
+            ],
+            [
+                [
+                    "black",
+                    9
+                ],
+                "save",
+                2
+            ]
+        ],
+        "score": 57.0,
+        "components": {
+            "player": {
+                "saved_pieces": 180,
+                "saved_bonus": 86,
+                "goal_pieces": 110,
+                "goal_bonus": 86,
+                "pieces_near_goal": 20,
+                "loose_pieces": -1,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -16,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 160,
+                "saved_bonus": 68,
+                "goal_pieces": 120,
+                "goal_bonus": 102,
+                "pieces_near_goal": 24,
+                "loose_pieces": 0,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -16,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    11
+                ],
+                [
+                    2,
+                    8
+                ],
+                5
+            ],
+            [
+                [
+                    "black",
+                    13
+                ],
+                "save",
+                5
+            ]
+        ],
+        "score": 74.0,
+        "components": {
+            "player": {
+                "saved_pieces": 200,
+                "saved_bonus": 86,
+                "goal_pieces": 110,
+                "goal_bonus": 86,
+                "pieces_near_goal": 16,
+                "loose_pieces": 0,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -16,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 160,
+                "saved_bonus": 68,
+                "goal_pieces": 120,
+                "goal_bonus": 102,
+                "pieces_near_goal": 24,
+                "loose_pieces": 0,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -16,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    11
+                ],
+                [
+                    2,
+                    6
+                ],
+                4
+            ],
+            [
+                [
+                    "black",
+                    8
+                ],
+                "save",
+                6
+            ]
+        ],
+        "score": 59.0,
+        "components": {
+            "player": {
+                "saved_pieces": 220,
+                "saved_bonus": 86,
+                "goal_pieces": 110,
+                "goal_bonus": 86,
+                "pieces_near_goal": 12,
+                "loose_pieces": -1,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -16,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 180,
+                "saved_bonus": 82,
+                "goal_pieces": 120,
+                "goal_bonus": 102,
+                "pieces_near_goal": 20,
+                "loose_pieces": 0,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": -16,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    3
+                ],
+                [
+                    7,
+                    8
+                ],
+                5
+            ],
+            [
+                [
+                    "black",
+                    7
+                ],
+                [
+                    7,
+                    8
+                ],
+                5
+            ]
+        ],
+        "score": 50.0,
+        "components": {
+            "player": {
+                "saved_pieces": 220,
+                "saved_bonus": 86,
+                "goal_pieces": 130,
+                "goal_bonus": 102,
+                "pieces_near_goal": 12,
+                "loose_pieces": -1,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": 0,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 200,
+                "saved_bonus": 102,
+                "goal_pieces": 130,
+                "goal_bonus": 102,
+                "pieces_near_goal": 16,
+                "loose_pieces": -1,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": 0,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    3
+                ],
+                "save",
+                3
+            ],
+            [
+                [
+                    "black",
+                    7
+                ],
+                "save",
+                3
+            ]
+        ],
+        "score": 71.0,
+        "components": {
+            "player": {
+                "saved_pieces": 260,
+                "saved_bonus": 102,
+                "goal_pieces": 130,
+                "goal_bonus": 102,
+                "pieces_near_goal": 4,
+                "loose_pieces": -1,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": 0,
+                "game_stage_bonus": 50
+            },
+            "opponent": {
+                "saved_pieces": 220,
+                "saved_bonus": 102,
+                "goal_pieces": 140,
+                "goal_bonus": 102,
+                "pieces_near_goal": 12,
+                "loose_pieces": 0,
+                "total_distance": -0.0,
+                "unentered_pieces": 0,
+                "off_goal_penalty": 0,
+                "game_stage_bonus": 0
+            }
+        }
+    },
+    {
+        "move": [
+            [
+                [
+                    "black",
+                    11
+                ],
+                [
+                    7,
+                    6
+                ],
+                5
+            ],
+            [
+                [
+                    "black",
+                    11
+                ],
+                "save",
+                6
+            ]
+        ],
+        "score": 20000,
+        "components": {}
     }
 ]

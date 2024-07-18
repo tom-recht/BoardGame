@@ -72,6 +72,7 @@ class Board:
         self.game_stages = {'white': 'opening', 'black': 'opening'}
         self.initialize_pieces()
         self.firstMove = None
+        self.moves = []
 
         self.endgame_reward_applied = {'white': False, 'black': False}
         self.offgoals = {'white': 0, 'black': 0}
@@ -190,7 +191,6 @@ class Board:
         self.assign_piece_indices()
         self.game_stages[self.current_player] = self.get_game_stage(self.current_player)
 
-
     def assign_tile_indices(self):
         for i in range(len(self.tiles)):
             self.tiles[i].index = i
@@ -271,35 +271,27 @@ class Board:
             else:
                 return False  # The piece cannot be saved with the current dice rolls
 
-
     def get_reachable_tiles(self, start_tile, steps):
         queue = deque([(start_tile, 0)])  # Start with the current tile and 0 steps taken
         visited = set([start_tile])
         reachable_tiles = []
-
-        print(f"Starting tile: {start_tile}, Steps: {steps}")
         
         while queue:
             current_tile, current_steps = queue.popleft()
-   #         print(f"Visiting tile: {current_tile}, Steps taken: {current_steps}")
             
             if current_steps < steps:     
                 for neighbor in current_tile.neighbors:
                     if neighbor not in visited and neighbor.type not in ['nogo', 'home'] and not neighbor.is_blocked():
-    #                   print(f"Adding neighbor tile: {neighbor}, Steps to neighbor: {current_steps + 1}")
                         queue.append((neighbor, current_steps + 1))
                         visited.add(neighbor)
                         if current_steps + 1 == steps:
                             reachable_tiles.append(neighbor)
             elif current_steps == steps:
                 reachable_tiles.append(current_tile)
-        
-        print(f"Reachable tiles: {reachable_tiles}")
+
         return list(set(reachable_tiles))
 
-
     def get_reachable_tiles_by_dice(self, piece):   
-        print('Getting reachable tiles for:', piece)
         reachable_tiles = {self.dice[0].number: [], self.dice[1].number: []}
         
         if piece.rack and piece.rack in [self.white_unentered, self.black_unentered]:   # if an unentered piece, start from the home tile
@@ -310,68 +302,39 @@ class Board:
         if not self.dice[0].used:
             reachable_tiles[self.dice[0].number] = self.get_reachable_tiles(start_tile, self.dice[0].number)
 
-            # uses 2 alternative ways of finding the sum-reachable tiles for a moved piece
-            #reachable_by_sum = None
-            #if piece.reachable_by_sum:  # this comes from update_state()
-             #   reachable_by_sum = piece.reachable_by_sum
             if self.firstMove and self.firstMove['piece'] == piece: 
-                print('First move:', self.firstMove)
                 origin_tile = self.firstMove['origin_tile'] or self.home_tile
-                print('Origin tile:', origin_tile)
-                print(origin_tile is self.home_tile)
                 reachable_by_sum = self.get_reachable_tiles(origin_tile, self.dice[0].number + self.dice[1].number)
-                print('Reachable by sum:', reachable_by_sum)
-            #if reachable_by_sum:
-            #    print('***Reachable by sum:', reachable_by_sum)
                 reachable_tiles[self.dice[0].number] = [tile for tile in reachable_tiles[self.dice[0].number] if tile in reachable_by_sum]
-                print('Filtered reachable tiles:', reachable_tiles[self.dice[0].number])
 
         if not self.dice[1].used:
             reachable_tiles[self.dice[1].number] = self.get_reachable_tiles(start_tile, self.dice[1].number)
 
-            #reachable_by_sum = None
-            #if piece.reachable_by_sum:
-             #   reachable_by_sum = piece.reachable_by_sum
             if self.firstMove and self.firstMove['piece'] == piece:
-                print('First move:', self.firstMove)
                 origin_tile = self.firstMove['origin_tile'] or self.home_tile
-                print('Origin tile:', origin_tile)
-                print(origin_tile is self.home_tile)
                 reachable_by_sum = self.get_reachable_tiles(origin_tile, self.dice[0].number + self.dice[1].number)     
-                print('Reachable by sum:', reachable_by_sum) 
-            #if reachable_by_sum:
-             #   print('***Reachable by sum:', reachable_by_sum)
                 reachable_tiles[self.dice[1].number] = [tile for tile in reachable_tiles[self.dice[1].number] if tile in reachable_by_sum]
-                print('Filtered reachable tiles:', reachable_tiles[self.dice[1].number])
-       
-             # removed total rolls to avoid en-route capture complications   
- #       if not self.dice[0].used and not self.dice[1].used:
-  #          reachable_tiles['total'] = self.get_reachable_tiles(start_tile, self.dice[0].number+self.dice[1].number)
+
 
         if piece.tile and piece.tile.type == 'save' and self.game_stages[piece.player] != 'opening':
             save_roll = self.get_saving_die(piece)
             if save_roll:             
-                reachable_tiles[save_roll].append('save')  # this needs changing?
-          #      print('Save roll', reachable_tiles[save_roll])
+                reachable_tiles[save_roll].append('save') 
 
         piece.reachable_tiles = reachable_tiles
-     #   print(piece, reachable_tiles)
 
     def get_valid_moves(self, mask_offgoals = True):
 
         # if must move captured piece(s), do so
         captured_pieces = [piece for piece in self.home_tile.pieces if piece.player == self.current_player]
         if captured_pieces:
-       #     print('Captured pieces:', captured_pieces)
             for piece in captured_pieces:
                 self.get_reachable_tiles_by_dice(piece)
             self.destinations_by_piece = {piece: piece.reachable_tiles for piece in captured_pieces}
 
         # if must move unentered piece, do so
         elif self.must_move_unentered():
-      #      print('Must move unentered')
             piece = self.get_unentered_piece()
-      #      print('Unentered piece:', piece)
             self.get_reachable_tiles_by_dice(piece)
             self.destinations_by_piece = {piece: piece.reachable_tiles}
             
@@ -411,8 +374,68 @@ class Board:
   
         return tuples_list
     
+    def save_move(self, move, origin_tile = None, origin_rack = None, captured_piece = None):
+        piece_id, destination, roll = move
+
+        move_to_save = dict()
+        move_to_save['piece'] = next((p for p in self.pieces if (p.player, p.number) == piece_id), None)
+        move_to_save['origin_tile'] = origin_tile
+        move_to_save['origin_rack'] = origin_rack
+        move_to_save['destination'] = destination
+        move_to_save['captured_piece'] = captured_piece
+        move_to_save['roll'] = roll
+
+        self.moves.append(move_to_save)
+
+    def undo_last_move(self):
+        if not self.moves:
+            return
+
+        last_move = self.moves.pop()
+        piece = last_move['piece']
+        origin_tile = last_move['origin_tile']
+        origin_rack = last_move['origin_rack']
+        destination = last_move['destination']
+        captured_piece = last_move['captured_piece']
+        roll = last_move['roll']
+
+        # Undo the move
+        if destination == 'save':
+            saved_rack = self.white_saved if piece.player == 'white' else self.black_saved
+            saved_rack.remove(piece)
+            piece.tile = origin_tile
+            origin_tile.pieces.append(piece)
+        else:
+            new_tile = self.get_tile(*destination)
+            new_tile.pieces.remove(piece)
+            piece.tile = None
+            if origin_tile:
+                origin_tile.pieces.append(piece)
+            elif origin_rack:
+                origin_rack.append(piece)
+
+            if captured_piece:      # undo the capture
+                new_tile.pieces.append(captured_piece)
+                captured_piece.tile = new_tile
+
+        # Mark the die as unused
+        if roll == self.dice[0].number and self.dice[0].used:
+            self.dice[0].used = False
+        elif roll == self.dice[1].number and self.dice[1].used:
+            self.dice[1].used = False
+
+        # if both dice are now unused, this was the first move, so clear self.firstMove
+        if not self.dice[0].used and not self.dice[1].used:
+            self.firstMove = None
+
+        self.game_stages[self.current_player] = self.get_game_stage(self.current_player)
+    
     def apply_move(self, move):
         piece_id, destination, roll = move
+
+        captured_piece = None
+        origin_tile = None
+        origin_rack = None
 
         # Handle the pass move (0, 0, 0)
         if move == (0, 0, 0):
@@ -432,6 +455,7 @@ class Board:
             saved_rack.append(piece)
             if piece.tile:
                 piece.tile.pieces.remove(piece)
+                origin_tile = piece.tile
             piece.tile = None
             piece.rack = saved_rack
 
@@ -444,8 +468,10 @@ class Board:
             if piece.rack:
                 piece.rack.remove(piece)
                 piece.rack = None
+                origin_rack = piece.rack
             if piece.tile:
                 piece.tile.pieces.remove(piece)
+                origin_tile = piece.tile
             
             # Set the first move if not set already
             if not self.firstMove:
@@ -467,8 +493,9 @@ class Board:
         elif roll == self.dice[1].number and not self.dice[1].used:
             self.dice[1].used = True
 
-
         self.game_stages[self.current_player] = self.get_game_stage(self.current_player)
+
+        self.save_move(move, origin_tile, origin_rack, captured_piece)
 
         # Switch to the next player if both dice are used
         if all(die.used for die in self.dice):
@@ -585,7 +612,6 @@ class Board:
             intermediate_reward += 5000             
             if piece_object.number <= 6:
                 intermediate_reward += piece_object.number * 1000
-                #   print("Saving piece", piece_object.player, piece_object.number, intermediate_reward)
         
         if isinstance(destination, tuple):   
             tile = self.get_tile(*destination)
@@ -620,11 +646,9 @@ class Board:
         # intermediate rewards: after move
         if isinstance(destination, tuple):   
             if piece_object.can_be_saved():  #  moved to goal
-                intermediate_reward += 5000
-            #   print('+5000', move)                
+                intermediate_reward += 5000             
                 if piece_object.number <= 6:
                     intermediate_reward += piece_object.number * 1000
-            #   print(f"Moving onto save tile, {piece_object.player}, {piece_object.number}. {player} saveable pieces: {len([p for p in self.pieces if p.player == player and p.tile and p.can_be_saved()])}, {intermediate_reward}")
                 self.game_stages[player] = self.get_game_stage(player)
                 if self.game_stages[player] == 'endgame' and not self.endgame_reward_applied[player]:   # enter endgame for first time
                     intermediate_reward += 50000
@@ -640,7 +664,6 @@ class Board:
                     intermediate_reward -= 1000
                     if piece_object.number <= 6:
                         intermediate_reward -= piece_object.number * 200
-
 
         # Blend intermediate and final rewards
         reward = (1 - transition_factor) * intermediate_reward + transition_factor * score
@@ -742,21 +765,39 @@ def random_play(self):
         print(self)
 
 if __name__ == '__main__':
-    # Initialize the board and load the game state
     board = Board()
 
-    """ filename = 'game_state (4).json'
-    with open(filename, 'r') as f:
-        data = json.load(f)
-    board.update_state(data) """
+    while True:
+        print("\nCurrent Board State:")
+        print(board)
 
-    # Run the text interface
-    #random_play(board)
-    state = board.encode_state()
-    print(len(state))
-    print(len(board.get_all_possible_moves()))
+        valid_moves = board.get_valid_moves()
+        print("\nValid moves:")
+        for i, move in enumerate(valid_moves):
+            piece_id, destination, roll = move
+            piece_desc = f"{piece_id}" if piece_id != 0 else "Pass"
+            dest_desc = f"{destination}" if destination != "save" else "Save"
+            print(f"{i}: Move {piece_desc} to {dest_desc} with roll {roll}")
+
+        choice = input("Enter the number of the move you want to make (or 'u' to undo, 'q' to quit): ")
+
+        if choice.lower() == 'q':
+            print("Exiting...")
+            break
+        elif choice.lower() == 'u':
+            board.undo_last_move()
+            print("Last move undone!")
+        else:
+            try:
+                choice = int(choice)
+                if 0 <= choice < len(valid_moves):
+                    chosen_move = valid_moves[choice]
+                    board.apply_move(chosen_move)
+                    print("Move applied!")
+                else:
+                    print("Invalid choice. Please select a valid move number.")
+            except ValueError:
+                print("Invalid input. Please enter a number.")
 
 
 # add logic for saving opponent's block
-
-# AI seems to be trying to move twice ignoring shortest path rule

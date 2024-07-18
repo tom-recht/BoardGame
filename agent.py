@@ -26,48 +26,6 @@ class Agent():
             file.write(json.dumps(self.log, indent=4))
         print(f"Log file {self.log_file} created.")
 
-    def random_move(self, valid_moves):
-
-         # Remove pass move if there are other options
-        non_pass_moves = [move for move in valid_moves if move != (0, 0, 0)]
-        
-        if not non_pass_moves:
-            return (0, 0, 0)
-
-        save_moves = [move for move in valid_moves if move[1] == 'save']
-        if save_moves:
-            chosen_move = random.choice(save_moves)
-        else:
-            # Check for moves that place a piece on a save goal where it can be saved
-            prioritized_moves = []
-            for move in valid_moves:
-                piece_id, destination, roll = move
-                if isinstance(destination, tuple):
-                    ring, pos = destination
-                    tile = self.board.get_tile(ring, pos)
-                    if tile and tile.type == 'save':
-                        piece = next((p for p in self.board.pieces if (p.player, p.number) == piece_id), None)
-                        if piece and (piece.number > 6 or piece.number == tile.number):
-                            prioritized_moves.append(move)
-
-            # Filter out moves that involve moving pieces already on save goals where they can be saved
-            non_pass_moves = [
-                move for move in non_pass_moves
-                if move[1] == 'save' or 
-                not (isinstance(move[1], tuple) and 
-                    self.board.get_tile(*move[1]) and 
-                    self.board.get_tile(*move[1]).type == 'save' and 
-                    any(p.number > 6 or (p.number == self.board.get_tile(*move[1]).number) 
-                        for p in self.board.get_tile(*move[1]).pieces))
-            ]
-
-            if prioritized_moves:
-                chosen_move = random.choice(prioritized_moves)
-            else:
-                chosen_move = random.choice(non_pass_moves)
-
-        return chosen_move
-    
     def evaluate_player(self, board, player):
         # number of saved pieces
         save_rack = board.get_save_rack(player)
