@@ -88,7 +88,7 @@ class Agent():
 
         # total distance froms goals of other pieces
         pieces_not_near_goal = [piece for piece in board.pieces if board.shortest_route_to_goal(piece) > 6]
-        total_distance = min(sum(board.shortest_route_to_goal(piece) for piece in pieces_not_near_goal), 100)
+        total_distance = min(sum(board.shortest_route_to_goal(piece) for piece in pieces_not_near_goal), 1000)  # to avoid infinity
         total_distance += sum(self.weights['goal_bonuses'].get(piece.number, 0) for piece in pieces_not_near_goal if piece.number <= 6) / 10
 
         # number of loose pieces
@@ -126,7 +126,6 @@ class Agent():
 
         return total_score, score_components
 
-
     def evaluate(self, board, player):
         winner, score = board.check_game_over()
         if winner:
@@ -147,6 +146,7 @@ class Agent():
 
     def select_move_pair(self, moves, board, player):
         move_scores = dict()
+        move_log_data = {}
 
         # Ensure moves is a set and does not contain integers
         if not isinstance(moves, (list, set)) or not all(isinstance(m, tuple) for m in moves):
@@ -168,8 +168,7 @@ class Agent():
             move_scores[(move, (0, 0, 0))] = self.evaluate(simulated_board, player)  # make one move then pass
             
             next_moves = set(simulated_board.get_valid_moves(mask_offgoals=True))
-        
-            
+
             if not next_moves:
                 continue
             next_moves.discard((0, 0, 0))
@@ -183,7 +182,6 @@ class Agent():
                 move_scores[(move, next_move)] = self.evaluate(simulated_board2, player)
 
         best_move_pair = max(move_scores, key=lambda k: move_scores[k][0])
-
         best_move_score, best_move_components = move_scores[best_move_pair]
 
         self.log.append({
@@ -196,8 +194,9 @@ class Agent():
             with open(self.log_file, 'w') as file:
                 file.write(json.dumps(self.log, indent=4))
             print(f"Log updated with move: {best_move_pair}")
-        
+
         return best_move_pair
+
 
     def save_log_to_file(self):
         return json.dumps(self.log, indent=4)

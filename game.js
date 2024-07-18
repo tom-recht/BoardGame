@@ -2,7 +2,7 @@ const DEBUG_MODE = false;
 const LOCAL_AI = true;
 
 const WHITE_IS_AI = false;
-let BLACK_IS_AI = false;
+let BLACK_IS_AI = true;
 
 const PIECE_RADIUS_BASE = 20; 
 const TILE_RADIUS_STEP = 60; 
@@ -2292,6 +2292,8 @@ const config = {
 };
 
 const gameInstance = new Phaser.Game(config);
+
+// bug: code is allowing movement on sum against shortest-move rule (when click on piece twice)
 
 // add saving opponent's pieces
 

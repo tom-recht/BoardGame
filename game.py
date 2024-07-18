@@ -270,27 +270,36 @@ class Board:
                 return die.number
             else:
                 return False  # The piece cannot be saved with the current dice rolls
-            
+
+
     def get_reachable_tiles(self, start_tile, steps):
         queue = deque([(start_tile, 0)])  # Start with the current tile and 0 steps taken
         visited = set([start_tile])
         reachable_tiles = []
 
+        print(f"Starting tile: {start_tile}, Steps: {steps}")
+        
         while queue:
             current_tile, current_steps = queue.popleft()
+   #         print(f"Visiting tile: {current_tile}, Steps taken: {current_steps}")
+            
             if current_steps < steps:     
                 for neighbor in current_tile.neighbors:
-                    if (neighbor not in visited and neighbor.type not in ['nogo', 'home'] and not neighbor.is_blocked()):  
+                    if neighbor not in visited and neighbor.type not in ['nogo', 'home'] and not neighbor.is_blocked():
+    #                   print(f"Adding neighbor tile: {neighbor}, Steps to neighbor: {current_steps + 1}")
                         queue.append((neighbor, current_steps + 1))
                         visited.add(neighbor)
                         if current_steps + 1 == steps:
                             reachable_tiles.append(neighbor)
             elif current_steps == steps:
                 reachable_tiles.append(current_tile)
-
+        
+        print(f"Reachable tiles: {reachable_tiles}")
         return list(set(reachable_tiles))
 
+
     def get_reachable_tiles_by_dice(self, piece):   
+        print('Getting reachable tiles for:', piece)
         reachable_tiles = {self.dice[0].number: [], self.dice[1].number: []}
         
         if piece.rack and piece.rack in [self.white_unentered, self.black_unentered]:   # if an unentered piece, start from the home tile
@@ -302,26 +311,38 @@ class Board:
             reachable_tiles[self.dice[0].number] = self.get_reachable_tiles(start_tile, self.dice[0].number)
 
             # uses 2 alternative ways of finding the sum-reachable tiles for a moved piece
-            reachable_by_sum = None
-         #   if piece.reachable_by_sum:  # this comes from update_state()
-         #       reachable_by_sum = piece.reachable_by_sum
+            #reachable_by_sum = None
+            #if piece.reachable_by_sum:  # this comes from update_state()
+             #   reachable_by_sum = piece.reachable_by_sum
             if self.firstMove and self.firstMove['piece'] == piece: 
+                print('First move:', self.firstMove)
                 origin_tile = self.firstMove['origin_tile'] or self.home_tile
+                print('Origin tile:', origin_tile)
+                print(origin_tile is self.home_tile)
                 reachable_by_sum = self.get_reachable_tiles(origin_tile, self.dice[0].number + self.dice[1].number)
-            if reachable_by_sum:
+                print('Reachable by sum:', reachable_by_sum)
+            #if reachable_by_sum:
+            #    print('***Reachable by sum:', reachable_by_sum)
                 reachable_tiles[self.dice[0].number] = [tile for tile in reachable_tiles[self.dice[0].number] if tile in reachable_by_sum]
+                print('Filtered reachable tiles:', reachable_tiles[self.dice[0].number])
 
         if not self.dice[1].used:
             reachable_tiles[self.dice[1].number] = self.get_reachable_tiles(start_tile, self.dice[1].number)
 
-            reachable_by_sum = None
-            if piece.reachable_by_sum:
-                reachable_by_sum = piece.reachable_by_sum
-            elif self.firstMove and self.firstMove['piece'] == piece:
+            #reachable_by_sum = None
+            #if piece.reachable_by_sum:
+             #   reachable_by_sum = piece.reachable_by_sum
+            if self.firstMove and self.firstMove['piece'] == piece:
+                print('First move:', self.firstMove)
                 origin_tile = self.firstMove['origin_tile'] or self.home_tile
-                reachable_by_sum = self.get_reachable_tiles(origin_tile, self.dice[0].number + self.dice[1].number)      
-            if reachable_by_sum:
+                print('Origin tile:', origin_tile)
+                print(origin_tile is self.home_tile)
+                reachable_by_sum = self.get_reachable_tiles(origin_tile, self.dice[0].number + self.dice[1].number)     
+                print('Reachable by sum:', reachable_by_sum) 
+            #if reachable_by_sum:
+             #   print('***Reachable by sum:', reachable_by_sum)
                 reachable_tiles[self.dice[1].number] = [tile for tile in reachable_tiles[self.dice[1].number] if tile in reachable_by_sum]
+                print('Filtered reachable tiles:', reachable_tiles[self.dice[1].number])
        
              # removed total rolls to avoid en-route capture complications   
  #       if not self.dice[0].used and not self.dice[1].used:
@@ -336,7 +357,7 @@ class Board:
         piece.reachable_tiles = reachable_tiles
      #   print(piece, reachable_tiles)
 
-    def get_valid_moves(self, mask_offgoals = False):
+    def get_valid_moves(self, mask_offgoals = True):
 
         # if must move captured piece(s), do so
         captured_pieces = [piece for piece in self.home_tile.pieces if piece.player == self.current_player]
@@ -627,6 +648,8 @@ class Board:
         done = False   
 
         return next_state, reward, done
+    
+
 
 
 def text_interface(board):

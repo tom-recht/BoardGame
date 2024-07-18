@@ -1,0 +1,49 @@
+{
+    "initial": {
+        "firstMove": null,
+        "valid_moves_initial": [
+            [
+                [
+                    "black",
+                    10
+                ],
+                "save",
+                6
+            ],
+            [
+                0,
+                0,
+                0
+            ]
+        ]
+    },
+    "selected": {
+        "move": [
+            [
+                "black",
+                10
+            ],
+            "save",
+            6
+        ],
+        "next_move": [
+            [
+                "black",
+                9
+            ],
+            "save",
+            6
+        ],
+        "firstMove": null,
+        "valid_moves": [
+            [
+                [
+                    "black",
+                    9
+                ],
+                "save",
+                6
+            ]
+        ]
+    }
+}
