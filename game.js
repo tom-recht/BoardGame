@@ -22,12 +22,13 @@ const colorSum = 0xFFFF00; // Yellow
 /* const CONFIG = {
     AI_SERVER_URL: 'https://boardgame-tg08.onrender.com'
 }; */
-
-SERVER_URL = LOCAL_AI ? 'http://localhost:10000' : CONFIG.AI_SERVER_URL;
-
 const CONFIG = {
     AI_SERVER_URL: 'https://board-game-indol-sigma.vercel.app/'
 }; 
+
+SERVER_URL = LOCAL_AI ? 'http://localhost:10000' : CONFIG.AI_SERVER_URL;
+
+
 
 class Piece {
     constructor(scene, game, color, number, x, y, rack = null) {
