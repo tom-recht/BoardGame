@@ -1,5 +1,5 @@
 const DEBUG_MODE = false; 
-const LOCAL_AI = false;
+const LOCAL_AI = true;
 
 const WHITE_IS_AI = false;
 let BLACK_IS_AI = true;
