@@ -5,7 +5,6 @@
 from flask import Flask, request, jsonify, Response
 from flask_cors import CORS, cross_origin
 import os
-import json
 from game import Board
 from agent import Agent
 import logging
