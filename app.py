@@ -3,7 +3,7 @@
 # http://localhost:8000
 
 from flask import Flask, request, jsonify, Response
-#from flask_cors import CORS, cross_origin
+from flask_cors import CORS, cross_origin
 import os
 from game import Board
 from agent import Agent
@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 
 
 app = Flask(__name__, static_folder='', static_url_path='')
-#CORS(app)
+CORS(app)
 #CORS(app, resources={r"/*": {"origins": "https://tom-recht.github.io"}})
 
 # Initialize board
