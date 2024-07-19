@@ -2,7 +2,7 @@ import subprocess
 import json
 
 GAME_OVER_SCORE = 10000
-LOG_TO_FILE = True
+LOG_TO_FILE = False
 
 INITIAL_WEIGHTS = {
     'saved_bonuses': {0:0, 1:12, 2:14, 3:16, 4:18, 5:20, 6:22},
