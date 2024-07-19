@@ -1,0 +1,8 @@
+# Exclude unnecessary files and directories
+*.pyc
+__pycache__/
+env/
+venv/
+train*
+GCN*
+*.pth
