@@ -1,5 +1,4 @@
-import random
-import copy
+import subprocess
 import json
 
 GAME_OVER_SCORE = 10000
@@ -126,6 +125,7 @@ class Agent():
             next_moves = set(board.get_valid_moves(mask_offgoals=True))
 
             if not next_moves:
+                subprocess.run(["say", "-v", "Victoria", "beep"])
                 continue
             next_moves.discard((0, 0, 0))
 

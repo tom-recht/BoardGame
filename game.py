@@ -279,7 +279,8 @@ class Board:
         while queue:
             current_tile, current_steps = queue.popleft()
             
-            if current_steps < steps:     
+            if current_steps < steps:   
+                print(start_tile, current_tile)  
                 for neighbor in current_tile.neighbors:
                     if neighbor not in visited and neighbor.type not in ['nogo', 'home'] and not neighbor.is_blocked():
                         queue.append((neighbor, current_steps + 1))
@@ -300,17 +301,21 @@ class Board:
             start_tile = piece.tile
 
         if not self.dice[0].used:
+            print(start_tile)
             reachable_tiles[self.dice[0].number] = self.get_reachable_tiles(start_tile, self.dice[0].number)
 
             if self.firstMove and self.firstMove['piece'] == piece: 
+                print(1)
                 origin_tile = self.firstMove['origin_tile'] or self.home_tile
                 reachable_by_sum = self.get_reachable_tiles(origin_tile, self.dice[0].number + self.dice[1].number)
                 reachable_tiles[self.dice[0].number] = [tile for tile in reachable_tiles[self.dice[0].number] if tile in reachable_by_sum]
 
         if not self.dice[1].used:
+            print(start_tile)
             reachable_tiles[self.dice[1].number] = self.get_reachable_tiles(start_tile, self.dice[1].number)
 
             if self.firstMove and self.firstMove['piece'] == piece:
+                print(1)
                 origin_tile = self.firstMove['origin_tile'] or self.home_tile
                 reachable_by_sum = self.get_reachable_tiles(origin_tile, self.dice[0].number + self.dice[1].number)     
                 reachable_tiles[self.dice[1].number] = [tile for tile in reachable_tiles[self.dice[1].number] if tile in reachable_by_sum]
@@ -416,8 +421,10 @@ class Board:
             piece.tile = None
             if origin_tile:
                 origin_tile.pieces.append(piece)
+                piece.tile = origin_tile
             elif origin_rack:
                 origin_rack.insert(0, piece)
+                piece.rack = origin_rack
 
             if captured_piece:      # undo the capture
                 new_tile.pieces.append(captured_piece)
