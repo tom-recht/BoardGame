@@ -17,14 +17,13 @@ logger = logging.getLogger(__name__)
 
 
 app = Flask(__name__, static_folder='', static_url_path='')
-CORS(app, resources={r"/*": {"origins": "https://tom-recht.github.io", "methods": ["GET", "POST"], "allow_headers": ["Content-Type"]}})
+CORS(app, resources={r"/*": {"origins": "https://tom-recht.github.io"}})
 
 # Initialize board
 board = Board()
 agent = Agent()
 
 @app.route('/select_moves', methods=['POST'])
-@cross_origin(origin='https://tom-recht.github.io', headers=['Content-Type'])
 def select_moves():
     try:
         state = request.json
